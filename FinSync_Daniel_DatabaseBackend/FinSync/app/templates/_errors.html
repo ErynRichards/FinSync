@@ -1,0 +1,9 @@
+{# Shows server-side messages. Include with: {% include "_errors.html" %} #}
+{% if error %}<div class="alert alert-error" role="alert">{{ error }}</div>{% endif %}
+{% if errors %}
+  <div class="alert alert-error" role="alert">
+    <ul>{% for e in errors %}<li>{{ e }}</li>{% endfor %}</ul>
+  </div>
+{% endif %}
+{% if success %}<div class="alert alert-success" role="status">{{ success }}</div>{% endif %}
+<div class="alert alert-error js-errors" role="alert" hidden></div>
