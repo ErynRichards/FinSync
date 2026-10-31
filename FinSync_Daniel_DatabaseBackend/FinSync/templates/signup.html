@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Sign up{% endblock %}
+{% block content %}
+<!-- PLACEHOLDER: Lashanya replaces this page. -->
+<section class="card">
+  <h1>Create your account</h1>
+  {% include "_errors.html" %}
+
+  <form method="post" action="{{ url_for('signup') }}" data-validate="signup" novalidate>
+    <label for="full_name">Full name</label>
+    <input id="full_name" name="full_name" type="text" value="{{ full_name or '' }}">
+
+    <label for="email">Email address</label>
+    <input id="email" name="email" type="email" value="{{ email or '' }}">
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password">
+
+    <label for="confirm_password">Confirm password</label>
+    <input id="confirm_password" name="confirm_password" type="password">
+
+    <p class="muted small">At least 8 characters, with an uppercase letter, a lowercase letter,
+       a number and a special character.</p>
+    <button type="submit">Sign up</button>
+  </form>
+
+  <p class="muted">Already have an account? <a href="{{ url_for('login') }}">Log in</a></p>
+</section>
+{% endblock %}
