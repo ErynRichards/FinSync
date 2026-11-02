@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{# PLACEHOLDER dashboard - proves that login works after a password reset. #}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<section class="card">
+  <h1>Welcome, {{ user.first_name }}</h1>
+  <p class="muted">You are logged in as {{ user.email }}. (Dashboard placeholder.)</p>
+</section>
+{% endblock %}

@@ -1,0 +1,95 @@
+<!-- FRONTEND SOURCE: Phase 5.1 Frontend.zip / login.html; Flask integration changes are documented. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FinSync - Login</title>
+
+    <!-- Connect CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+</head>
+
+<body>
+
+    <div class="auth-container">
+
+        <!-- FinSync Logo and Name -->
+        <div class="logo-container">
+
+            <img src="{{ url_for('static', filename='images/finsync-logo.png') }}"
+                 alt="FinSync Logo"
+                 class="logo">
+
+            <span class="brand-name">FinSync</span>
+
+        </div>
+
+        <!-- Welcome Message -->
+        <h1>Welcome back!</h1>
+
+        <p class="subtitle">
+            Login to continue to your account.
+        </p>
+
+
+<!-- BACKEND INTEGRATION: Display messages returned by Flask. -->
+{% with notices = get_flashed_messages(with_categories=true) %}{% for category, message in notices %}<p role="status" class="backend-message">{{ message }}</p>{% endfor %}{% endwith %}
+{% if errors %}{% for message in errors %}<p role="alert" class="error-message">{{ message }}</p>{% endfor %}{% endif %}
+{% if error %}<p role="alert" class="error-message">{{ error }}</p>{% endif %}
+{% if success %}<p role="status" class="backend-message">{{ success }}</p>{% endif %}
+
+        <!-- Login Form -->
+        <form id="loginForm" method="POST" action="{{ url_for('login') }}">
+
+            <!-- Email Address -->
+            <label for="loginEmail">Email Address</label>
+
+            <input type="email"
+                   id="loginEmail"
+                   name="email" value="{{ email or '' }}"
+                   required>
+
+            <!-- Password -->
+            <div class="password-heading">
+
+                <label for="loginPassword">Password</label>
+
+                <a href="{{ url_for('forgot_password') }}" class="forgot-password">
+                    Forgot password?
+                </a>
+
+            </div>
+
+            <input type="password"
+                   id="loginPassword"
+                   name="password"
+                   required>
+
+            <!-- Login Button -->
+            <button type="submit" class="main-button">
+                Login
+            </button>
+
+        </form>
+
+        <!-- Clickable Sign Up Link -->
+        <div class="bottom-link">
+
+            <a href="{{ url_for('signup') }}" class="account-link">
+                Don't have an account?
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Connect JavaScript -->
+    <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+
+</body>
+
+</html>
