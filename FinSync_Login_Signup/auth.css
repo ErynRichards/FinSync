@@ -1,0 +1,165 @@
+
+/* Main page */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: white;
+}
+
+/* Main form container */
+.auth-container {
+    width: 400px;
+    max-width: 90%;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+/* Logo and FinSync name */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+/* Feather logo */
+.logo {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* FinSync name */
+.brand-name {
+    color: #190C72;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* Main heading */
+h1 {
+    color: #190C72;
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+
+/* Subtitle */
+.subtitle {
+    color: #616161;
+    font-size: 15px;
+    margin-top: 0;
+    margin-bottom: 35px;
+}
+
+/* Form labels */
+label {
+    display: block;
+    color: #190C72;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+/* Input fields */
+input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 42px;
+    padding: 10px;
+    margin-bottom: 30px;
+    border: 1px solid #dddddd;
+    border-radius: 7px;
+    font-size: 15px;
+}
+
+/* Input focus */
+input:focus {
+    outline: none;
+    border-color: #1595EC;
+}
+
+/* Password heading */
+.password-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Forgot password link */
+.forgot-password {
+    color: #18B7C9;
+    font-size: 14px;
+    text-decoration: underline;
+}
+
+/* Forgot password hover */
+.forgot-password:hover {
+    color: #190C72;
+}
+
+/* Login and Sign Up buttons */
+.main-button {
+    width: 100%;
+    height: 45px;
+    margin-top: 15px;
+    background-color: #190C72;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Button hover */
+.main-button:hover {
+    background-color: #25139b;
+}
+
+/* Bottom link */
+.bottom-link {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* Account navigation links */
+.account-link {
+    color: #18B7C9;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* Account link hover */
+.account-link:hover {
+    color: #190C72;
+}
+
+/* Password validation error */
+.error-message {
+    color: #d32f2f;
+    font-size: 13px;
+    margin-top: -15px;
+    margin-bottom: 15px;
+}
+
+/* Mobile screen adjustments */
+@media (max-width: 480px) {
+
+    .auth-container {
+        width: auto;
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .brand-name {
+        font-size: 25px;
+    }
+}

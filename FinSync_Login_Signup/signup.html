@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FinSync - Sign Up</title>
+
+    <!-- Connect CSS -->
+    <link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+
+    <div class="auth-container">
+
+        <!-- FinSync Logo and Name -->
+        <div class="logo-container">
+
+            <img src="images/finsync-logo.png"
+                 alt="FinSync Logo"
+                 class="logo">
+
+            <span class="brand-name">FinSync</span>
+
+        </div>
+
+        <!-- Sign Up Heading -->
+        <h1>Create your account</h1>
+
+        <p class="subtitle">
+            Start your journey to better financial wellness.
+        </p>
+
+        <!-- Sign Up Form -->
+        <form id="signupForm">
+
+            <!-- Full Name -->
+            <label for="fullName">Full Name</label>
+
+            <input type="text"
+                   id="fullName"
+                   name="full_name"
+                   required>
+
+            <!-- Email Address -->
+            <label for="signupEmail">Email Address</label>
+
+            <input type="email"
+                   id="signupEmail"
+                   name="email"
+                   required>
+
+            <!-- Password -->
+            <label for="signupPassword">Password</label>
+
+            <input type="password"
+                   id="signupPassword"
+                   name="password"
+                   required>
+
+            <!-- Confirm Password -->
+            <label for="confirmPassword">Confirm Password</label>
+
+            <input type="password"
+                   id="confirmPassword"
+                   name="confirm_password"
+                   required>
+
+            <!-- Error Message -->
+            <p id="passwordError"
+               class="error-message"
+               role="alert"></p>
+
+            <!-- Sign Up Button -->
+            <button type="submit" class="main-button">
+                Sign up
+            </button>
+
+        </form>
+
+        <!-- Clickable Login Link -->
+        <div class="bottom-link">
+
+            <a href="login.html" class="account-link">
+                Already have an account?
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Connect JavaScript -->
+    <script src="auth.js"></script>
+
+</body>
+
+</html>
