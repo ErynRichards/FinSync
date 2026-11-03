@@ -1,0 +1,216 @@
+/* Include padding and borders in each element's width. */
+* {
+    box-sizing: border-box;
+}
+
+/* Set the default appearance of the page. */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: white;
+    color: #10132b;
+}
+
+/* Create the navy navigation sidebar. */
+.sidebar {
+    position: fixed;
+    width: 210px;
+    height: 100vh;
+    padding: 25px;
+    background: #050a32;
+    color: white;
+}
+
+.sidebar h2 {
+    margin-bottom: 40px;
+}
+
+/* Style the navigation links. */
+nav a {
+    display: block;
+    padding: 13px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+/* Highlight the current page. */
+nav a.active {
+    background: #1900b5;
+}
+
+/* Leave space beside the sidebar. */
+main {
+    margin-left: 210px;
+    padding: 35px;
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+p {
+    line-height: 1.5;
+}
+
+.note {
+    color: #666;
+    font-size: 13px;
+}
+
+#message {
+    color: #176344;
+}
+
+/* Use the FinSync purple for main buttons. */
+button {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #1900b5;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Give secondary buttons a lighter colour. */
+.secondary {
+    background: #dce6ff;
+    color: #10132b;
+}
+
+/* Keep a visible outline when using the keyboard. */
+button:focus-visible,
+a:focus-visible,
+input:focus,
+select:focus {
+    outline: 3px solid #83b4ff;
+    outline-offset: 2px;
+}
+
+/* Arrange the search and filters in a row. */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.filters > div {
+    flex: 1;
+    min-width: 150px;
+}
+
+/* Give all form controls a consistent appearance. */
+label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    background: white;
+    font: inherit;
+}
+
+/* Allow horizontal scrolling inside the table container. */
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    min-width: 650px;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+    text-align: left;
+}
+
+th {
+    background: #f4f5fa;
+}
+
+/* Prevent long descriptions from stretching the table. */
+td {
+    max-width: 280px;
+    overflow-wrap: anywhere;
+}
+
+/* Use different colours for income and expense amounts. */
+.income {
+    color: #16814c;
+}
+
+.expense {
+    color: #bd3a44;
+}
+
+/* Display the form as a white card with a navy border. */
+dialog {
+    width: 440px;
+    max-width: calc(100% - 30px);
+    max-height: 90vh;
+    padding: 25px;
+    border: 10px solid #050a32;
+    border-radius: 20px;
+}
+
+/* Darken the page behind the open form. */
+dialog::backdrop {
+    background: rgba(5, 10, 50, 0.5);
+}
+
+form input,
+form select {
+    margin-bottom: 18px;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.form-buttons button {
+    flex: 1;
+}
+
+/* Move the sidebar above the content on smaller screens. */
+@media (max-width: 750px) {
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+    }
+
+    .sidebar h2 {
+        margin-bottom: 20px;
+    }
+
+    nav {
+        display: flex;
+        overflow-x: auto;
+    }
+
+    nav a {
+        white-space: nowrap;
+    }
+
+    main {
+        margin-left: 0;
+        padding: 20px;
+    }
+}
