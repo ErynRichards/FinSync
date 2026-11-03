@@ -1,0 +1,145 @@
+<!-- FRONTEND SOURCE: Phase 5.1 Frontend.zip / landingPage.html; Flask integration changes are documented. -->
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinSync | Take Control of Your Finances</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/landingStyle.css') }}">
+<script src="{{ url_for('static', filename='js/landingScript.js') }}" defer></script>
+
+</head>
+
+
+<body> 
+
+
+<!-- navigation bar -->
+<header class="header">
+<nav class="navbar">
+
+<a href="{{ url_for('index') }}" class="logo">
+FinSync
+
+</a>
+
+<!-- mobile menu button --> 
+<button class="menu-toggle"
+aria-label="Toggle navigation"
+aria-expanded="false"
+aria-controls="navLinks">
+&#9776;
+</button>
+
+
+<div class="nav-links" id="navLinks">
+<a href="{{ url_for('index') }}">Home</a>
+<a href="{{ url_for('features') }}">Features</a>
+<a href="{{ url_for('about') }}">About</a>
+<a href="{{ url_for('signup') }}" class="signup-btn">
+Sign Up
+</a>
+
+<a href="{{ url_for('login') }}" class="login-btn">
+Login
+</a>
+
+</div>
+</nav>
+</header>
+
+
+
+<main>
+<!-- home/landing page -->
+<section id="home" class="hero">
+<div class="hero-content">
+
+<h1>
+Take control of<br>
+your <span>finances</span>
+</h1> 
+
+<h2>
+Track. Plan.<br>
+Save. Grow. 
+</h2>
+
+<p>
+FinSync helps you manage your expenses,
+income and goals so you can build a
+healthier and brighter future ahead. 
+</p>
+
+
+<!-- get started button -->
+<a href="{{ url_for('signup') }}" class="get-started">
+Get started &rarr;
+</a>
+
+</div> 
+
+
+<!-- main financial image -->
+<div class="hero-image">
+<img src="{{ url_for('static', filename='images/landingIcon.png') }}"
+alt="FinSync financial growth illustration">
+</div>
+</section>
+
+
+<!-- four feature highlights -->
+<section class="highlights">
+
+<!--  track -->
+<div class="highlight-item">
+<img src="{{ url_for('static', filename='images/track.png') }}"
+alt="Track expenses icon">
+<h3>Track</h3>
+<p>Your income and expenses.</p>
+</div>
+
+
+
+<!-- set -->
+<div class="highlight-item">
+<img src="{{ url_for('static', filename='images/set.png') }}"
+alt="Set budgets icon">
+
+<h3>Set</h3>
+<p>Budgets &amp; goals.</p>
+</div>
+
+
+
+
+<!-- visualize -->
+<div class="highlight-item">
+<img src="{{ url_for('static', filename='images/visualize.png') }}"
+alt="Visualize financial progress icon">
+<h3>Visualize</h3>
+<p>Your progress.</p>
+</div> 
+
+<!-- build better -->
+<div class="highlight-item">
+<img src="{{ url_for('static', filename='images/build.png') }}"
+alt="Build better financial habits icon">
+<H3>Build Better</h3>
+<p>Financial habits.</p>
+</div>
+</section>
+</main>
+
+
+<!--Footer-->
+<footer class="footer">
+<p>
+&copy; <span id="year"></span> FinSync.
+All rights reserved.
+</p>
+</footer>
+
+</body>
+</html>
