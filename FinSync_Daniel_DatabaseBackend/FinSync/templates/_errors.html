@@ -1,0 +1,17 @@
+<!-- Shows error and success messages sent from app.py -->
+{% if error %}
+  <div class="alert alert-error">{{ error }}</div>
+{% endif %}
+{% if errors %}
+  <div class="alert alert-error">
+    <ul>
+      {% for e in errors %}<li>{{ e }}</li>{% endfor %}
+    </ul>
+  </div>
+{% endif %}
+{% if success %}
+  <div class="alert alert-success">{{ success }}</div>
+{% endif %}
+
+<!-- Filled in by validation.js when the form has mistakes -->
+<div class="alert alert-error js-errors" hidden></div>

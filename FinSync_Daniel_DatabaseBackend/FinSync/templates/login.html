@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+<!-- PLACEHOLDER: Lashanya replaces this page.
+     Keep the "Forgot password?" link. -->
+<section class="card">
+  <h1>Log in</h1>
+  {% include "_errors.html" %}
+
+  <form method="post" action="{{ url_for('login') }}" data-validate="login" novalidate>
+    <label for="email">Email address</label>
+    <input id="email" name="email" type="email" value="{{ email or '' }}">
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password">
+
+    <button type="submit">Log in</button>
+  </form>
+
+  <p><a href="{{ url_for('forgot_password') }}">Forgot password?</a></p>
+  <p class="muted">No account? <a href="{{ url_for('signup') }}">Sign up</a></p>
+</section>
+{% endblock %}
