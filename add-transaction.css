@@ -1,0 +1,230 @@
+/* Colours taken from the supplied FinSync design. */
+:root {
+    --navy: #050a32;
+    --blue: #2854e8;
+    --light-blue: #7b98ec;
+    --text: #111322;
+    --border: #e3e3e3;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Centre the form on a white page. */
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    color: var(--text);
+    font-family: Arial, sans-serif;
+}
+
+/* The outer navy area matches the reference frame. */
+.transaction-frame {
+    width: 620px;
+    max-width: 100%;
+    padding: 26px 48px 42px;
+    border-radius: 25px;
+    background: var(--navy);
+}
+
+/* White inner card with rounded corners. */
+.transaction-card {
+    padding: 45px 38px 25px;
+    border-radius: 25px;
+    background: white;
+}
+
+h1 {
+    margin: 6px 0 20px;
+    font-size: 24px;
+}
+
+/* Labels sit directly above their controls. */
+label,
+legend {
+    display: block;
+    margin-bottom: 8px;
+    padding: 0;
+    font-size: 18px;
+}
+
+input,
+select,
+button {
+    font-family: inherit;
+    font-size: 17px;
+}
+
+input,
+select {
+    min-width: 0;
+    height: 46px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: white;
+    color: var(--text);
+    box-shadow: 0 0 2px #ddd;
+}
+
+/* The type dropdown uses the selected blue colour. */
+.type-field {
+    margin-bottom: 35px;
+}
+
+.type-field select {
+    width: 100%;
+    border: none;
+    border-radius: 22px;
+    background: var(--blue);
+    color: white;
+    cursor: pointer;
+}
+
+.type-field option {
+    background: white;
+    color: var(--text);
+}
+
+.field {
+    margin-bottom: 14px;
+}
+
+/* Display the rand symbol inside the amount control. */
+.amount-control {
+    display: flex;
+    align-items: center;
+    width: 150px;
+    height: 46px;
+    padding-left: 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 0 2px #ddd;
+}
+
+.amount-control span {
+    font-size: 17px;
+}
+
+.amount-control input {
+    width: 100%;
+    height: 42px;
+    padding-left: 6px;
+    border: none;
+    box-shadow: none;
+}
+
+#description {
+    width: 100%;
+}
+
+#category {
+    width: 100%;
+}
+
+/* Group the three date inputs without a visible fieldset border. */
+.date-field {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.date-inputs {
+    display: flex;
+    gap: 9px;
+}
+
+.date-inputs input {
+    width: 30%;
+    text-align: center;
+}
+
+.date-inputs #year {
+    flex: 1;
+}
+
+/* Cancel and Save use the two blues from the reference. */
+.action-buttons {
+    display: flex;
+    gap: 22px;
+    margin-top: 40px;
+}
+
+button {
+    flex: 1;
+    padding: 9px 12px;
+    border: none;
+    border-radius: 22px;
+    cursor: pointer;
+}
+
+#cancelButton {
+    background: var(--light-blue);
+    color: var(--text);
+}
+
+#saveButton {
+    background: var(--blue);
+    color: white;
+}
+
+button:hover {
+    filter: brightness(0.95);
+}
+
+/* Show keyboard users which control is selected. */
+input:focus-visible,
+select:focus-visible,
+button:focus-visible {
+    outline: 3px solid #91b9ff;
+    outline-offset: 3px;
+}
+
+#message {
+    margin: 16px 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #245340;
+}
+
+/* Hide labels visually while keeping them available to screen readers. */
+.screen-reader-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* Reduce spacing on phones. */
+@media (max-width: 500px) {
+    body {
+        padding: 12px;
+    }
+
+    .transaction-frame {
+        padding: 18px;
+    }
+
+    .transaction-card {
+        padding: 28px 20px 20px;
+    }
+
+    .action-buttons {
+        gap: 14px;
+    }
+
+    .date-inputs input {
+        padding: 10px 5px;
+        font-size: 16px;
+    }
+}

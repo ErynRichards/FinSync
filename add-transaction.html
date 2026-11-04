@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FinSync | Add Transaction</title>
+
+    <!-- Load the separate CSS and JavaScript files. -->
+    <link rel="stylesheet" href="add-transaction.css">
+    <script src="add-transaction.js" defer></script>
+</head>
+
+<body>
+    <main class="transaction-frame">
+        <section class="transaction-card" aria-labelledby="formTitle">
+
+            <h1 id="formTitle">Add Transaction</h1>
+
+            <form id="transactionForm">
+                <!-- The selected type determines the category choices. -->
+                <div class="type-field">
+                    <label for="transactionType">Transaction type</label>
+
+                    <select id="transactionType" name="type">
+                        <option value="Expense">Expense</option>
+                        <option value="Income">Income</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="amount">Amount</label>
+
+                    <!-- The R is displayed separately from the number. -->
+                    <div class="amount-control">
+                        <span aria-hidden="true">R</span>
+
+                        <input
+                            id="amount"
+                            name="amount"
+                            type="number"
+                            min="0.01"
+                            max="999999999.99"
+                            step="0.01"
+                            placeholder="0.00"
+                            aria-label="Amount in South African rand"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="description">Description</label>
+
+                    <input
+                        id="description"
+                        name="description"
+                        type="text"
+                        maxlength="150"
+                        placeholder="E.g. Checkers"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label for="category">Category</label>
+
+                    <select id="category" name="category" required>
+                        <option value="">Select category</option>
+                    </select>
+                </div>
+
+                <!-- Date is positioned below Category. -->
+                <fieldset class="date-field">
+                    <legend>Date</legend>
+
+                    <div class="date-inputs">
+                        <label class="screen-reader-only" for="day">
+                            Day
+                        </label>
+                        <input
+                            id="day"
+                            name="day"
+                            type="number"
+                            min="1"
+                            max="31"
+                            placeholder="DD"
+                            required
+                        >
+
+                        <label class="screen-reader-only" for="month">
+                            Month
+                        </label>
+                        <input
+                            id="month"
+                            name="month"
+                            type="number"
+                            min="1"
+                            max="12"
+                            placeholder="MM"
+                            required
+                        >
+
+                        <label class="screen-reader-only" for="year">
+                            Year
+                        </label>
+                        <input
+                            id="year"
+                            name="year"
+                            type="number"
+                            min="1900"
+                            max="9999"
+                            placeholder="YYYY"
+                            required
+                        >
+                    </div>
+                </fieldset>
+
+                <div class="action-buttons">
+                    <button id="cancelButton" type="button">
+                        Cancel
+                    </button>
+
+                    <button id="saveButton" type="submit">
+                        Save
+                    </button>
+                </div>
+
+                <!-- Display feedback without refreshing the page. -->
+                <p id="message" role="status"></p>
+            </form>
+
+        </section>
+    </main>
+</body>
+</html>
