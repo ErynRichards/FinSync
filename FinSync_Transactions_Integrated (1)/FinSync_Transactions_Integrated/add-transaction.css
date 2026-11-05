@@ -1,0 +1,229 @@
+
+/* Add Transaction popup */
+#transactionDialog {
+    width: 580px;
+    max-width: 95%;
+    padding: 0;
+    border: none;
+    border-radius: 25px;
+    background-color: white;
+    color: #111322;
+    max-height: 95vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* Overlay */
+#transactionDialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.45);
+}
+
+/* White card */
+#transactionDialog .transaction-card {
+    background-color: white;
+    border-radius: 25px;
+    padding: 45px 40px 35px;
+}
+
+/* Heading */
+#transactionDialog h2 {
+    font-size: 25px;
+    color: #050a32;
+    margin: 0 0 20px;
+}
+
+/* Type buttons */
+#transactionDialog .type-buttons {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 42px;
+}
+
+#transactionDialog .type-btn {
+    flex: 1;
+    height: 42px;
+    border: none;
+    border-radius: 25px;
+    background-color: #7299ed;
+    color: #111322;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#transactionDialog .type-btn.selected {
+    background-color: #1959e9;
+    color: white;
+}
+
+#transactionDialog .type-btn:hover {
+    filter: brightness(0.95);
+}
+
+/* Fields */
+#transactionDialog .field {
+    margin-bottom: 16px;
+}
+
+#transactionDialog label {
+    display: block;
+    font-size: 18px;
+    color: #222333;
+    margin-bottom: 9px;
+}
+
+/* Inputs */
+#transactionDialog input,
+#transactionDialog select {
+    height: 48px;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    background-color: white;
+    color: #333333;
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+    padding: 10px 15px;
+    box-shadow: 0 0 3px #dddddd;
+    min-width: 0;
+}
+
+/* Amount */
+#transactionDialog .amount-control {
+    display: flex;
+    align-items: center;
+    width: 150px;
+    height: 48px;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    padding-left: 15px;
+    box-shadow: 0 0 3px #dddddd;
+}
+
+#transactionDialog .amount-control span {
+    font-size: 18px;
+    color: #333333;
+}
+
+#transactionDialog #amount {
+    width: 100%;
+    height: 44px;
+    border: none;
+    box-shadow: none;
+    padding-left: 6px;
+}
+
+/* Description */
+#transactionDialog #description {
+    width: 175px;
+}
+
+/* Category */
+#transactionDialog #category {
+    width: 210px;
+    max-width: 100%;
+    height: 50px;
+    cursor: pointer;
+}
+
+/* Date */
+#transactionDialog .date-field {
+    margin-top: 15px;
+}
+
+#transactionDialog .date-inputs {
+    display: flex;
+    gap: 9px;
+    width: 300px;
+    max-width: 100%;
+}
+
+#transactionDialog .date-inputs input {
+    width: 0;
+    flex: 1;
+    height: 50px;
+    padding: 8px 5px;
+    text-align: center;
+}
+
+#transactionDialog .date-inputs #year {
+    flex: 1.3;
+}
+
+/* Hide number arrows */
+#transactionDialog input::-webkit-inner-spin-button,
+#transactionDialog input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#transactionDialog input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* Action buttons */
+#transactionDialog .action-buttons {
+    display: flex;
+    gap: 25px;
+    margin-top: 50px;
+}
+
+#transactionDialog .action-buttons button {
+    flex: 1;
+    height: 42px;
+    border: none;
+    border-radius: 25px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Cancel */
+#transactionDialog #cancelButton {
+    background-color: #7299ed;
+    color: #111322;
+}
+
+/* Save */
+#transactionDialog #saveButton {
+    background-color: #1959e9;
+    color: white;
+}
+
+#transactionDialog .action-buttons button:hover {
+    filter: brightness(0.95);
+}
+
+/* Message */
+#transactionDialog #message {
+    margin: 15px 0 0;
+    font-size: 14px;
+    color: #245340;
+}
+
+#transactionDialog #message.error {
+    color: #cc3333;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+
+    #transactionDialog {
+        width: 95%;
+    }
+
+    #transactionDialog .transaction-card {
+        padding: 30px 20px;
+    }
+
+    #transactionDialog .type-buttons {
+        gap: 12px;
+    }
+
+    #transactionDialog .date-inputs {
+        width: 100%;
+    }
+
+    #transactionDialog .action-buttons {
+        gap: 12px;
+        margin-top: 35px;
+    }
+}
