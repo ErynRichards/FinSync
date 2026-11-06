@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FinSync - Create Budget</title>
+
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="createBudget.css">
+</head>
+
+<body>
+
+    <!-- Main page container -->
+    <main class="budget-page">
+
+        <!-- White form card -->
+        <section class="budget-card">
+
+            <!-- Navigation back to Budgets dashboard -->
+            <a href="budgets.html" class="back-btn">
+                &larr; Back to Budgets
+            </a>
+
+            <h1>Create Budget</h1>
+
+            <!-- Budget creation form -->
+            <form id="budgetForm">
+
+                <!-- Category selection -->
+                <div class="form-group">
+
+                    <label for="category">
+                        Category
+                    </label>
+
+                    <select id="category"
+                            name="category"
+                            required>
+
+                        <option value="" disabled selected>
+                            Select category
+                        </option>
+
+                        <option value="housing">
+                            Housing
+                        </option>
+
+                        <option value="groceries">
+                            Groceries
+                        </option>
+
+                        <option value="transport">
+                            Transport
+                        </option>
+
+                        <option value="entertainment">
+                            Entertainment
+                        </option>
+
+                        <option value="shopping">
+                            Shopping
+                        </option>
+
+                        <option value="utilities">
+                            Utilities
+                        </option>
+
+                    </select>
+                </div>
+
+                <!-- Monthly budget amount -->
+                <div class="form-group">
+
+                    <label for="monthlyAmount">
+                        Monthly Amount (R)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="monthlyAmount"
+                        name="monthlyAmount"
+                        placeholder="0.00"
+                        min="0.01"
+                        step="0.01"
+                        required>
+                </div>
+
+                <!-- Suggested budget feature -->
+                <div class="suggestion-box"
+                     id="suggestionBox">
+
+                    <h3>
+                        Suggested Monthly Budget
+                    </h3>
+
+                    <!-- Loading, information and error messages -->
+                    <p id="suggestionMessage"
+                       aria-live="polite">
+                        Select a category to view
+                        your suggested budget.
+                    </p>
+
+                    <!-- Suggested amount and button -->
+                    <div class="suggestion-result"
+                         id="suggestionResult"
+                         hidden>
+
+                        <strong id="suggestedAmount">
+                            R 0.00
+                        </strong>
+
+                        <button
+                            type="button"
+                            id="useAmountBtn">
+                            Use Amount
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- Start date -->
+                <div class="form-group">
+
+                    <label for="startDate">
+                        Start Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="startDate"
+                        name="startDate"
+                        required>
+
+                </div>
+
+                <!-- End date -->
+                <div class="form-group">
+
+                    <label for="endDate">
+                        End Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="endDate"
+                        name="endDate"
+                        required>
+
+                </div>
+
+                <!-- Form feedback -->
+                <p id="formMessage"
+                   role="status"
+                   aria-live="polite"></p>
+
+                <!-- Form buttons -->
+                <div class="form-actions">
+
+                    <a href="budgets.html"
+                       class="cancel-btn">
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        id="saveBudgetBtn"
+                        class="save-btn">
+                        Save
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <!-- Link JavaScript -->
+    <script src="createBudget.js"></script>
+
+</body>
+</html>
