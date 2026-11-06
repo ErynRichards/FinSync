@@ -21,11 +21,17 @@ password reset can be tested now. Teammates replace them with their own work.
 | `config.py` | Reads the settings from `.env` |
 | `db.py` | Connects to MySQL and runs queries |
 | `users.py` | Add, find and update users |
+| `accounts.py` | Add and find a user's accounts, and work out an account's balance |
+<<<<<<< HEAD
+| `dashboard_summary.py` | Calculates the four dashboard summary cards |
+=======
+>>>>>>> 5d32f2b4fdd331c05da94c8c70a75622d8fb38f7
+| `transactions.py` | Save, list and delete a user's transactions, and total income and expenses |
 | `security.py` | Password hashing and the password rules |
 | `reset_tokens.py` | Creates and checks the password-reset tokens |
 | `email_service.py` | Sends the reset email (or prints it in the terminal for testing) |
 | `check_db.py` | Checks that the database connection works |
-| `database/` | SQL scripts that create the database and tables |
+| `database/` | SQL scripts that create the database and all five tables (users, password_reset_tokens, accounts, categories, transactions) |
 | `templates/` | The HTML pages |
 | `static/` | CSS and JavaScript |
 | `.env.example` | Settings template. Copy it to `.env` and fill it in |
@@ -57,13 +63,75 @@ Open `.env` in Notepad. Put any long random text in `SECRET_KEY` and put your My
 ```
 python check_db.py
 ```
-You should see two lines starting with `OK`.
+You should see five lines starting with `OK`, one for each table. The categories table starts with 5 rows.
 
 **6. Start the app:**
 ```
 python app.py
 ```
 Open **http://127.0.0.1:5000** in your browser.
+
+---
+
+## Database tables
+
+| Table | What it stores | Links to |
+|---|---|---|
+| `users` | Registered users | – |
+| `password_reset_tokens` | One row per "Forgot Password" request | `users` |
+| `accounts` | Each user's financial accounts, with an opening balance and currency (default ZAR) | `users` |
+| `categories` | How transactions are classified: Salary (income), Groceries, Transport, Entertainment and Utilities (expense) | – |
+| `transactions` | Income and expenses. `amount` is always positive and `transaction_type` says whether it is income or an expense | `accounts`, `categories` |
+
+An account's current balance isn't stored. Work it out as:
+**opening balance + total income − total expenses** for that account.
+
+### Functions for the backend members (dashboard and transactions)
+
+Every function takes the logged-in user's `user_id` (from `session["user_id"]`), so users only ever see their own data. Transactions are linked to a user through their account: **transaction → account → user**.
+
+| Function | What it does |
+|---|---|
+| `create_account(user_id, name, type, opening_balance, currency)` | Adds an account and returns its id |
+| `get_accounts(user_id)` | All the user's accounts |
+| `get_account_balance(user_id, account_id)` | Opening balance + income − expenses |
+| `get_categories()` | All categories, for the form's drop-down list |
+| `add_transaction(user_id, account_id, category_id, description, amount, type, date)` | Checks the details and saves the transaction. Raises `DatabaseError` with a friendly message if the amount isn't more than 0, the type isn't income/expense, the account isn't the user's, or the category doesn't match the type |
+| `get_transactions(user_id)` | All the user's transactions, newest first, with the account and category names |
+| `get_account_transactions(user_id, account_id)` | Transactions for one account |
+| `delete_transaction(user_id, transaction_id)` | Deletes it if it's the user's. Returns `False` otherwise |
+| `get_totals(user_id, start_date, end_date)` | Total income and expenses between two dates, for the dashboard |
+
+Example in a Flask route:
+```python
+from transactions import add_transaction
+add_transaction(session["user_id"], request.form["account_id"], request.form["category_id"],
+                request.form["description"], request.form["amount"],
+                request.form["transaction_type"], request.form["transaction_date"])
+```
+Dates are text like `2026-11-03`. The form fields above are suggested names; agree on them with the frontend members.
+
+<<<<<<< HEAD
+### Dashboard summary cards
+
+`get_summary(user_id)` in `dashboard_summary.py` returns the values for the four cards:
+
+```python
+from dashboard_summary import get_summary
+summary = get_summary(session["user_id"])
+# {"total_balance": 13749.5, "total_income": 15000.0, "total_expenses": 2750.75, "savings": 12249.25}
+```
+
+- **Total Balance** = opening balances of all the user's accounts + income − expenses
+- **Total Income** = all income transactions
+- **Total Expenses** = all expense transactions
+- **Savings** = total income − total expenses
+
+The values are plain numbers, so the JavaScript can format them as rand (R).
+
+=======
+>>>>>>> 5d32f2b4fdd331c05da94c8c70a75622d8fb38f7
+If you already ran `02_schema.sql` before, just run it again. It only adds the tables that are missing and doesn't touch existing data.
 
 ---
 
