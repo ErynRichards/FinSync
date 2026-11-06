@@ -22,10 +22,11 @@ password reset can be tested now. Teammates replace them with their own work.
 | `db.py` | Connects to MySQL and runs queries |
 | `users.py` | Add, find and update users |
 | `accounts.py` | Add and find a user's accounts, and work out an account's balance |
-<<<<<<< HEAD
+| `budget_database.py` | Budgets and the spending history for budget suggestions |
+| `savings_database.py` | Create, get and update savings goals |
+| `reports_database.py` | Transaction data for the Reports screen |
+| `settings_database.py` | Profile, password hash and user preferences for Settings |
 | `dashboard_summary.py` | Calculates the four dashboard summary cards |
-=======
->>>>>>> 5d32f2b4fdd331c05da94c8c70a75622d8fb38f7
 | `transactions.py` | Save, list and delete a user's transactions, and total income and expenses |
 | `security.py` | Password hashing and the password rules |
 | `reset_tokens.py` | Creates and checks the password-reset tokens |
@@ -81,6 +82,9 @@ Open **http://127.0.0.1:5000** in your browser.
 | `password_reset_tokens` | One row per "Forgot Password" request | `users` |
 | `accounts` | Each user's financial accounts, with an opening balance and currency (default ZAR) | `users` |
 | `categories` | How transactions are classified: Salary (income), Groceries, Transport, Entertainment and Utilities (expense) | – |
+| `budgets` | Monthly budget amount per category | `users`, `categories` |
+| `savings_goals` | Savings goals with target amount, amount saved, target date and status (active/completed) | `users` |
+| `user_settings` | Theme (light/dark) and notification settings, one row per user | `users` |
 | `transactions` | Income and expenses. `amount` is always positive and `transaction_type` says whether it is income or an expense | `accounts`, `categories` |
 
 An account's current balance isn't stored. Work it out as:
@@ -111,7 +115,6 @@ add_transaction(session["user_id"], request.form["account_id"], request.form["ca
 ```
 Dates are text like `2026-11-03`. The form fields above are suggested names; agree on them with the frontend members.
 
-<<<<<<< HEAD
 ### Dashboard summary cards
 
 `get_summary(user_id)` in `dashboard_summary.py` returns the values for the four cards:
@@ -129,8 +132,28 @@ summary = get_summary(session["user_id"])
 
 The values are plain numbers, so the JavaScript can format them as rand (R).
 
-=======
->>>>>>> 5d32f2b4fdd331c05da94c8c70a75622d8fb38f7
+### Budgets, Savings Goals, Reports and Settings
+
+| File | Function | What it returns / does |
+|---|---|---|
+| `budget_database.py` | `get_previous_three_months()` | Start and end date of the last 3 full months |
+| | `get_category_spending_history(user_id, category_id, start_date, end_date)` | Expenses per month, e.g. `[{"month": "2026-08", "total": 1500.5}, ...]`. Months with no spending show 0 |
+| | `create_budget(...)`, `get_budgets(user_id)` | Add and list budgets |
+| `savings_database.py` | `create_savings_goal(user_id, goal_name, target_amount, target_date, category)` | Adds a goal, returns its id |
+| | `get_savings_goals(user_id)`, `get_savings_goal(user_id, goal_id)` | The user's goals |
+| | `update_goal_target(...)`, `update_saved_amount(...)`, `update_goal_status(...)` | Return `False` if the goal isn't the user's |
+| `reports_database.py` | `get_report_transactions(user_id, start_date, end_date)` | Date, amount, type and category of each transaction |
+| `settings_database.py` | `get_profile(user_id)`, `update_profile(...)` | Name, email and phone |
+| | `get_password_hash(user_id)`, `update_password_hash(user_id, hash)` | For changing the password |
+| | `get_preferences(user_id)`, `save_preferences(user_id, theme, budget_notifications, savings_notifications)` | Theme and notification settings |
+
+Budget suggestion example (for Lashanya):
+```python
+from budget_database import get_previous_three_months, get_category_spending_history
+start_date, end_date = get_previous_three_months()
+history = get_category_spending_history(session["user_id"], category_id, start_date, end_date)
+```
+
 If you already ran `02_schema.sql` before, just run it again. It only adds the tables that are missing and doesn't touch existing data.
 
 ---
