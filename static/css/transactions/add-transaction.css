@@ -1,0 +1,225 @@
+/* Form styles are scoped to avoid changing the Transactions page. */
+
+#transactionDialog {
+    --navy: #050a32;
+    --blue: #2854e8;
+    --light-blue: #7b98ec;
+    --text: #111322;
+    --border: #e3e3e3;
+}
+#transactionDialog * {
+    box-sizing: border-box;
+}
+#transactionDialog {
+    width: 580px;
+    max-width: calc(100% - 30px);
+    max-height: 92vh;
+    padding: 30px;
+    border: none;
+    border-radius: 20px;
+    background: white;
+    color: var(--text);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
+    overflow-y: auto;
+}
+#transactionDialog .transaction-card {
+    padding: 10px 15px 20px;
+    border-radius: 20px;
+    background: white;
+}
+#transactionDialog h2 {
+    margin: 6px 0 20px;
+    font-size: 24px;
+}
+#transactionDialog label,
+#transactionDialog legend {
+    display: block;
+    margin-bottom: 8px;
+    padding: 0;
+    font-size: 18px;
+}
+#transactionDialog input,
+#transactionDialog select,
+#transactionDialog button {
+    font-family: inherit;
+    font-size: 17px;
+}
+#transactionDialog input,
+#transactionDialog select {
+    min-width: 0;
+    height: 46px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: white;
+    color: var(--text);
+    box-shadow: 0 0 2px #ddd;
+}
+#transactionDialog .type-field {
+    margin-bottom: 35px;
+}
+
+/* Income and Expense buttons */
+#transactionDialog .type-buttons {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+#transactionDialog .type-btn {
+    flex: 1;
+    padding: 13px;
+    border: none;
+    border-radius: 22px;
+    background: #e8ecff;
+    color: #050a32;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#transactionDialog .type-btn.selected {
+    background: #2854e8;
+    color: white;
+}
+
+#transactionDialog .type-btn:hover {
+    filter: brightness(0.95);
+}
+
+/* Hide original dropdown but keep it accessible */
+#transactionDialog .screen-reader-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+#transactionDialog .field {
+    margin-bottom: 14px;
+}
+#transactionDialog .amount-control {
+    display: flex;
+    align-items: center;
+    width: 150px;
+    height: 46px;
+    padding-left: 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 0 2px #ddd;
+}
+#transactionDialog .amount-control span {
+    font-size: 17px;
+}
+#transactionDialog .amount-control input {
+    width: 100%;
+    height: 42px;
+    padding-left: 6px;
+    border: none;
+    box-shadow: none;
+}
+#transactionDialog #description {
+    width: 100%;
+}
+#transactionDialog #category {
+    width: 100%;
+}
+#transactionDialog .date-field {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+#transactionDialog .date-inputs {
+    display: flex;
+    gap: 9px;
+}
+#transactionDialog .date-inputs input {
+    width: 30%;
+    text-align: center;
+}
+#transactionDialog .date-inputs #year {
+    flex: 1;
+}
+#transactionDialog .action-buttons {
+    display: flex;
+    gap: 22px;
+    margin-top: 40px;
+}
+#transactionDialog button {
+    flex: 1;
+    padding: 9px 12px;
+    border: none;
+    border-radius: 22px;
+    cursor: pointer;
+}
+#transactionDialog #cancelButton {
+    background: var(--light-blue);
+    color: var(--text);
+}
+#transactionDialog #saveButton {
+    background: var(--blue);
+    color: white;
+}
+#transactionDialog button:hover {
+    filter: brightness(0.95);
+}
+#transactionDialog input:focus-visible,
+#transactionDialog select:focus-visible,
+#transactionDialog button:focus-visible {
+    outline: 3px solid #91b9ff;
+    outline-offset: 3px;
+}
+#transactionDialog #message {
+    margin: 16px 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #245340;
+}
+#transactionDialog .screen-reader-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+
+@media (max-width: 500px) {
+#transactionDialog {
+        padding: 18px;
+    }
+#transactionDialog .transaction-card {
+        padding: 28px 20px 20px;
+    }
+#transactionDialog .action-buttons {
+        gap: 14px;
+    }
+#transactionDialog .date-inputs input {
+        padding: 10px 5px;
+        font-size: 16px;
+    }
+}
+/* Native modal keeps keyboard focus inside the form. */
+#transactionDialog { border: none; max-height: 92vh; overflow-y: auto; color: var(--text); }
+#transactionDialog::backdrop { background: rgba(5, 10, 50, 0.55); }
+#transactionDialog #message.error { color: #b42318; }
+#transactionDialog button:disabled { opacity: .65; cursor: wait; }
+
+/* Highlight the complete Amount box */
+#transactionDialog .amount-control:focus-within {
+    outline: 3px solid #91b9ff;
+    outline-offset: 3px;
+}
+
+/* Prevent the inner input from having a separate outline */
+#transactionDialog .amount-control input:focus-visible {
+    outline: none;
+    box-shadow: none;
+}

@@ -1,5 +1,5 @@
 """
-Landing page placeholder (Eryn's page replaces templates/index.html) and a
+Landing page placeholder (Eryn's page replaces templates/dashboard.html) and a
 database health check for troubleshooting.
 """
 from flask import Blueprint, jsonify, render_template
@@ -11,7 +11,7 @@ bp = Blueprint("main", __name__)
 
 @bp.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("dashboard.html")
 
 
 @bp.route("/health/db")

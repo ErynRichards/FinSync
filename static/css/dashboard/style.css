@@ -1,0 +1,250 @@
+/* General styling */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: white;
+}
+
+/* Main application layout */
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background-color: #050b35;
+    color: white;
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+/* Logo section */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 50px;
+}
+
+/* Circular FinSync logo */
+.logo img {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #34bfff;
+}
+
+/* FinSync name */
+.logo h2 {
+    font-size: 26px;
+    margin: 0;
+    color: white;
+}
+
+/* Navigation menu */
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Navigation buttons */
+.nav-btn {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 14px 30px;
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+/* Navigation hover */
+.nav-btn:hover {
+    background-color: #151f70;
+}
+
+/* Selected navigation button */
+.nav-btn.active {
+    background-color: #1100cc;
+    font-weight: bold;
+}
+
+/* Logout button */
+.logout {
+    margin-top: auto;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    text-align: left;
+    padding: 15px 30px;
+    cursor: pointer;
+}
+
+.bell-image {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+}
+
+
+/* ==========================================
+   DASHBOARD MAIN CONTENT
+   ========================================== */
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+    padding: 30px;
+    background-color: #f5f7fb;
+}
+
+/* Top header with notification and profile */
+.top-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+/* Notification bell */
+.bell-image {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+}
+
+/* User profile circle */
+.profile {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: #050b35;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* ==========================================
+   DASHBOARD HEADING
+   ========================================== */
+
+.page-header {
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    font-size: 30px;
+    color: #050b35;
+    margin: 0 0 10px;
+}
+
+.page-header p {
+    color: #666;
+    font-size: 16px;
+    margin: 0;
+}
+
+/* ==========================================
+   FINANCIAL SUMMARY CARDS
+   ========================================== */
+
+.dashboard-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.summary-card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    min-width: 0;
+}
+
+.summary-card h3 {
+    font-size: 16px;
+    color: #666;
+    margin: 0 0 20px;
+    font-weight: 500;
+}
+
+.summary-amount {
+    font-size: 25px;
+    font-weight: bold;
+    color: #050b35;
+    overflow-wrap: anywhere;
+}
+
+/* ==========================================
+   CASH FLOW GRAPH
+   ========================================== */
+
+.dashboard-chart {
+    background-color: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    width: 100%;
+    overflow: hidden;
+}
+
+.dashboard-chart img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
+/* ==========================================
+   OTHER PAGE CONTENT
+   ========================================== */
+
+.page-box {
+    background-color: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+
+@media (max-width: 1200px) {
+    .dashboard-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .dashboard-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .main-content {
+        padding: 15px;
+    }
+
+    .page-header h1 {
+        font-size: 24px;
+    }
+}

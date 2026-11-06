@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FinSync Accounts</title>
+</head>
+<body>
+
+    <h1>My Accounts</h1>
+
+    <form method="POST">
+
+        <label>Account Name:</label>
+        <input type="text" name="account_name" required>
+
+        <label>Account Type:</label>
+        <select name="account_type" required>
+            <option value="Savings">Savings</option>
+            <option value="Cheque">Cheque</option>
+            <option value="Cash">Cash</option>
+        </select>
+
+        <button type="submit">Add Account</button>
+
+    </form>
+
+    <h2>Existing Accounts</h2>
+
+    {% for account in accounts %}
+        <p>
+            {{ account.account_name }}
+            ({{ account.account_type }})
+        </p>
+    {% else %}
+        <p>No accounts yet.</p>
+    {% endfor %}
+
+</body>
+</html>

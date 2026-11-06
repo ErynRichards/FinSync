@@ -1,4 +1,5 @@
--- FinSync: Step 2 - create the tables for the login and password-reset module
+
+-- FinSync: Step 2 - create all the tables
 -- Run as root after 01_create_database.sql.
 
 USE finsync;
@@ -30,3 +31,53 @@ CREATE TABLE IF NOT EXISTS password_reset_tokens (
     FOREIGN KEY (user_id) REFERENCES users (user_id)
         ON DELETE CASCADE                    -- deleting a user also deletes their tokens
 ) ENGINE=InnoDB;
+
+-- Financial accounts belonging to each user (e.g. Cheque, Savings, Credit Card, Cash)
+CREATE TABLE IF NOT EXISTS accounts (
+    account_id       INT UNSIGNED   NOT NULL AUTO_INCREMENT,
+    user_id          INT UNSIGNED   NOT NULL,
+    account_name     VARCHAR(100)   NOT NULL,
+    account_type     VARCHAR(30)    NOT NULL,
+    opening_balance  DECIMAL(12,2)  NOT NULL DEFAULT 0.00,  -- the balance when the account was added
+    currency         CHAR(3)        NOT NULL DEFAULT 'ZAR', -- e.g. ZAR, USD
+    created_at       DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (account_id),
+    FOREIGN KEY (user_id) REFERENCES users (user_id)
+        ON DELETE CASCADE                    -- deleting a user also deletes their accounts
+) ENGINE=InnoDB;
+
+-- How transactions are classified (shared by all users)
+CREATE TABLE IF NOT EXISTS categories (
+    category_id    INT UNSIGNED  NOT NULL AUTO_INCREMENT,
+    category_name  VARCHAR(50)   NOT NULL,
+    category_type  ENUM('income', 'expense') NOT NULL,
+    PRIMARY KEY (category_id),
+    UNIQUE (category_name)                   -- no duplicate category names
+) ENGINE=InnoDB;
+
+-- The user's income and expenses
+CREATE TABLE IF NOT EXISTS transactions (
+    transaction_id    INT UNSIGNED   NOT NULL AUTO_INCREMENT,
+    account_id        INT UNSIGNED   NOT NULL,
+    category_id       INT UNSIGNED   NOT NULL,
+    description       VARCHAR(255)   NULL,
+    amount            DECIMAL(12,2)  NOT NULL,              -- always positive; the type says if it's money in or out
+    transaction_type  ENUM('income', 'expense') NOT NULL,
+    transaction_date  DATE           NOT NULL,
+    created_at        DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (transaction_id),
+    CHECK (amount > 0),
+    FOREIGN KEY (account_id) REFERENCES accounts (account_id)
+        ON DELETE CASCADE,                   -- deleting an account also deletes its transactions
+    FOREIGN KEY (category_id) REFERENCES categories (category_id)
+        ON DELETE RESTRICT                   -- a category can't be deleted while transactions use it
+) ENGINE=InnoDB;
+
+-- Starting categories. INSERT IGNORE skips any that already exist,
+-- so this script can be run again safely.
+INSERT IGNORE INTO categories (category_name, category_type) VALUES
+    ('Salary', 'income'),
+    ('Groceries', 'expense'),
+    ('Transport', 'expense'),
+    ('Entertainment', 'expense'),
+    ('Utilities', 'expense');

@@ -1,0 +1,342 @@
+
+/* General styling */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: white;
+}
+
+/* Main application layout */
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background-color: #050b35;
+    color: white;
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+/* Logo section */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 50px;
+}
+
+/* Circular FinSync logo */
+.logo img {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #34bfff;
+}
+
+/* FinSync name */
+.logo h2 {
+    font-size: 26px;
+    margin: 0;
+    color: white;
+}
+
+/* Navigation menu */
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Navigation buttons */
+.nav-btn {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 14px 30px;
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+/* Navigation hover */
+.nav-btn:hover {
+    background-color: #151f70;
+}
+
+/* Selected navigation button */
+.nav-btn.active {
+    background-color: #1100cc;
+    font-weight: bold;
+}
+
+/* Logout button */
+.logout {
+    margin-top: auto;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    text-align: left;
+    padding: 15px 30px;
+    cursor: pointer;
+}
+
+/* Logout hover */
+.logout:hover {
+    color: #a9b4ff;
+}
+
+/* Main content area */
+.main-content {
+    flex: 1;
+    min-width: 0;
+    padding: 30px 40px;
+    background-color: white;
+}
+
+/* Top header */
+.top-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+    height: 40px;
+}
+
+/* Notification bell */
+.bell-image {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+}
+
+/* User profile */
+.profile {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Page heading */
+.page-header h1 {
+    font-size: 36px;
+    color: #050b35;
+    margin-bottom: 5px;
+}
+
+/* Page description */
+.page-header p {
+    font-size: 16px;
+    color: gray;
+    margin-top: 0;
+}
+
+/* Main page content */
+#page-content {
+    margin-top: 25px;
+}
+
+/* Temporary content for other screens */
+.page-box {
+    padding: 25px;
+    background-color: #fafafa;
+    border: 1px solid #eeeeee;
+    border-radius: 10px;
+}
+
+/* Add Transaction button */
+.transaction-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 25px;
+}
+
+.transaction-actions button {
+    background-color: #1100cc;
+    color: white;
+    border: none;
+    padding: 14px 25px;
+    border-radius: 7px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+/* Add Transaction button hover */
+.transaction-actions button:hover {
+    background-color: #090099;
+}
+
+/* Transaction filters */
+.transaction-filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+/* Filter dropdowns */
+.transaction-filters select,
+.transaction-filters input {
+    padding: 12px;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    font-size: 15px;
+    background-color: white;
+    min-width: 180px;
+}
+
+/* Transaction table container */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Transaction table */
+.transaction-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+/* Table headings */
+.transaction-table th {
+    text-align: left;
+    padding: 15px;
+    background-color: #fafafa;
+    border-bottom: 1px solid #dddddd;
+}
+
+/* Table cells */
+.transaction-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+/* Table row hover */
+.transaction-table tbody tr:hover {
+    background-color: #f8f9fc;
+}
+
+/* Amount column */
+.transaction-table th:last-child,
+.transaction-table td:last-child {
+    text-align: right;
+}
+
+/* Income amounts */
+.income {
+    color: green;
+    font-weight: bold;
+}
+
+/* Expense amounts */
+.expense {
+    color: #cc3333;
+    font-weight: bold;
+}
+
+/* Message when there are no transactions */
+.empty-message {
+    text-align: center !important;
+    padding: 45px 20px !important;
+    color: #888888;
+    font-size: 15px;
+}
+
+/* Smaller screen layout */
+@media (max-width: 650px) {
+
+    .app {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .logo {
+        margin-bottom: 20px;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .transaction-filters select,
+    .transaction-filters input {
+        width: 100%;
+    }
+}
+
+/* Integration feedback and long descriptions. */
+.preview-note { color: #707482; font-size: 13px; }
+#transactions-status { color: #245340; line-height: 1.5; }
+.transaction-table { min-width: 600px; }
+.transaction-table td { max-width: 300px; overflow-wrap: anywhere; }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #91b9ff; outline-offset: 2px; }
+
+/* Clear button for the transaction filters */
+#clear-filters-btn {
+    padding: 10px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: white;
+    color: #050b35;
+    cursor: pointer;
+}
+#clear-filters-btn:hover { background: #edf2f7; }
+
+
+/* Month calendar filter */
+.month-filter-container {
+    display: flex;
+    align-items: center;
+    min-width: 200px;
+}
+
+.month-filter-container input[type="month"] {
+    width: 100%;
+    height: 55px;
+    padding: 12px 15px;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    background-color: white;
+    color: #050b35;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color-scheme: light;
+    cursor: pointer;
+}
+
+/* Calendar icon */
+.month-filter-container input[type="month"]::-webkit-calendar-picker-indicator {
+    display: block;
+    opacity: 1;
+    cursor: pointer;
+}
+
+/* Highlight when selected */
+.month-filter-container input[type="month"]:focus {
+    outline: 2px solid #1100cc;
+    outline-offset: 2px;
+}
+

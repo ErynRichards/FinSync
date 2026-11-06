@@ -1,9 +1,111 @@
-{% extends "base.html" %}
-{% block title %}Dashboard{% endblock %}
-{% block content %}
-<!-- PLACEHOLDER dashboard: shows that login works after a password reset. -->
-<section class="card">
-  <h1>Welcome, {{ user.first_name }}</h1>
-  <p class="muted">You are logged in as {{ user.email }}.</p>
-</section>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FinSync</title>
+
+    <!-- Connect CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard/style.css') }}">
+</head>
+
+<body>
+
+    <!-- Main application layout -->
+    <div class="app">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <!-- FinSync logo and name -->
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/transactions/logo.png') }}" alt="FinSync Logo">
+                <h2>FinSync</h2>
+            </div>
+
+            <!-- Navigation menu -->
+            <nav>
+                <button class="nav-btn active" data-page="Dashboard">
+                    Dashboard
+                </button>
+
+                <button class="nav-btn" data-page="Transactions">
+                    Transactions
+                </button>
+
+                <button class="nav-btn" data-page="Budgets">
+                    Budgets
+                </button>
+
+                <button class="nav-btn" data-page="Savings Goals">
+                    Savings Goals
+                </button>
+
+                <button class="nav-btn" data-page="Reports">
+                    Reports
+                </button>
+
+                <button class="nav-btn" data-page="Settings">
+                    Settings
+                </button>
+            </nav>
+
+            <!-- Logout button -->
+            <button class="logout" id="logout-btn">
+                Logout
+            </button>
+
+        </aside>
+
+        <!-- Main application content -->
+        <main class="main-content">
+
+            <!-- Top header -->
+            <header class="top-header">
+
+                <!-- Notification bell -->
+                <img
+                    src="{{ url_for('static', filename='images/transactions/Bell.png') }}"
+                    alt="Notifications"
+                    class="bell-image"
+                >
+
+                <!-- User profile -->
+                <div class="profile">{{ user.first_name[:1]|upper }}</div>
+
+            </header>
+
+            <!-- Page heading -->
+            <section class="page-header">
+
+                <h1 id="page-title">Dashboard</h1>
+
+                <p id="page-description">
+                    Here's your financial overview
+                </p>
+
+            </section>
+
+            <!-- Selected page content -->
+            <section id="page-content"></section>
+
+        </main>
+
+    </div>
+
+    <!-- Dashboard values from the existing backend. -->
+    <script>
+        window.finSyncDashboard = {{ dashboard_values|tojson }};
+        window.finSyncUsername = {{ user.first_name|tojson }};
+        window.finSyncTransactions = {{ dashboard_transactions|tojson }};
+        window.finSyncGraphUrl = {{ url_for('dashboard_graph')|tojson }};
+        window.finSyncLogoutUrl = {{ url_for('logout')|tojson }};
+        window.finSyncTransactionsUrl = {{ url_for('transactions_page')|tojson }};
+    </script>
+    <!-- Connect JavaScript file -->
+    <script src="{{ url_for('static', filename='js/dashboard/dashboard.js') }}"></script>
+
+</body>
+</html>

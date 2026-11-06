@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FinSync | Transactions</title>
+
+    <!-- Connect CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/transactions/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/transactions/add-transaction.css') }}">
+</head>
+
+<body>
+
+    <!-- Main application layout -->
+    <div class="app">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <!-- FinSync logo and name -->
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/transactions/logo.png') }}" alt="FinSync Logo">
+                <h2>FinSync</h2>
+            </div>
+
+            <!-- Navigation menu -->
+            <nav>
+                <button class="nav-btn" data-page="Dashboard">
+                    Dashboard
+                </button>
+
+                <button class="nav-btn active" data-page="Transactions">
+                    Transactions
+                </button>
+
+                <button class="nav-btn" data-page="Budgets">
+                    Budgets
+                </button>
+
+                <button class="nav-btn" data-page="Savings Goals">
+                    Savings Goals
+                </button>
+
+                <button class="nav-btn" data-page="Reports">
+                    Reports
+                </button>
+
+                <button class="nav-btn" data-page="Settings">
+                    Settings
+                </button>
+            </nav>
+
+            <!-- Logout button -->
+            <button class="logout" id="logout-btn">
+                Logout
+            </button>
+
+        </aside>
+
+        <!-- Main application content -->
+        <main class="main-content">
+
+            <!-- Top header -->
+            <header class="top-header">
+
+                <!-- Notification bell -->
+                <img
+                    src="{{ url_for('static', filename='images/transactions/Bell.png') }}"
+                    alt="Notifications"
+                    class="bell-image"
+                >
+
+                <!-- User profile -->
+                <div class="profile">J</div>
+
+            </header>
+
+            <!-- Page heading -->
+            <section class="page-header">
+
+                <h1 id="page-title">Transactions</h1>
+
+                <p id="page-description">
+                    View and manage all of your income and expenses
+                </p>
+
+            </section>
+
+            <!-- Selected page content -->
+            <section id="page-content"></section>
+
+        </main>
+
+    </div>
+
+    <!-- Shared dialog remains available when page content changes. -->
+    <dialog id="transactionDialog" class="transaction-frame" aria-labelledby="formTitle">
+        <section class="transaction-card" aria-labelledby="formTitle">
+
+            <h2 id="formTitle">Add Transaction</h2>
+
+            <form id="transactionForm" novalidate>
+                <!-- The selected type determines the category choices. -->
+
+    <div class="type-field">
+        <!-- Hidden dropdown used by the existing saving code -->
+        <label class="screen-reader-only" for="transactionType">
+            Transaction type
+        </label>
+
+        <select id="transactionType" name="type"
+                class="screen-reader-only" tabindex="-1">
+            <option value="Expense">Expense</option>
+            <option value="Income">Income</option>
+        </select>
+
+        <!-- Lashanya's new buttons -->
+        <div class="type-buttons" role="group" aria-label="Transaction type">
+            <button type="button" id="expenseButton"
+                    class="type-btn selected" aria-pressed="true">
+                Expense
+            </button>
+
+            <button type="button" id="incomeButton"
+                    class="type-btn" aria-pressed="false">
+                Income
+            </button>
+        </div>
+    </div>
+
+
+                <div class="field">
+                    <label for="amount">Amount</label>
+
+                    <!-- The R is displayed separately from the number. -->
+                    <div class="amount-control">
+                        <span aria-hidden="true">R</span>
+
+                        <input
+                            id="amount"
+                            name="amount"
+                            type="number"
+                            min="0.01"
+                            max="999999999.99"
+                            step="0.01"
+                            placeholder="0.00"
+                            aria-label="Amount in South African rand"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="description">Description</label>
+
+                    <input
+                        id="description"
+                        name="description"
+                        type="text"
+                        maxlength="150"
+                        placeholder="E.g. Checkers"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label for="category">Category</label>
+
+                    <select id="category" name="category" required>
+                        <option value="">Select category</option>
+                    </select>
+                </div>
+
+                <!-- Date is positioned below Category. -->
+                <fieldset class="date-field">
+                    <legend>Date</legend>
+
+                    <div class="date-inputs">
+                        <label class="screen-reader-only" for="day">
+                            Day
+                        </label>
+                        <input
+                            id="day"
+                            name="day"
+                            type="number"
+                            min="1"
+                            max="31"
+                            placeholder="DD"
+                            required
+                        >
+
+                        <label class="screen-reader-only" for="month">
+                            Month
+                        </label>
+                        <input
+                            id="month"
+                            name="month"
+                            type="number"
+                            min="1"
+                            max="12"
+                            placeholder="MM"
+                            required
+                        >
+
+                        <label class="screen-reader-only" for="year">
+                            Year
+                        </label>
+                        <input
+                            id="year"
+                            name="year"
+                            type="number"
+                            min="1900"
+                            max="9999"
+                            placeholder="YYYY"
+                            required
+                        >
+                    </div>
+                </fieldset>
+
+                <div class="action-buttons">
+                    <button id="cancelButton" type="button">
+                        Cancel
+                    </button>
+
+                    <button id="saveButton" type="submit">
+                        Save
+                    </button>
+                </div>
+
+                <!-- Display feedback without refreshing the page. -->
+                <p id="message" role="status"></p>
+            </form>
+
+        </section>
+    
+    </dialog>
+
+    <!-- Connect JavaScript file -->
+    <script src="{{ url_for('static', filename='js/transactions/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/transactions/add-transaction.js') }}"></script>
+
+</body>
+</html>
