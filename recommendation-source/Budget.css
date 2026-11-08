@@ -1,0 +1,236 @@
+/* General page layout */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 24px;
+    background: #f4f6fb;
+    color: #17213b;
+    font-family: Arial, sans-serif;
+}
+
+.budget-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.page-header {
+    margin-bottom: 24px;
+}
+
+.page-header h1 {
+    margin-bottom: 8px;
+}
+
+.page-header p,
+.section-description {
+    color: #647084;
+}
+
+/* Form panels */
+.panel {
+    background: #ffffff;
+    padding: 24px;
+    margin-bottom: 24px;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(20, 35, 70, 0.06);
+}
+
+.panel h2 {
+    margin-top: 0;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    font-weight: 600;
+}
+
+input,
+select {
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 14px;
+    border: 1px solid #d5dbe6;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #17213b;
+    font: inherit;
+}
+
+input:focus,
+select:focus {
+    outline: 2px solid #1558e8;
+    outline-offset: 1px;
+    border-color: #1558e8;
+}
+
+/* Recommendation display */
+.recommendation-panel {
+    margin-top: 8px;
+    padding: 18px;
+    border: 1px solid #dce5f8;
+    border-radius: 12px;
+    background: #f6f8ff;
+}
+
+.recommendation-panel h3 {
+    margin-top: 0;
+}
+
+#suggestionMessage {
+    color: #536078;
+}
+
+.suggestion-label {
+    margin-bottom: 4px;
+    color: #536078;
+}
+
+.suggested-amount {
+    margin: 4px 0 14px;
+    color: #1558e8;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+/* Buttons */
+.form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+button {
+    min-height: 42px;
+    padding: 10px 18px;
+    border: 0;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.primary-button {
+    background: #1558e8;
+    color: #ffffff;
+}
+
+.secondary-button {
+    background: #e9eef8;
+    color: #17213b;
+}
+
+.delete-button {
+    background: #fdecec;
+    color: #a52323;
+}
+
+/* Alerts and messages */
+.alert {
+    padding: 13px 16px;
+    margin-bottom: 18px;
+    border-radius: 8px;
+    background: #e9f5ed;
+    color: #205b34;
+}
+
+.alert.error {
+    background: #fdecec;
+    color: #a52323;
+}
+
+.alert.warning {
+    background: #fff4dc;
+    color: #79520a;
+}
+
+#formMessage {
+    color: #536078;
+}
+
+/* Budget list */
+.budget-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid #e8ebf1;
+}
+
+.budget-item:last-child {
+    border-bottom: 0;
+}
+
+.budget-item h3 {
+    margin: 0 0 6px;
+}
+
+.budget-item p {
+    margin: 0;
+    color: #647084;
+}
+
+.budget-item-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Smaller screens */
+@media (max-width: 600px) {
+    body {
+        padding: 14px;
+    }
+
+    .panel {
+        padding: 17px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions button {
+        width: 100%;
+    }
+
+    .budget-item {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .budget-item-actions {
+        width: 100%;
+    }
+
+    .budget-item-actions button {
+        flex: 1;
+    }
+}
