@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Allow the form to adjust to phone and desktop screens. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FinSync | Create Budget</title>
+
+    <!-- CSS controls the appearance of this component. -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/budgets/budget_recommendations.css') }}">
+
+    <!--
+        defer makes the script run after the HTML has been parsed.
+        This allows JavaScript to find the form controls by their IDs.
+    -->
+    <script src="{{ url_for('static', filename='js/budgets/budget_recommendations.js') }}" defer></script>
+
+</head>
+
+<body>
+    <main class="budget-frame">
+        <section class="budget-card" aria-labelledby="formTitle">
+            <h1 id="formTitle">Create Budget</h1>
+
+            <!--
+                This form is a separate preview of the recommendation feature.
+                Actual budget saving will be connected during integration.
+            -->
+            <form id="budgetForm">
+
+                <label for="category">Category</label>
+
+                <!--
+                    Each option has:
+                    - A value: the category ID sent in the request.
+                    - Visible text: the category name shown to the user.
+
+                    These demo IDs must be replaced with actual database IDs.
+                -->
+                <select id="category" name="category_id" required>
+                    <option value="">Select category</option>
+                    <option value="demo-groceries">Groceries</option>
+                    <option value="demo-transport">Transport</option>
+                    <option value="demo-entertainment">
+                        Entertainment
+                    </option>
+                </select>
+
+                <!--
+                    JavaScript displays loading, recommendation and error
+                    messages here.
+
+                    role="status" and aria-live help screen readers announce
+                    changes without moving the user's keyboard focus.
+                -->
+                <p id="suggestion" role="status" aria-live="polite">
+                    Select a category to see a suggestion.
+                </p>
+
+                <label for="amount">Monthly Amount</label>
+
+                <!--
+                    The suggested amount is separate from this input.
+                    Changing categories must preserve the user's amount.
+                -->
+                <div class="amount-box">
+                    <span aria-hidden="true">R</span>
+
+                    <input
+                        id="amount"
+                        name="amount"
+                        type="number"
+                        min="0.01"
+                        step="0.01"
+                        placeholder="0.00"
+                        aria-label="Monthly amount in rand"
+                        required
+                    >
+                </div>
+
+                <!--
+                    Date fields match the Create Budget screen.
+                    Native date inputs provide a calendar and basic validation.
+                -->
+                <label for="startDate">Start Date</label>
+                <input
+                    id="startDate"
+                    name="start_date"
+                    type="date"
+                    required
+                >
+
+                <label for="endDate">End Date</label>
+                <input
+                    id="endDate"
+                    name="end_date"
+                    type="date"
+                    required
+                >
+
+                <div class="buttons">
+                    <!-- Reset clears the form and pending recommendations. -->
+                    <button type="reset" class="cancel">
+                        Cancel
+                    </button>
+
+                    <!-- Submit validates this preview without saving a budget. -->
+                    <button type="submit" class="save">
+                        Save
+                    </button>
+                </div>
+
+                <!-- Form validation and preview confirmation appear here. -->
+                <p id="formMessage" role="status"></p>
+            </form>
+
+            <p class="demo-note">
+                Preview only: sample recommendations; budgets are not saved.
+            </p>
+        </section>
+    </main>
+</body>
+</html>

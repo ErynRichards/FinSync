@@ -266,19 +266,31 @@ function clearTransactionFilters() {
 }
 
 // Connect navigation buttons
+
 const navButtons = document.querySelectorAll(".nav-btn");
 
 navButtons.forEach(function(button) {
 
     button.addEventListener("click", function() {
+
+        // Open the main Dashboard
         if (button.dataset.page === "Dashboard") {
             window.location.href = "/dashboard";
             return;
         }
+
+        // MISHAYLE: Open Michalyn's Budgets dashboard
+        if (button.dataset.page === "Budgets") {
+            window.location.href = "/budgets";
+            return;
+        }
+
+        // Keep the existing navigation for other pages
         showPage(button.dataset.page);
     });
 
 });
+
 
 // Temporary logout function
 document.getElementById("logout-btn").addEventListener("click", function() {

@@ -1,0 +1,67 @@
+/* Budget-only classes avoid changing the existing Transactions table. */
+.budget-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 26px;
+    margin: 14px 15px 18px 0;
+}
+.budget-actions input[type="month"] {
+    width: 220px;
+    height: 48px;
+    padding: 0 18px;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    background: white;
+    color: #333333;
+    font: 18px Arial, sans-serif;
+}
+#add-budget-btn {
+    width: 218px;
+    border: 0;
+    border-radius: 6px;
+    background: #1100cc;
+    color: white;
+    font: bold 16px Arial, sans-serif;
+    cursor: pointer;
+}
+#add-budget-btn:hover { background: #090099; }
+.budget-table-wrap { overflow-x: auto; margin: 0 30px 0 42px; }
+.budget-table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background: #fcfcfc;
+    color: #222222;
+    font-size: 11px;
+}
+.budget-table th, .budget-table td {
+    text-align: left;
+    border-bottom: 1px solid #eeeeee;
+    padding: 18px 4px;
+}
+.budget-table th { font-size: 10px; padding: 13px 4px 19px; }
+.budget-table th:nth-child(1) { width: 24%; }
+.budget-table th:nth-child(2) { width: 22%; }
+.budget-table th:nth-child(3) { width: 22%; }
+.budget-table th:nth-child(4) { width: 32%; }
+.budget-progress { display: flex; align-items: center; gap: 8px; }
+.budget-progress span { min-width: 29px; text-align: right; font-size: 10px; }
+/* The pale track shows the unused part of each budget. */
+.budget-track { flex: 1; height: 8px; background: #f0f0f0; border-radius: 8px; overflow: hidden; }
+.budget-fill { height: 100%; background: #347bce; border-radius: inherit; }
+.budget-warning { background: #dc9037; }
+.budget-empty { text-align: center !important; padding: 35px !important; }
+#budget-status { color: #555555; font-size: 14px; margin-left: 42px; }
+/* This label is read by assistive tools without adding text to the design. */
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.logo-fallback { width: 65px; height: 65px; border-radius: 50%; background: #124c80; text-align: center; line-height: 65px; font-size: 30px; }
+.logo-fallback[hidden] { display: none; }
+@media (max-width: 900px) {
+    .budget-table-wrap { margin: 0; }
+    .budget-actions { margin-right: 0; gap: 15px; }
+}
+@media (max-width: 650px) {
+    .budget-actions { flex-wrap: wrap; }
+    .budget-actions input[type="month"], #add-budget-btn { flex: 1; min-width: 155px; height: 48px; }
+}

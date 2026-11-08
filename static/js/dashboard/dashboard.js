@@ -199,9 +199,6 @@ const transactionsPage = `
 /* PLACEHOLDERS FOR OTHER GROUP MEMBERS' PAGES */
 
 const pages = {
-    "Budgets":
-        "<h2>Budgets</h2><p>Your budgets will appear here.</p>",
-
     "Savings Goals":
         "<h2>Savings Goals</h2><p>Your savings goals will appear here.</p>",
 
@@ -366,19 +363,31 @@ function clearTransactionFilters() {
     displayTransactions();
 }
 
+
 /* NAVIGATION BUTTON EVENTS */
 
 const navButtons = document.querySelectorAll(".nav-btn");
 
 navButtons.forEach(function (button) {
     button.addEventListener("click", function () {
+
+        // Open Transactions
         if (button.dataset.page === "Transactions") {
-            window.location.href = window.finSyncTransactionsUrl;
+            window.location.href = "/transactions";
             return;
         }
+
+        // MISHAYLE: Open Michalyn's real Budgets page
+        if (button.dataset.page === "Budgets") {
+            window.location.href = "/budgets";
+            return;
+        }
+
+        // Keep existing navigation for other pages
         showPage(button.dataset.page);
     });
 });
+
 
 
 /* TEMPORARY LOGOUT */

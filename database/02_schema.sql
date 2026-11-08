@@ -73,6 +73,30 @@ CREATE TABLE IF NOT EXISTS transactions (
         ON DELETE RESTRICT                   -- a category can't be deleted while transactions use it
 ) ENGINE=InnoDB;
 
+-- The users created budgets
+CREATE TABLE IF NOT EXISTS budgets (
+    budget_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    user_id INT UNSIGNED NOT NULL,
+    category_id INT UNSIGNED NOT NULL,
+    budget_amount DECIMAL(12,2) NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (budget_id),
+
+    CHECK (budget_amount > 0),
+
+    FOREIGN KEY (user_id)
+        REFERENCES users(user_id)
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (category_id)
+        REFERENCES categories(category_id)
+        ON DELETE RESTRICT
+) ENGINE=InnoDB;
+
+
 -- Starting categories. INSERT IGNORE skips any that already exist,
 -- so this script can be run again safely.
 INSERT IGNORE INTO categories (category_name, category_type) VALUES

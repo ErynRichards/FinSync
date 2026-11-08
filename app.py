@@ -21,6 +21,7 @@ from users import create_user, get_user_by_email, get_user_by_id
 # DANIEL: Financial summary calculations
 from dashboard_summary import get_summary
 
+
 app = Flask(__name__)
 app.secret_key = config.SECRET_KEY  # needed for sessions and flash messages
 
@@ -444,6 +445,30 @@ def accounts_page():
         "accounts.html",
         accounts=accounts
     )
+
+
+# MISHAYLE: Main Budgets dashboard using Michalyn's frontend.
+@app.route('/budgets')
+def budgets_page():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    user = get_user_by_id(session['user_id'])
+    if user is None:
+        session.clear()
+        return redirect(url_for('login'))
+    from datetime import date
+    period = request.args.get('period', date.today().strftime('%Y-%m'))
+    return render_template('budgets/dashboard.html', user=user, selected_period=period)
+
+
+# MISHAYLE: Display Eryn's Create Budget form
+@app.route("/budgets/create")
+def create_budget_page():
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    return render_template("budgets/createBudget.html")
+
 
 
 if __name__ == "__main__":
