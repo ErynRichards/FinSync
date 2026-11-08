@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en-ZA">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FinSync - Financial Reports</title>
+
+    <!-- Connect CSS -->
+    <link rel="stylesheet" href="erynReports.css">
+
+    <!-- Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+
+    <!-- Connect JavaScript -->
+    <script src="erynReports.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Main Reports container -->
+    <main class="reports-page">
+
+        <div class="reports-container">
+
+            <!-- Page heading -->
+            <header class="reports-header">
+                <h1>Financial Reports</h1>
+
+                <p>
+                    Analyse your income and expenses
+                    to understand your financial trends.
+                </p>
+            </header>
+
+            <!-- Reporting period selection -->
+            <div class="report-controls">
+
+                <label for="reportPeriod">
+                    Reporting Period
+                </label>
+
+                <select id="reportPeriod">
+                    <option value="1">1 Month</option>
+                    <option value="3">3 Months</option>
+                    <option value="6" selected>6 Months</option>
+                    <option value="12">12 Months</option>
+                </select>
+
+            </div>
+
+            <!-- Monthly Trend section -->
+            <section class="chart-card">
+
+                <h2>Monthly Trend</h2>
+
+                <p>
+                    Track how your expenses change
+                    over time.
+                </p>
+
+                <div class="chart-container">
+                    <canvas id="monthlyTrendChart"></canvas>
+                </div>
+
+            </section>
+
+            <!-- Income vs Expenses section -->
+            <section class="chart-card">
+
+                <h2>Income vs Expenses</h2>
+
+                <p>
+                    Compare your monthly income
+                    and expenses.
+                </p>
+
+                <div class="chart-container">
+                    <canvas id="incomeExpensesChart"></canvas>
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
