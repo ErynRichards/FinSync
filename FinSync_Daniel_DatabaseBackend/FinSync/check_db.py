@@ -5,7 +5,7 @@
 from db import DatabaseError, fetch_one
 
 tables = ["users", "password_reset_tokens", "accounts", "categories", "transactions",
-          "budgets", "savings_goals", "user_settings"]
+          "budgets", "budget_notification_history", "savings_goals", "user_settings"]
 
 try:
     for table in tables:

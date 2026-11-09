@@ -89,6 +89,21 @@ CREATE TABLE IF NOT EXISTS budgets (
         ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
+-- Record budget-exceeded notifications to prevent duplicates
+CREATE TABLE IF NOT EXISTS budget_notification_history (
+    notification_id  INT UNSIGNED  NOT NULL AUTO_INCREMENT,
+    user_id          INT UNSIGNED  NOT NULL,
+    budget_id        INT UNSIGNED  NOT NULL,
+    budget_month     CHAR(7)       NOT NULL,   -- e.g. 2026-11
+    created_at       DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (notification_id),
+    UNIQUE KEY unique_budget_month (budget_id, budget_month),   -- one notification per budget per month
+    FOREIGN KEY (user_id) REFERENCES users (user_id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (budget_id) REFERENCES budgets (budget_id)
+        ON DELETE CASCADE
+) ENGINE=InnoDB;
+
 -- Savings goals, e.g. "Holiday" or "New laptop"
 CREATE TABLE IF NOT EXISTS savings_goals (
     goal_id         INT UNSIGNED   NOT NULL AUTO_INCREMENT,

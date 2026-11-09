@@ -23,6 +23,7 @@ password reset can be tested now. Teammates replace them with their own work.
 | `users.py` | Add, find and update users |
 | `accounts.py` | Add and find a user's accounts, and work out an account's balance |
 | `budget_database.py` | Budgets and the spending history for budget suggestions |
+| `notification_database.py` | Records budget-exceeded notifications so each is only sent once per month |
 | `savings_database.py` | Create, get and update savings goals |
 | `reports_database.py` | Transaction data for the Reports screen |
 | `settings_database.py` | Profile, password hash and user preferences for Settings |
@@ -83,6 +84,7 @@ Open **http://127.0.0.1:5000** in your browser.
 | `accounts` | Each user's financial accounts, with an opening balance and currency (default ZAR) | `users` |
 | `categories` | How transactions are classified: Salary (income), Groceries, Transport, Entertainment and Utilities (expense) | – |
 | `budgets` | Monthly budget amount per category | `users`, `categories` |
+| `budget_notification_history` | One row per budget-exceeded notification. The unique key allows only one per budget per month | `users`, `budgets` |
 | `savings_goals` | Savings goals with target amount, amount saved, target date and status (active/completed) | `users` |
 | `user_settings` | Theme (light/dark) and notification settings, one row per user | `users` |
 | `transactions` | Income and expenses. `amount` is always positive and `transaction_type` says whether it is income or an expense | `accounts`, `categories` |
@@ -146,6 +148,21 @@ The values are plain numbers, so the JavaScript can format them as rand (R).
 | `settings_database.py` | `get_profile(user_id)`, `update_profile(...)` | Name, email and phone |
 | | `get_password_hash(user_id)`, `update_password_hash(user_id, hash)` | For changing the password |
 | | `get_preferences(user_id)`, `save_preferences(user_id, theme, budget_notifications, savings_notifications)` | Theme and notification settings |
+
+Budget notifications (for Mishayle):
+
+| Function | What it does |
+|---|---|
+| `notification_already_sent(user_id, budget_id, budget_month)` | `True` if a notification was already recorded for that budget and month (`"2026-11"`) |
+| `record_budget_notification(user_id, budget_id, budget_month)` | Saves the notification. Returns `False` if one already exists, even if two expenses are saved at the same moment |
+| `get_notification_history(user_id)` | The user's past budget notifications |
+
+```python
+from notification_database import record_budget_notification
+if record_budget_notification(session["user_id"], budget_id, "2026-11"):
+    # first time this month, so show or send the warning
+    ...
+```
 
 Budget suggestion example (for Lashanya):
 ```python
