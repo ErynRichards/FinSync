@@ -16,6 +16,7 @@
   </script>
   <link rel="stylesheet" href="settings.css">
   <script src="settings.js" defer></script>
+  <script src="MichalynSettings.js" defer></script>
 </head>
 
 <body>
@@ -60,16 +61,70 @@
 
       <div class="settings-grid">
 
-        <!-- Michalyn's Profile Information section -->
-        <!-- Replace this placeholder during integration -->
-        <section class="card profile-card"
-                 aria-labelledby="profile-heading">
-          <h2 id="profile-heading">Profile Information</h2>
-          <p class="hint">Update your personal details</p>
-          <p class="placeholder">
-            Profile fields will be integrated from Michalyn's section.
-          </p>
-        </section>
+        
+<!-- Michalyn: Profile Information -->
+<section class="card profile-card" aria-labelledby="profile-title">
+
+    <h2 id="profile-title">Profile Information</h2>
+    <p class="profile-subtitle">Update your personal details</p>
+
+    <!-- Demo mode until Flask backend is connected -->
+    <form id="profile-form" data-demo data-profile-url="" novalidate>
+
+        <div class="profile-fields">
+
+            <!-- Full Name -->
+            <label for="profile-name">Full Name</label>
+            <input id="profile-name"
+                   name="fullName"
+                   autocomplete="name"
+                   maxlength="100"
+                   required
+                   aria-describedby="profile-name-error">
+            <span class="profile-error"
+                  id="profile-name-error"></span>
+
+            <!-- Email Address -->
+            <label for="profile-email">Email address</label>
+            <input id="profile-email"
+                   name="email"
+                   type="email"
+                   autocomplete="email"
+                   maxlength="254"
+                   required
+                   aria-describedby="profile-email-error">
+            <span class="profile-error"
+                  id="profile-email-error"></span>
+
+            <!-- Contact Number -->
+            <label for="profile-phone">Contact number (optional)</label>
+            <input id="profile-phone"
+                   name="contactNumber"
+                   type="tel"
+                   autocomplete="tel"
+                   maxlength="30"
+                   aria-describedby="profile-phone-error">
+            <span class="profile-error"
+                  id="profile-phone-error"></span>
+        </div>
+
+        <!-- Save Profile Changes -->
+        <button type="submit"
+                class="profile-save"
+                disabled>
+            Save Changes
+        </button>
+
+    </form>
+
+    <!-- Profile success/error messages -->
+    <p id="profile-status"
+       class="profile-status"
+       role="status"
+       aria-live="polite"></p>
+
+</section>
+
 
         <!-- ERYN: Change Password section -->
         <section class="card password-card"

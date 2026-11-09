@@ -398,3 +398,135 @@ button:disabled {
         gap: 5px;
     }
 }
+
+
+
+
+/* michalyn - profile information
+   integrated with eryn's settings layout */
+
+/* Profile card inherits FinSync theme */
+.profile-card {
+    background: var(--card);
+    color: var(--text);
+    padding: 18px 19px;
+    font-family: Arial, sans-serif;
+}
+
+/* Profile heading */
+.profile-card h2 {
+    margin: 0;
+    font-size: 17px;
+}
+
+/* Description */
+.profile-subtitle {
+    margin: 3px 0 12px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* Form layout */
+#profile-form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+    align-items: end;
+}
+
+/* Profile fields */
+.profile-fields {
+    min-width: 0;
+}
+
+.profile-fields label {
+    display: block;
+    margin: 8px 0 4px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* Profile input fields */
+.profile-fields input {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 250px;
+    padding: 9px 10px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    background: var(--input);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 13px;
+}
+
+/* Input focus */
+.profile-fields input:focus-visible,
+.profile-save:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Invalid fields */
+.profile-fields input[aria-invalid="true"] {
+    border-color: var(--message-error);
+}
+
+/* Field validation messages */
+.profile-error {
+    display: block;
+    margin-top: 3px;
+    color: var(--message-error);
+    font-size: 12px;
+}
+
+/* Profile Save Changes button */
+.profile-save {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 11px 14px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* Disabled button */
+.profile-save:disabled {
+    opacity: 0.65;
+    cursor: default;
+}
+
+/* Profile confirmation messages */
+.profile-status {
+    margin: 10px 0 0;
+    color: var(--message-ok);
+    font-size: 12px;
+}
+
+.profile-status[data-error="true"] {
+    color: var(--message-error);
+}
+
+/* Hide empty messages */
+.profile-error:empty,
+.profile-status:empty {
+    display: none;
+}
+
+/* Responsive Profile Information form */
+@media (max-width: 550px) {
+    #profile-form {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-fields input {
+        max-width: none;
+    }
+
+    .profile-save {
+        justify-self: end;
+    }
+}

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FinSync | Settings</title>
+  <link rel="stylesheet" href="MichalynSettings.css">
+  <script src="MichalynSettings.js" defer></script>
+</head>
+<body class="profile-preview">
+  <main>
+    <!-- Your deliverable starts here. For live mode, remove data-demo and
+         set data-profile-url to the team's authenticated profile endpoint. -->
+    <section class="profile-card" aria-labelledby="profile-title">
+      <h2 id="profile-title">Profile information</h2>
+      <p class="profile-subtitle">Update your personal details</p>
+      <form id="profile-form" data-demo data-profile-url="" novalidate>
+        <div class="profile-fields">
+          <label for="profile-name">Full Name</label>
+          <input id="profile-name" name="fullName" autocomplete="name"
+                 maxlength="100" required aria-describedby="profile-name-error">
+          <span class="profile-error" id="profile-name-error"></span>
+
+          <label for="profile-email">Email address</label>
+          <input id="profile-email" name="email" type="email" autocomplete="email"
+                 maxlength="254" required aria-describedby="profile-email-error">
+          <span class="profile-error" id="profile-email-error"></span>
+
+          <label for="profile-phone">Contact number (optional)</label>
+          <input id="profile-phone" name="contactNumber" type="tel" autocomplete="tel"
+                 maxlength="30" aria-describedby="profile-phone-error">
+          <span class="profile-error" id="profile-phone-error"></span>
+        </div>
+        <button type="submit" class="profile-save" disabled>Save Changes</button>
+      </form>
+      <p id="profile-status" class="profile-status" role="status"></p>
+    </section>
+  </main>
+</body>
+</html>
