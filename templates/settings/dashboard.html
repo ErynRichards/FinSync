@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinSync - Settings</title>
+  <script>
+    try {
+      document.documentElement.dataset.theme =
+        localStorage.getItem('finsync-theme') === 'dark'
+          ? 'dark' : 'light';
+    } catch (e) {
+      document.documentElement.dataset.theme = 'light';
+    }
+  </script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/settings/settings.css') }}">
+  <script src="{{ url_for('static', filename='js/settings/settings.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/settings/profile.js') }}" defer></script>
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- FinSync sidebar -->
+    <aside class="sidebar" aria-label="Main navigation">
+      <!-- FinSync Logo and Brand Name -->
+<a class="brand" href="/dashboard">
+
+    <img src="{{ url_for('static', filename='images/finsync-logo.png') }}"
+         alt="FinSync Logo"
+         class="brand-logo">
+
+    <span>FinSync</span>
+
+</a>
+
+      <nav class="nav">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/transactions">Transactions</a>
+        <a href="/budgets">Budgets</a>
+        <a href="/savings-goals">Goals</a>
+        <a href="/reports">Reports</a>
+        <a href="/settings" class="active"
+           aria-current="page">Settings</a>
+      </nav>
+
+      <a class="logout" href="/logout">Logout</a>
+    </aside>
+
+    <!-- Main Settings content -->
+    <main class="main">
+
+      <header class="page-header">
+        <div>
+          <h1>Settings</h1>
+          <p>Manage your account, preferences and app settings</p>
+        </div>
+        <div class="header-icons" aria-hidden="true">♧ &nbsp; ●</div>
+      </header>
+
+      <div class="settings-grid">
+
+        
+<!-- Michalyn: Profile Information -->
+<section class="card profile-card" aria-labelledby="profile-title">
+
+    <h2 id="profile-title">Profile Information</h2>
+    <p class="profile-subtitle">Update your personal details</p>
+
+    <!-- Demo mode until Flask backend is connected -->
+    <form id="profile-form" data-profile-url="/api/settings/profile" novalidate>
+
+        <div class="profile-fields">
+
+            <!-- Full Name -->
+            <label for="profile-name">Full Name</label>
+            <input id="profile-name"
+                   name="fullName"
+                   autocomplete="name"
+                   maxlength="100"
+                   required
+                   aria-describedby="profile-name-error">
+            <span class="profile-error"
+                  id="profile-name-error"></span>
+
+            <!-- Email Address -->
+            <label for="profile-email">Email address</label>
+            <input id="profile-email"
+                   name="email"
+                   type="email"
+                   autocomplete="email"
+                   maxlength="254"
+                   required
+                   aria-describedby="profile-email-error">
+            <span class="profile-error"
+                  id="profile-email-error"></span>
+
+            <!-- Contact Number -->
+            <label for="profile-phone">Contact number (optional)</label>
+            <input id="profile-phone"
+                   name="contactNumber"
+                   type="tel"
+                   autocomplete="tel"
+                   maxlength="30"
+                   aria-describedby="profile-phone-error">
+            <span class="profile-error"
+                  id="profile-phone-error"></span>
+        </div>
+
+        <!-- Save Profile Changes -->
+        <button type="submit"
+                class="profile-save"
+                disabled>
+            Save Changes
+        </button>
+
+    </form>
+
+    <!-- Profile success/error messages -->
+    <p id="profile-status"
+       class="profile-status"
+       role="status"
+       aria-live="polite"></p>
+
+</section>
+
+
+        <!-- ERYN: Change Password section -->
+        <section class="card password-card"
+                 aria-labelledby="password-heading">
+
+          <h2 id="password-heading">Change Password</h2>
+          <p class="hint">Keep your account secure</p>
+
+          <form id="passwordForm" novalidate>
+
+            <div class="form-row">
+              <label for="currentPassword">Current Password</label>
+              <input
+                id="currentPassword"
+                type="password"
+                placeholder="Enter current password"
+                autocomplete="current-password"
+                required>
+            </div>
+
+            <div class="form-row">
+              <label for="newPassword">New Password</label>
+              <input
+                id="newPassword"
+                type="password"
+                placeholder="Enter new password"
+                autocomplete="new-password"
+                minlength="8"
+                required>
+            </div>
+
+            <div class="form-row">
+              <label for="confirmPassword">Confirm New Password</label>
+              <input
+                id="confirmPassword"
+                type="password"
+                placeholder="Confirm new password"
+                autocomplete="new-password"
+                required>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" id="changePasswordButton">
+                Change Password
+              </button>
+            </div>
+
+            <p id="passwordMessage"
+               class="message"
+               role="status"
+               aria-live="polite"></p>
+          </form>
+        </section>
+
+        <!-- ERYN: Appearance section -->
+        <section class="card appearance-card"
+                 aria-labelledby="appearance-heading">
+
+          <h2 id="appearance-heading">Appearance</h2>
+          <p class="hint">Choose how FinSync looks for you</p>
+
+          <fieldset class="theme-options">
+            <legend class="sr-only">Choose appearance</legend>
+
+            <!-- Light Mode -->
+            <label class="theme-choice light-preview">
+              <span>Light Mode</span>
+              <input type="radio" name="theme" value="light">
+              <span class="switch" aria-hidden="true"></span>
+            </label>
+
+            <!-- Dark Mode -->
+            <label class="theme-choice dark-preview">
+              <span>Dark Mode</span>
+              <input type="radio" name="theme" value="dark">
+              <span class="switch" aria-hidden="true"></span>
+            </label>
+          </fieldset>
+
+          <div class="form-actions">
+            <button type="button" id="saveThemeButton">
+              Save Changes
+            </button>
+          </div>
+
+          <p id="themeMessage"
+             class="message"
+             role="status"
+             aria-live="polite"></p>
+        </section>
+        <section class="card" aria-labelledby="notifications-heading">
+          <h2 id="notifications-heading">Notification Preferences</h2>
+          <p class="hint">Choose which alerts you want to receive</p>
+          <label><input type="checkbox" id="budgetNotifications"> Budget warnings</label>
+          <label><input type="checkbox" id="savingsNotifications"> Savings goal notifications</label>
+          <div class="form-actions"><button type="button" id="saveNotificationsButton">Save Preferences</button></div>
+          <p id="notificationsMessage" class="message" role="status"></p>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

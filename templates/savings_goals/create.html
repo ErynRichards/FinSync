@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FinSync - Create Savings Goal</title>
+
+    <!-- Connect CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/savings_goals/createSavingsGoal.css') }}">
+</head>
+
+<body>
+
+    <!-- Main page container -->
+    <main class="savings-page">
+
+        <!-- White form card -->
+        <section class="savings-card">
+
+            <h1>Create Savings Goal</h1>
+
+            <!-- Savings goal form -->
+            <form id="savingsGoalForm" novalidate>
+
+                <!-- Goal Name -->
+                <div class="form-group">
+                    <label for="goalName">Goal Name</label>
+
+                    <input
+                        type="text"
+                        id="goalName"
+                        name="goalName"
+                        placeholder="E.g Checkers"
+                        maxlength="100"
+                        required
+                    >
+
+                    <small class="error-message"
+                           id="goalNameError"></small>
+                </div>
+
+                <!-- Target Amount -->
+                <div class="form-group">
+                    <label for="targetAmount">
+                        Target Amount
+                    </label>
+
+                    <input
+                        type="number"
+                        id="targetAmount"
+                        name="targetAmount"
+                        placeholder="R 0.00"
+                        min="0.01"
+                        step="0.01"
+                        required
+                    >
+
+                    <small class="error-message"
+                           id="targetAmountError"></small>
+                </div>
+
+                <!-- Target Date -->
+                <div class="form-group">
+                    <label for="targetDate">
+                        Target Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="targetDate"
+                        name="targetDate"
+                        required
+                    >
+
+                    <small class="error-message"
+                           id="targetDateError"></small>
+                </div>
+
+                <!-- Optional Category -->
+                <div class="form-group">
+                    <label for="category">
+                        Category (optional)
+                    </label>
+
+                    <select id="category" name="category">
+                        <option value="">
+                            Select category
+                        </option>
+
+                        <option value="Emergency">
+                            Emergency
+                        </option>
+
+                        <option value="Travel">
+                            Travel
+                        </option>
+
+                        <option value="Education">
+                            Education
+                        </option>
+
+                        <option value="Shopping">
+                            Shopping
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+                    </select>
+                </div>
+
+                <!-- Form buttons -->
+                <div class="form-buttons">
+
+                    <button type="button"
+                            id="cancelBtn"
+                            class="cancel-btn">
+                        Cancel
+                    </button>
+
+                    <button type="submit"
+                            id="saveBtn"
+                            class="save-btn">
+                        Save
+                    </button>
+
+                </div>
+
+                <!-- General form feedback -->
+                <p id="formMessage"
+                   class="form-message"
+                   role="status"
+                   aria-live="polite"></p>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <!-- Connect JavaScript -->
+    <script src="{{ url_for('static', filename='js/savings_goals/createSavingsGoal.js') }}"></script>
+
+</body>
+</html>

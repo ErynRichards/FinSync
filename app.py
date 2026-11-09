@@ -26,10 +26,26 @@ app = Flask(__name__)
 app.secret_key = config.SECRET_KEY  # needed for sessions and flash messages
 
 
+# MISHAYLE: Register Reports backend routes
+from reports_routes import reports_bp
+app.register_blueprint(reports_bp)
+
+
+# MISHAYLE: Register Savings Goals routes
+from savings_routes import savings_routes
+app.register_blueprint(savings_routes)
+
 # MISHAYLE: Register the Budget Recommendation Flask routes
 from budget_routes import budget_routes
 app.register_blueprint(budget_routes)
 
+#settings/profile routes
+from settings_routes import settings_bp
+app.register_blueprint(settings_bp)
+
+#notification routes
+from notification_routes import notification_bp
+app.register_blueprint(notification_bp)
 
 if not app.secret_key:
     raise RuntimeError("SECRET_KEY is missing. Copy .env.example to .env and fill it in.")
@@ -228,6 +244,15 @@ def dashboard_graph():
     return send_file(graph, mimetype="image/png")
 
 
+# MISHAYLE: Combined Reports page
+@app.route("/reports")
+def reports_page():
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    return render_template("reports/dashboard.html")
+
+
 # transactions
 @app.route("/transactions")
 def transactions_page():
@@ -288,6 +313,26 @@ def delete_transaction_route(transaction_id):
     )
 
     return redirect(url_for("transactions_page"))
+
+
+# MISHAYLE: Display the Savings Goals dashboard
+@app.route("/savings-goals")
+def savings_goals_page():
+
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    return render_template("savings_goals/dashboard.html")
+
+
+# MISHAYLE: Display the Create Savings Goal page
+@app.route("/savings-goals/create")
+def savings_goal_create_page():
+
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    return render_template("savings_goals/create.html")
 
 
 # REECE'S PART: Logout (existing placeholder preserved).

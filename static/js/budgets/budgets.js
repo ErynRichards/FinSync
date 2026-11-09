@@ -48,13 +48,46 @@ async function loadBudgetRows() {
         if(!(data.budgets||[]).length){const row=document.createElement('tr');const cell=document.createElement('td');cell.colSpan=4;cell.className='budget-empty';cell.textContent='No budgets recorded for this month.';row.appendChild(cell);body.appendChild(row);}
     } catch(error){if(requestId===budgetLoadId)status.textContent=error.message;}
 }
-document.querySelectorAll('.nav-btn').forEach(button=>{
-    button.classList.toggle('active',button.dataset.page==='Budgets');
-    button.addEventListener('click',()=>{
-        if(button.dataset.page==='Dashboard')window.location.href='/dashboard';
-        else if(button.dataset.page==='Transactions')window.location.href='/transactions';
-        else if(button.dataset.page!=='Budgets')window.location.href='/dashboard';
+
+document.querySelectorAll(".nav-btn").forEach(function(button) {
+
+    button.classList.toggle(
+        "active",
+        button.dataset.page === "Budgets"
+    );
+
+    button.addEventListener("click", function() {
+
+        if (button.dataset.page === "Dashboard") {
+            window.location.href = "/dashboard";
+            return;
+        }
+
+        if (button.dataset.page === "Transactions") {
+            window.location.href = "/transactions";
+            return;
+        }
+
+        // MISHAYLE: Open Savings Goals
+        if (button.dataset.page === "Savings Goals") {
+            window.location.href = "/savings-goals";
+            return;
+        }
+
+        // MISHAYLE: Open the Reports page
+        if (button.dataset.page === "Reports") {
+            window.location.href = "/reports";
+            return;
+        }
+
+        if (button.dataset.page === "Settings") {
+            window.location.href = "/settings";
+
+        }
+
+        // Other pages are not implemented yet.
     });
 });
+
 document.getElementById('logout-btn').addEventListener('click',()=>{window.location.href=window.finSyncLogoutUrl;});
 showBudgets(document.getElementById('page-content'));

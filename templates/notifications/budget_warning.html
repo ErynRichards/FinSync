@@ -1,0 +1,13 @@
+<!-- Eryn's FinSync-styled warning, based on Michalyn's dialog structure -->
+<dialog class="budget-warning" id="budget-warning" aria-labelledby="budget-warning-title" aria-describedby="budget-warning-message">
+  <div class="budget-warning-content">
+    <span class="budget-warning-icon" aria-hidden="true">⚠</span>
+    <div>
+      <h2 id="budget-warning-title">Monthly Budget Exceeded!</h2>
+      <p id="budget-warning-message">Your <strong id="budget-warning-category"></strong> budget has been exceeded by <strong id="budget-warning-excess"></strong>.</p>
+      <dl><div><dt>Monthly Budget:</dt><dd id="budget-warning-limit"></dd></div>
+      <div><dt>Total Expenses:</dt><dd id="budget-warning-expenses"></dd></div></dl>
+    </div>
+  </div>
+  <form method="dialog"><button type="submit">Dismiss</button></form>
+</dialog>

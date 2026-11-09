@@ -103,5 +103,9 @@
         window.finSyncInitialBudgetPeriod = {{ selected_period|tojson }};
     </script>
     <script src="{{ url_for('static', filename='js/budgets/budgets.js') }}"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notifications/budget_warning.css') }}">
+    {% include 'notifications/budget_warning.html' %}
+    <script src="{{ url_for('static', filename='js/notifications/budget_warning.js') }}" defer></script>
 </body>
 </html>

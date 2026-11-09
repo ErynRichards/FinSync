@@ -285,6 +285,22 @@ navButtons.forEach(function(button) {
             return;
         }
 
+        // MISHAYLE: Open Savings Goals
+        if (button.dataset.page === "Savings Goals") {
+            window.location.href = "/savings-goals";
+            return;
+        }
+
+        // MISHAYLE: Open the Reports page
+        if (button.dataset.page === "Reports") {
+            window.location.href = "/reports";
+            return;
+        }
+        if (button.dataset.page === "Settings") {
+            window.location.href = "/settings";
+            return;
+        }
+
         // Keep the existing navigation for other pages
         showPage(button.dataset.page);
     });
@@ -307,15 +323,25 @@ showPage("Transactions");
 window.FinSyncTransactions = {
     persistent: true,
     async save(transaction) {
-        const response = await fetch("/api/transactions", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(transaction)
-        });
-        const result = await response.json();
-        if (!response.ok) throw new Error(result.error || "Could not save transaction");
-        return result;
-    },
+    const response = await fetch("/api/transactions", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(transaction)
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw new Error(result.error || "Could not save transaction");
+    }
+
+    // MISHAYLE: Check budget notifications after saving an expense
+    if (transaction.type?.toLowerCase() === "expense") {
+        window.checkBudgetNotifications?.();
+    }
+
+    return result;
+},
     setTransactions(records) {
         transactions = records;
         displayTransactions();

@@ -12,6 +12,8 @@ from backend.transactions.transaction_validation import validate_transaction
 # Import the account balance calculation function.
 from backend.transactions.account_balance import calculate_account_balance
 
+# REECE: Monthly income and expense summary
+from backend.transactions.monthly_summary import calculate_monthly_summary
 
 def format_money(amount):
     """
@@ -116,12 +118,44 @@ def build_dashboard_data(transactions, opening_balance=None):
     # Count all validated transactions.
     transaction_count = len(transactions)
 
+
+    # REECE: Prepare transactions for the monthly summary.
+    monthly_transactions = []
+
+    for transaction in transactions:
+        monthly_transaction = transaction.copy()
+
+        # MySQL can return dates as Python date objects.
+        transaction_date = monthly_transaction["transaction_date"]
+
+        if hasattr(transaction_date, "isoformat"):
+            monthly_transaction["transaction_date"] = (
+                transaction_date.isoformat()
+            )
+
+        monthly_transactions.append(monthly_transaction)
+
+    # REECE: Calculate monthly income and expenses.
+    monthly_summary = calculate_monthly_summary(monthly_transactions)
+
+    # Convert Decimal amounts to strings for JSON.
+    formatted_monthly_summary = []
+
+    for month in monthly_summary:
+        formatted_monthly_summary.append({
+            "month": month["month"],
+            "total_income": format_money(month["total_income"]),
+            "total_expenses": format_money(month["total_expenses"])
+        })
+
+
     # Combine all information into one Dashboard response.
     dashboard_data = {
         "account_balance": formatted_account_balance,
         "financial_summary": formatted_summary,
         "recent_transactions": formatted_recent_transactions,
-        "transaction_count": transaction_count
+        "transaction_count": transaction_count,
+        "monthly_summary": formatted_monthly_summary
     }
 
     return dashboard_data

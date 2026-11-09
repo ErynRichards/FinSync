@@ -383,6 +383,22 @@ navButtons.forEach(function (button) {
             return;
         }
 
+        // MISHAYLE: Open the Savings Goals dashboard
+        if (button.dataset.page === "Savings Goals") {
+            window.location.href = "/savings-goals";
+            return;
+        }
+
+        // MISHAYLE: Open the Reports page
+        if (button.dataset.page === "Reports") {
+            window.location.href = "/reports";
+            return;
+        }
+
+        if (button.dataset.page === "Settings") {
+            window.location.href = "/settings";
+            return;
+        }
         // Keep existing navigation for other pages
         showPage(button.dataset.page);
     });
