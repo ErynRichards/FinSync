@@ -1,0 +1,203 @@
+
+/*
+ * FinSync - Budget Notification Popup
+ *
+ * Styles for the notification component
+ * and its standalone test page.
+ */
+
+/* General page styling */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 30px 16px;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #f4f6f9;
+    color: #263238;
+}
+
+.test-container {
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.page-header {
+    margin-bottom: 28px;
+}
+
+.page-header h1 {
+    margin-bottom: 8px;
+    color: #17365d;
+}
+
+.page-header p,
+.test-panel p {
+    line-height: 1.6;
+    color: #64748b;
+}
+
+/* Test panel styling */
+
+.test-panel {
+    margin-bottom: 22px;
+    padding: 24px;
+
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+
+    box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
+}
+
+.test-panel h2 {
+    margin-top: 0;
+    color: #17365d;
+}
+
+/* Preference checkbox */
+
+.preference-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.preference-option input {
+    width: 18px;
+    height: 18px;
+
+    accent-color: #1769aa;
+}
+
+.help-text {
+    margin-bottom: 0;
+    font-size: 13px;
+}
+
+/* Test buttons */
+
+.test-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.test-buttons button,
+.notification-content button {
+    padding: 12px 18px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: #1769aa;
+    color: #ffffff;
+
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+}
+
+.test-buttons button:hover,
+.notification-content button:hover {
+    background: #105487;
+}
+
+.test-buttons button:focus-visible,
+.notification-content button:focus-visible {
+    outline: 3px solid #93c5fd;
+    outline-offset: 3px;
+}
+
+.test-status {
+    min-height: 24px;
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+/* Budget notification dialog */
+
+.budget-notification-dialog {
+    width: min(92%, 420px);
+    padding: 0;
+
+    border: none;
+    border-radius: 14px;
+
+    box-shadow: 0 18px 55px rgba(15, 23, 42, 0.25);
+}
+
+.budget-notification-dialog::backdrop {
+    background: rgba(15, 23, 42, 0.58);
+}
+
+.notification-content {
+    padding: 30px;
+    text-align: center;
+}
+
+.notification-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 54px;
+    height: 54px;
+    margin: 0 auto 16px;
+
+    border-radius: 50%;
+
+    background: #fff1db;
+    color: #b45309;
+
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.notification-content h2 {
+    margin: 0 0 12px;
+    color: #17365d;
+}
+
+.notification-content p {
+    margin: 0 0 24px;
+    color: #475569;
+    line-height: 1.6;
+}
+
+.notification-content button {
+    min-width: 120px;
+}
+
+/* Responsive layout for smaller screens */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 20px 12px;
+    }
+
+    .test-panel {
+        padding: 18px;
+    }
+
+    .test-buttons {
+        flex-direction: column;
+    }
+
+    .test-buttons button {
+        width: 100%;
+    }
+
+}
