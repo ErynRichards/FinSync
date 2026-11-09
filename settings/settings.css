@@ -1,0 +1,400 @@
+
+/* FinSync Settings - Eryn's Allocation */
+
+/* Light Mode theme colours */
+:root {
+    color-scheme: light;
+    --page: #e2f5fd;
+    --card: #ffffff;
+    --text: #172536;
+    --muted: #65717c;
+    --input: #ffffff;
+    --border: #dce2e9;
+    --sidebar: #060b37;
+    --primary: #1300bd;
+    --message-ok: #176b3d;
+    --message-error: #ba2534;
+}
+
+/* Dark Mode theme colours */
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #111827;
+    --card: #1e293b;
+    --text: #f1f5f9;
+    --muted: #c2cbd7;
+    --input: #0f172a;
+    --border: #475569;
+    --sidebar: #03061d;
+    --primary: #5145ed;
+    --message-ok: #86efac;
+    --message-error: #fca5a5;
+}
+
+/* General styling */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--page);
+    color: var(--text);
+}
+
+/* Main application layout */
+.app {
+    min-height: 100vh;
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 230px;
+    flex-shrink: 0;
+    background: var(--sidebar);
+    color: white;
+    padding: 38px 20px 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* FinSync branding */
+.brand {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 65px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* FinSync Logo */
+.brand-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* Sidebar navigation */
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.nav a,
+.logout {
+    color: #f0f2ff;
+    text-decoration: none;
+    padding: 12px 17px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.nav a:hover,
+.logout:hover {
+    background: #252e6b;
+}
+
+.nav a.active {
+    background: #1500b7;
+    font-weight: bold;
+}
+
+.logout {
+    margin-top: auto;
+}
+
+/* Main content */
+.main {
+    flex: 1;
+    min-width: 0;
+    padding: 56px 38px;
+}
+
+/* Page heading */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 54px;
+}
+
+h1 {
+    font-size: 30px;
+    margin: 0 0 5px;
+}
+
+.page-header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.header-icons {
+    color: var(--text);
+}
+
+/* Settings card layout */
+.settings-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 22px 48px;
+    max-width: 1120px;
+}
+
+/* Shared card styling */
+.card {
+    background: var(--card);
+    padding: 18px 19px;
+    border-radius: 3px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+h2 {
+    font-size: 17px;
+    margin: 0 0 3px;
+}
+
+.hint {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 18px;
+}
+
+.placeholder {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Change Password form */
+.form-row {
+    display: grid;
+    grid-template-columns: 120px minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 12px;
+}
+
+.form-row label {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.form-row input {
+    min-width: 0;
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    background: var(--input);
+    color: var(--text);
+    font: inherit;
+    font-size: 13px;
+}
+
+.form-row input:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Buttons */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+
+button {
+    background: var(--primary);
+    color: white;
+    border: 0;
+    padding: 11px 18px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    filter: brightness(1.15);
+}
+
+button:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+
+/* Validation and confirmation messages */
+.message {
+    font-size: 12px;
+    margin: 10px 0 0;
+    min-height: 0;
+}
+
+.message:empty {
+    display: none;
+}
+
+.message.success {
+    color: var(--message-ok);
+}
+
+.message.error {
+    color: var(--message-error);
+}
+
+/* Appearance section */
+.theme-options {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+/* Theme selection cards */
+.theme-choice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 125px;
+    min-height: 120px;
+    padding: 12px;
+    gap: 17px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+/* Light Mode preview */
+.light-preview {
+    background: #f4f4f4;
+    color: #111;
+}
+
+/* Dark Mode preview */
+.dark-preview {
+    background: #242124;
+    color: white;
+}
+
+/* Highlight selected theme */
+.theme-choice:has(input:checked) {
+    border-color: #5145ed;
+}
+
+.theme-choice input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+}
+
+.theme-choice:has(input:focus-visible) {
+    outline: 3px solid #5145ed;
+    outline-offset: 3px;
+}
+
+/* Theme toggle appearance */
+.switch {
+    width: 72px;
+    height: 35px;
+    border-radius: 25px;
+    background: #c9cbd0;
+    position: relative;
+}
+
+.switch::after {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 27px;
+    height: 27px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.2s;
+}
+
+.theme-choice input:checked + .switch {
+    background: #5145ed;
+}
+
+.theme-choice input:checked + .switch::after {
+    transform: translateX(37px);
+}
+
+/* Accessible hidden text */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Tablet responsiveness */
+@media (max-width: 850px) {
+    .settings-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .main {
+        padding: 30px 22px;
+    }
+
+    .page-header {
+        margin-bottom: 30px;
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 550px) {
+    .app {
+        display: block;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .brand {
+        margin-bottom: 12px;
+    }
+
+    .nav {
+        flex-direction: row;
+        overflow-x: auto;
+    }
+
+    .nav a {
+        white-space: nowrap;
+        padding: 9px;
+    }
+
+    .logout {
+        margin-top: 10px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+}

@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinSync - Settings</title>
+  <script>
+    try {
+      document.documentElement.dataset.theme =
+        localStorage.getItem('finsync-theme') === 'dark'
+          ? 'dark' : 'light';
+    } catch (e) {
+      document.documentElement.dataset.theme = 'light';
+    }
+  </script>
+  <link rel="stylesheet" href="settings.css">
+  <script src="settings.js" defer></script>
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- FinSync sidebar -->
+    <aside class="sidebar" aria-label="Main navigation">
+      <!-- FinSync Logo and Brand Name -->
+<a class="brand" href="dashboard.html">
+
+    <img src="images/finsync-logo.png"
+         alt="FinSync Logo"
+         class="brand-logo">
+
+    <span>FinSync</span>
+
+</a>
+
+      <nav class="nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="transactions.html">Transactions</a>
+        <a href="budgets.html">Budgets</a>
+        <a href="goals.html">Goals</a>
+        <a href="reports.html">Reports</a>
+        <a href="settings.html" class="active"
+           aria-current="page">Settings</a>
+      </nav>
+
+      <a class="logout" href="login.html">Logout</a>
+    </aside>
+
+    <!-- Main Settings content -->
+    <main class="main">
+
+      <header class="page-header">
+        <div>
+          <h1>Settings</h1>
+          <p>Manage your account, preferences and app settings</p>
+        </div>
+        <div class="header-icons" aria-hidden="true">♧ &nbsp; ●</div>
+      </header>
+
+      <div class="settings-grid">
+
+        <!-- Michalyn's Profile Information section -->
+        <!-- Replace this placeholder during integration -->
+        <section class="card profile-card"
+                 aria-labelledby="profile-heading">
+          <h2 id="profile-heading">Profile Information</h2>
+          <p class="hint">Update your personal details</p>
+          <p class="placeholder">
+            Profile fields will be integrated from Michalyn's section.
+          </p>
+        </section>
+
+        <!-- ERYN: Change Password section -->
+        <section class="card password-card"
+                 aria-labelledby="password-heading">
+
+          <h2 id="password-heading">Change Password</h2>
+          <p class="hint">Keep your account secure</p>
+
+          <form id="passwordForm" novalidate>
+
+            <div class="form-row">
+              <label for="currentPassword">Current Password</label>
+              <input
+                id="currentPassword"
+                type="password"
+                placeholder="Enter current password"
+                autocomplete="current-password"
+                required>
+            </div>
+
+            <div class="form-row">
+              <label for="newPassword">New Password</label>
+              <input
+                id="newPassword"
+                type="password"
+                placeholder="Enter new password"
+                autocomplete="new-password"
+                minlength="8"
+                required>
+            </div>
+
+            <div class="form-row">
+              <label for="confirmPassword">Confirm New Password</label>
+              <input
+                id="confirmPassword"
+                type="password"
+                placeholder="Confirm new password"
+                autocomplete="new-password"
+                required>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" id="changePasswordButton">
+                Change Password
+              </button>
+            </div>
+
+            <p id="passwordMessage"
+               class="message"
+               role="status"
+               aria-live="polite"></p>
+          </form>
+        </section>
+
+        <!-- ERYN: Appearance section -->
+        <section class="card appearance-card"
+                 aria-labelledby="appearance-heading">
+
+          <h2 id="appearance-heading">Appearance</h2>
+          <p class="hint">Choose how FinSync looks for you</p>
+
+          <fieldset class="theme-options">
+            <legend class="sr-only">Choose appearance</legend>
+
+            <!-- Light Mode -->
+            <label class="theme-choice light-preview">
+              <span>Light Mode</span>
+              <input type="radio" name="theme" value="light">
+              <span class="switch" aria-hidden="true"></span>
+            </label>
+
+            <!-- Dark Mode -->
+            <label class="theme-choice dark-preview">
+              <span>Dark Mode</span>
+              <input type="radio" name="theme" value="dark">
+              <span class="switch" aria-hidden="true"></span>
+            </label>
+          </fieldset>
+
+          <div class="form-actions">
+            <button type="button" id="saveThemeButton">
+              Save Changes
+            </button>
+          </div>
+
+          <p id="themeMessage"
+             class="message"
+             role="status"
+             aria-live="polite"></p>
+        </section>
+
+      </div>
+    </main>
+  </div>
+</body>
+</html>
