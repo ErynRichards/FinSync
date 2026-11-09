@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FinSync | Monthly Budget Warning</title>
+  <!-- Eryn: FinSync Notification Styling -->
+<link rel="stylesheet" href="budget-warning-eryn.css">
+</head>
+<body>
+  <!-- Preview only. The dashboard can open the warning after it receives data. -->
+  <button type="button" id="preview-budget-warning">Preview budget warning</button>
+
+  <!-- Copy this dialog into the FinSync page. Keep the IDs for the data fields. -->
+  <dialog class="budget-warning" id="budget-warning"
+          aria-labelledby="budget-warning-title" aria-describedby="budget-warning-message">
+    <div class="budget-warning-content">
+      <span class="budget-warning-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.4 4.5a1.8 1.8 0 0 1 3.2 0l7.7 13.1a1.8 1.8 0 0 1-1.6 2.7H4.3a1.8 1.8 0 0 1-1.6-2.7z"/>
+          <path d="M12 9v4m0 3.5h.01"/>
+        </svg>
+      </span>
+      <div>
+        <h2 id="budget-warning-title">Monthly Budget Exceeded!</h2>
+        <p id="budget-warning-message">
+          You have exceeded your monthly budget by <strong id="budget-warning-excess"></strong>.
+        </p>
+        <dl>
+          <div>
+            <dt>Monthly Budget:</dt>
+            <dd id="budget-warning-limit"></dd>
+          </div>
+          <div>
+            <dt>Total Expenses:</dt>
+            <dd id="budget-warning-expenses"></dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <!-- The browser closes the dialog when this form is submitted. -->
+    <form method="dialog">
+      <button type="submit" autofocus>Dismiss</button>
+    </form>
+  </dialog>
+
+  <script>
+    // Call this after the backend confirms a budget overrun. All three
+    // amounts should be supplied in rand, without a currency symbol.
+    window.showBudgetWarning = function ({ monthlyBudget, totalExpenses, exceededBy }) {
+      const dialog = document.getElementById("budget-warning");
+      const currency = new Intl.NumberFormat("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+      // Fill the HTML fields with the backend's values before showing the modal.
+      document.getElementById("budget-warning-limit").textContent = "R" + currency.format(monthlyBudget);
+      document.getElementById("budget-warning-expenses").textContent = "R" + currency.format(totalExpenses);
+      document.getElementById("budget-warning-excess").textContent = "R" + currency.format(exceededBy);
+      if (!dialog.open) dialog.showModal();
+    };
+
+    // Sample values let you test the HTML without a running backend.
+    document.getElementById("preview-budget-warning").addEventListener("click", () => {
+      window.showBudgetWarning({ monthlyBudget: 3000, totalExpenses: 3500, exceededBy: 500 });
+    });
+  </script>
+</body>
+</html>
