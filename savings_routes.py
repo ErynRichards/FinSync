@@ -205,44 +205,157 @@ def change_goal_status(goal_id):
 
 
 # MISHAYLE: Add an amount to an existing goal (not replace its total).
+
+# MISHAYLE: Add money to a savings goal and record it as an expense.
 @savings_routes.route("/goals/<int:goal_id>/contributions", methods=["POST"])
 def add_goal_contribution(goal_id):
     from decimal import Decimal, InvalidOperation
+    from db import get_connection
+
     user_id = session.get("user_id")
+
     if not user_id:
         return jsonify({"error": "Please log in first"}), 401
+
     goal = get_savings_goal(user_id, goal_id)
+
     if not goal:
         return jsonify({"error": "Goal not found"}), 404
+
     data = request.get_json(silent=True) or {}
+
+    # Validate the contribution amount.
     try:
         amount = Decimal(str(data.get("amount")))
     except (InvalidOperation, TypeError, ValueError):
         return jsonify({"error": "Invalid amount"}), 400
-    if not amount.is_finite() or amount <= 0 or amount.as_tuple().exponent < -2:
-        return jsonify({"error": "Enter a positive amount with at most two decimal places"}), 400
-    # Lock the row to avoid lost updates if two contributions arrive together.
-    from db import get_connection
+
+    if (
+        not amount.is_finite()
+        or amount <= 0
+        or amount > Decimal("9999999999.99")
+        or amount.as_tuple().exponent < -2
+    ):
+        return jsonify({
+            "error": "Enter a valid positive amount with at most two decimal places"
+        }), 400
+
     connection = get_connection()
+
     try:
         with connection.cursor() as cursor:
-            cursor.execute("SELECT current_amount, target_amount FROM savings_goals WHERE goal_id=%s AND user_id=%s FOR UPDATE", (goal_id, user_id))
+
+            # 1. Lock and retrieve the savings goal.
+            cursor.execute("""
+                SELECT goal_name, current_amount, target_amount
+                FROM savings_goals
+                WHERE goal_id = %s AND user_id = %s
+                FOR UPDATE
+            """, (goal_id, user_id))
+
             row = cursor.fetchone()
+
             if not row:
                 connection.rollback()
                 return jsonify({"error": "Goal not found"}), 404
+
             current = Decimal(str(row["current_amount"]))
             target = Decimal(str(row["target_amount"]))
             new_amount = current + amount
+
             if new_amount > target:
                 connection.rollback()
-                return jsonify({"error": "Contribution exceeds remaining goal amount"}), 400
-            status = "completed" if new_amount >= target else "active"
-            cursor.execute("UPDATE savings_goals SET current_amount=%s, status=%s WHERE goal_id=%s AND user_id=%s", (new_amount, status, goal_id, user_id))
+                return jsonify({
+                    "error": "Contribution exceeds remaining goal amount"
+                }), 400
+
+            # 2. Find the user's account.
+            cursor.execute("""
+                SELECT account_id
+                FROM accounts
+                WHERE user_id = %s
+                ORDER BY account_id
+                LIMIT 1
+            """, (user_id,))
+
+            account = cursor.fetchone()
+
+            if not account:
+                connection.rollback()
+                return jsonify({
+                    "error": "Please create an account before adding savings"
+                }), 400
+
+            account_id = account["account_id"]
+
+            # 3. Find an existing expense category.
+            cursor.execute("""
+                SELECT category_id
+                FROM categories
+                WHERE category_name = %s
+                  AND category_type = 'expense'
+                LIMIT 1
+            """, ("Other expense",))
+
+            category = cursor.fetchone()
+
+            if not category:
+                connection.rollback()
+                return jsonify({
+                    "error": "Other expense category not found"
+                }), 400
+
+            category_id = category["category_id"]
+
+            # 4. Update the savings goal.
+            status = (
+                "completed" if new_amount >= target else "active"
+            )
+
+            cursor.execute("""
+                UPDATE savings_goals
+                SET current_amount = %s,
+                    status = %s
+                WHERE goal_id = %s AND user_id = %s
+            """, (new_amount, status, goal_id, user_id))
+
+            # 5. Save the contribution as an expense transaction.
+            description = (
+                "Savings Contribution - " + row["goal_name"]
+            )
+
+            cursor.execute("""
+                INSERT INTO transactions
+                (
+                    account_id,
+                    category_id,
+                    transaction_type,
+                    amount,
+                    transaction_date,
+                    description,
+                    created_at
+                )
+                VALUES (%s, %s, %s, %s, CURDATE(), %s, NOW())
+            """, (
+                account_id,
+                category_id,
+                "expense",
+                amount,
+                description
+            ))
+
+        # 6. Save both changes together.
         connection.commit()
+
     except Exception:
         connection.rollback()
         raise
+
     finally:
         connection.close()
-    return jsonify({"message": "Savings added", "goal": format_goal(get_savings_goal(user_id, goal_id))})
+
+    return jsonify({
+        "message": "Savings added and transaction recorded",
+        "goal": format_goal(get_savings_goal(user_id, goal_id))
+    })
+

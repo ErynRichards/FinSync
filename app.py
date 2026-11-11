@@ -21,7 +21,6 @@ from users import create_user, get_user_by_email, get_user_by_id
 # DANIEL: Financial summary calculations
 from dashboard_summary import get_summary
 
-
 app = Flask(__name__)
 app.secret_key = config.SECRET_KEY  # needed for sessions and flash messages
 
@@ -57,9 +56,8 @@ def database_error(error):
     return render_template("error.html", message=str(error)), 500
 
 
-# ---------------------------------------------------------------------
 # ERYN: Landing page from Phase 5.1 Frontend.zip
-# ---------------------------------------------------------------------
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -76,11 +74,9 @@ def features():
     return render_template("features.html")
 
 
-# ---------------------------------------------------------------------
 # MISHAYLE'S PART: REGISTRATION, LOGIN AND AUTHENTICATION BACKEND
 # Uses Daniel's users.py (database) and security.py (password hashing).
 # The HTML forms are Lashanya's part. Logout below is Reece's part.
-# ---------------------------------------------------------------------
 
 # MISHAYLE: Register a new FinSync user.
 @app.route("/signup", methods=["GET", "POST"])
@@ -343,9 +339,7 @@ def logout():
     return redirect(url_for("index"))
 
 
-# ---------------------------------------------------------------------
 # Password reset (Daniel)
-# ---------------------------------------------------------------------
 @app.route("/forgot-password", methods=["GET", "POST"])
 def forgot_password():
     if request.method == "GET":

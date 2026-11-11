@@ -41,17 +41,26 @@
 
       const context = instance.ctx;
       context.save();
-      context.font = "bold 10px Arial";
-      context.fillStyle = "#242851";
+
+      context.font = "bold 12px Arial";
+
+      // Red text with a white outline.
+      context.fillStyle = "#CC0000";
+      context.strokeStyle = "#FFFFFF";
+      context.lineWidth = 3;
+      context.lineJoin = "round";
+
       context.textAlign = "center";
       context.textBaseline = "middle";
+
 
       instance.getDatasetMeta(0).data.forEach((arc, index) => {
         const category = categories[index];
         if (category.percent < 8) return;
 
+        // Move the labels further away from the doughnut chart.
         const angle = (arc.startAngle + arc.endAngle) / 2;
-        const radius = arc.outerRadius + 18;
+        const radius = arc.outerRadius + 45;
 
         const name = category.name.length > 15
           ? category.name.slice(0, 13) + "…"
@@ -66,8 +75,15 @@
 
         const y = arc.y + Math.sin(angle) * radius;
 
-        context.fillText(name, x, y - 6);
-        context.fillText(category.percent.toFixed(1) + "%", x, y + 6);
+
+        // Draw the white outline first.
+        context.strokeText(name, x, y - 7);
+        context.strokeText(category.percent.toFixed(1) + "%", x, y + 7);
+
+        // Draw the red text on top.
+        context.fillText(name, x, y - 7);
+        context.fillText(category.percent.toFixed(1) + "%", x, y + 7);
+
       });
 
       context.restore();
@@ -207,18 +223,21 @@
       plugins: [ringLabels],
 
       options: {
-        maintainAspectRatio: false,
-        animation: false,
-        cutout: "50%",
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: false,
+    cutout: "50%",
 
-        layout: {
+
+      layout: {
           padding: {
-            top: 23,
-            right: 37,
-            bottom: 19,
-            left: 19
+              top: 55,
+              right: 65,
+              bottom: 55,
+              left: 65
           }
-        },
+      },
+
 
         plugins: {
           legend: {
@@ -423,9 +442,15 @@
     if (empty) return;
 
     // Shared Chart.js configuration.
+
+    // Shared Chart.js configuration for line and bar charts.
     const common = {
       responsive: true,
       maintainAspectRatio: false,
+
+      layout: {
+        padding: 15
+      },
 
       plugins: {
         legend: {
@@ -442,14 +467,29 @@
       },
 
       scales: {
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            autoSkip: true,
+            maxRotation: 0
+          }
+        },
+
         y: {
           beginAtZero: true,
           ticks: {
-            callback: value => money(value)
+            callback: function(value) {
+              if (value === 0) return "R0";
+              if (Math.abs(value) < 1000) return "R" + value;
+              return "R" + (value / 1000) + "k";
+            }
           }
         }
       }
     };
+
 
     // Monthly Trend line graph.
     if (!trendChart) {
@@ -476,6 +516,7 @@
       );
     }
 
+
     // Income vs Expenses double bar graph.
     if (!comparisonChart) {
       comparisonChart = new Chart(
@@ -501,10 +542,43 @@
             ]
           },
 
-          options: common
+          options: {
+            ...common,
+
+            // Add spacing around the chart.
+            layout: {
+              padding: {
+                top: 15,
+                right: 35,
+                bottom: 15,
+                left: 15
+              }
+            },
+
+            // Prevent the first and last month's bars
+            // from being cut off.
+            scales: {
+              ...common.scales,
+
+              x: {
+                ...common.scales.x,
+                offset: true
+              }
+            },
+
+            // Adjust the width of the bars.
+            datasets: {
+              bar: {
+                categoryPercentage: 0.6,
+                barPercentage: 0.7,
+                maxBarThickness: 35
+              }
+            }
+          }
         }
       );
     }
+
 
     // Refresh Monthly Trend.
     trendChart.data.labels = labels;
