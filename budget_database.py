@@ -3,18 +3,58 @@
 
 from datetime import date, timedelta
 
-from db import DatabaseError, execute, fetch_all
+from db import DatabaseError, execute, fetch_all, get_connection
+import pymysql
+
+
+class BudgetOverlapError(DatabaseError):
+    """The user already has a budget for this category and date range."""
 
 
 def create_budget(user_id, category_id, budget_amount, start_date, end_date):
-    """Add a budget for a category and return its id."""
-    if float(budget_amount) <= 0:
-        raise DatabaseError("Budget amount must be more than 0.")
+    """Save a budget only if the same category has no overlapping dates.
 
-    sql = """INSERT INTO budgets (user_id, category_id, budget_amount, start_date, end_date)
-             VALUES (%s, %s, %s, %s, %s)"""
-    rows_changed, budget_id = execute(sql, (user_id, category_id, budget_amount, start_date, end_date))
-    return budget_id
+    A MySQL named lock serializes simultaneous saves for this user/category.
+    """
+    if float(budget_amount) <= 0:
+        raise DatabaseError('Budget amount must be more than 0.')
+
+    connection = get_connection()
+    lock_name = f'finsync_budget_{user_id}_{category_id}'
+    locked = False
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute('SELECT GET_LOCK(%s, 5) AS acquired', (lock_name,))
+            if cursor.fetchone()['acquired'] != 1:
+                raise DatabaseError('Could not lock the budget. Please try again.')
+            locked = True
+
+            cursor.execute("""SELECT budget_id FROM budgets
+                WHERE user_id = %s AND category_id = %s
+                  AND start_date <= %s AND end_date >= %s
+                LIMIT 1""", (user_id, category_id, end_date, start_date))
+            if cursor.fetchone() is not None:
+                raise BudgetOverlapError('An overlapping budget already exists.')
+
+            cursor.execute("""INSERT INTO budgets
+                (user_id, category_id, budget_amount, start_date, end_date)
+                VALUES (%s, %s, %s, %s, %s)""",
+                (user_id, category_id, budget_amount, start_date, end_date))
+            budget_id = cursor.lastrowid
+            connection.commit()
+            return budget_id
+    except pymysql.MySQLError as error:
+        connection.rollback()
+        print('Database error:', error)
+        raise DatabaseError('Unable to save budget. Please try again.') from error
+    finally:
+        if locked:
+            try:
+                with connection.cursor() as cursor:
+                    cursor.execute('SELECT RELEASE_LOCK(%s)', (lock_name,))
+            except pymysql.MySQLError:
+                pass
+        connection.close()
 
 
 def get_budgets(user_id):

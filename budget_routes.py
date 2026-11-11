@@ -1,12 +1,18 @@
 """MISHAYLE: Flask integration for Lashanya's budget recommendations."""
 from datetime import date, timedelta
+from calendar import monthrange
 from decimal import Decimal
 from flask import Blueprint, jsonify, request, session
 from db import DatabaseError, fetch_one, fetch_all
 from transactions import get_transactions
-from budget_recommendations import calculate_suggested_budget
+from budget_recommendations import (
+    calculate_suggested_budget,
+    NEEDS_CATEGORIES,
+    WANTS_CATEGORIES
+)
 from budget_database import (
     create_budget,
+    BudgetOverlapError,
     get_budgets,
     get_category_spending_history
 )
@@ -68,45 +74,115 @@ def get_budget_recommendation():
 
         # Convert Daniel's monthly totals into the transaction
         # format expected by Lashanya's calculation.
-        transactions = []
+        # MISHAYLE: Prepare the previous three months of expenses
+        # for Lashanya's updated recommendation calculation.
+
+        monthly_expenses = []
 
         for item in category_history:
-            # Daniel returns the month as YYYY-MM
-            month_date = date.fromisoformat(item["month"] + "-01")
+            total = float(item["total"])
 
-            # Months with no spending must not count as history
-            if Decimal(str(item["total"])) > 0:
-                transactions.append({
-                    "user_id": user_id,
-                    "category": category["category_name"],
-                    "type": "expense",
-                    "date": month_date,
-                    "amount": item["total"]
-                })
+            if total > 0:
+                monthly_expenses.append(total)
+            else:
+                # No spending history for this month
+                monthly_expenses.append(None)
 
-        # We still need the user's transactions to calculate income.
+        # MISHAYLE: Prefer recorded income for the selected budget month.
+        # If none was recorded, use the average of the preceding three months.
         rows = get_transactions(user_id)
+        previous_months = set()
+        current_month = budget_period
+        for _ in range(3):
+            previous_day = current_month - timedelta(days=1)
+            current_month = date(previous_day.year, previous_day.month, 1)
+            previous_months.add((current_month.year, current_month.month))
 
-        # Calculate average income for the three completed months before the period.
-        # Lashanya's function requires monthly_income for its 50/30/20 cap.
-        from budget_recommendations import get_previous_three_months
-        previous_months = set(get_previous_three_months(budget_period))
-        income_total = sum((Decimal(str(row['amount'])) for row in rows
-            if row['transaction_type'].lower() == 'income'
-            and (row['transaction_date'].year, row['transaction_date'].month) in previous_months),
-            Decimal('0'))
-        monthly_income = income_total / Decimal('3')
+        selected_income = Decimal('0')
+        previous_income = Decimal('0')
+        for row in rows:
+            if str(row['transaction_type']).lower() != 'income':
+                continue
+            transaction_date = row['transaction_date']
+            if isinstance(transaction_date, str):
+                transaction_date = date.fromisoformat(transaction_date[:10])
+            month = (transaction_date.year, transaction_date.month)
+            amount = Decimal(str(row['amount']))
+            if month == (budget_period.year, budget_period.month):
+                selected_income += amount
+            elif month in previous_months:
+                previous_income += amount
+
+        if selected_income > 0:
+            monthly_income = selected_income
+            income_source = 'Selected month income'
+        else:
+            monthly_income = previous_income / Decimal('3')
+            income_source = 'Previous three-month average income'
+
+        # MISHAYLE: Calculate existing budgets in the same group
+
+        category_name = category["category_name"]
+
+        if category_name in NEEDS_CATEGORIES:
+            group_categories = NEEDS_CATEGORIES
+        elif category_name in WANTS_CATEGORIES:
+            group_categories = WANTS_CATEGORIES
+        else:
+            group_categories = []
+
+        other_category_budgets = 0
+
+        existing_budgets = get_budgets(user_id)
+
+        period_end = date(
+            budget_period.year,
+            budget_period.month,
+            monthrange(budget_period.year, budget_period.month)[1]
+        )
+
+        for budget in existing_budgets:
+
+            # Exclude the category currently being recommended
+            if budget["category_name"] == category_name:
+                continue
+
+            # Only include budgets from the same group
+            if budget["category_name"] not in group_categories:
+                continue
+
+            # Only include budgets covering the selected month
+            if (
+                    budget["start_date"] <= period_end
+                    and budget["end_date"] >= first_of_period
+            ):
+                other_category_budgets += float(budget["budget_amount"])
 
         result = calculate_suggested_budget(
-            user_id, category['category_name'], budget_period,
-            monthly_income, transactions
+            user_id=user_id,
+            category=category['category_name'],
+            period=period_text,
+            monthly_income=monthly_income,
+            monthly_expenses=monthly_expenses,
+            other_category_budgets=other_category_budgets
         )
+
         amount = result.get('suggested_budget') if result.get('success') else None
+        if result.get('success'):
+            method = result.get('method', '')
+            if amount == 0:
+                message = 'No allocation remains in this budget group.'
+            else:
+                message = f'{method}. Income source: {income_source}.'
+        else:
+            message = result.get('message', '')
         return jsonify({
             'category_id': category_id,
             'period': period_text,
             'suggested_amount': amount,
-            'message': result.get('message', '')
+            'message': message,
+            'method': result.get('method'),
+            'income_source': income_source
         }), 200
     except (DatabaseError, ValueError, TypeError, KeyError, AttributeError):
         return jsonify({'error': 'Could not calculate the suggested budget.'}), 500
@@ -174,5 +250,7 @@ def save_budget():
             return jsonify({'error': 'Please select an expense category.'}), 400
         budget_id = create_budget(session['user_id'], category_id, amount, start, end)
         return jsonify({'message': 'Budget saved successfully.', 'budget_id': budget_id}), 201
+    except BudgetOverlapError:
+        return jsonify({'error': 'A budget for this category already overlaps the selected dates. Choose different dates.'}), 409
     except DatabaseError:
         return jsonify({'error': 'Unable to save budget. Please try again.'}), 500

@@ -1,234 +1,200 @@
+# FinSync - Budget Recommendation Calculations
+# Uses the 50/30/20 rule and previous spending history.
 
-from datetime import date
+from datetime import datetime
 from decimal import Decimal, ROUND_HALF_UP
 
 
-# Categories belonging to each budget group
-BUDGET_CATEGORIES = {
-    "needs": [
-        "groceries", "food", "transport", "rent",
-        "utilities", "healthcare", "education"
-    ],
-    "wants": [
-        "entertainment", "shopping", "subscriptions",
-        "restaurants", "travel"
-    ],
-    "savings": [
-        "savings", "emergency fund", "financial goals"
-    ]
-}
+# Categories used in FinSync
 
-# Percentages for the 50/30/20 budgeting rule
-BUDGET_PERCENTAGES = {
-    "needs": Decimal("0.50"),
-    "wants": Decimal("0.30"),
-    "savings": Decimal("0.20")
-}
+INCOME_CATEGORIES = [
+    "Salary",
+    "Freelance",
+    "Allowance",
+    "Other income"
+]
+
+NEEDS_CATEGORIES = [
+    "Housing",
+    "Groceries",
+    "Transport",
+    "Education",
+    "Utilities"
+]
+
+WANTS_CATEGORIES = [
+    "Entertainment",
+    "Other expense"
+]
+
+# "Other" is not automatically classified because
+# it may represent either income or an expense.
 
 
 def round_to_50(amount):
-    # Round an amount to the nearest R50
-    amount = Decimal(str(amount))
-    return int(
-        (amount / 50).quantize(
-            Decimal("1"), rounding=ROUND_HALF_UP
-        ) * 50
+    """Round an amount to the nearest R50."""
+    value = Decimal(str(amount))
+    return float(
+        (value / Decimal("50")).quantize(
+            Decimal("1"),
+            rounding=ROUND_HALF_UP
+        ) * Decimal("50")
     )
 
 
-def get_budget_group(category):
-    # Find which budget group the selected category belongs to
-    category = category.strip().lower()
-
-    for group, categories in BUDGET_CATEGORIES.items():
-        if category in categories:
-            return group
-
-    return None
-
-
-def get_previous_three_months(budget_period):
-    # Find the previous three complete calendar months
-    year = budget_period.year
-    month = budget_period.month
-    months = []
-
-    for i in range(3):
-        month -= 1
-
-        if month == 0:
-            month = 12
-            year -= 1
-
-        months.append((year, month))
-
-    return months
-
-
 def calculate_suggested_budget(
-    user_id, category, budget_period, monthly_income, transactions
+    user_id,
+    category,
+    period,
+    monthly_income,
+    monthly_expenses=None,
+    other_category_budgets=0
 ):
     """
-    Calculate a recommended budget for the selected category.
+    Calculate the recommended budget for one expense category.
 
-    Transactions are supplied by the backend/database.
+    user_id: Logged-in user's ID
+    category: Selected expense category
+    period: Budget month in YYYY-MM format
+    monthly_income: Total income for the budget month
+    monthly_expenses: Previous 3 complete months of spending
+    other_category_budgets: Amount already allocated to
+                            other categories in the same group
     """
 
-    # Check that the selected category is valid
-    group = get_budget_group(category)
-
-    if group is None:
+    # Validate the selected budget period
+    try:
+        datetime.strptime(period, "%Y-%m")
+    except (ValueError, TypeError):
         return {
             "success": False,
-            "message": "Invalid budget category.",
+            "message": "Invalid budget period.",
             "suggested_budget": None
         }
 
-    # Check the monthly income
-    income = Decimal(str(monthly_income))
+    # Validate monthly income
+    try:
+        monthly_income = float(monthly_income)
+    except (TypeError, ValueError):
+        monthly_income = 0
 
-    if income <= 0:
+    if monthly_income <= 0:
         return {
             "success": False,
-            "message": "Monthly income must be greater than zero.",
+            "message": "Add your monthly income first.",
             "suggested_budget": None
         }
 
-    # Calculate the allowance using the 50/30/20 rule
-    percentage = BUDGET_PERCENTAGES[group]
-    group_allowance = income * percentage
+    # Calculate the 50/30/20 allocations
+    needs_budget = monthly_income * 0.50
+    wants_budget = monthly_income * 0.30
+    savings_budget = monthly_income * 0.20
 
-    # Savings uses 20% of income directly
-    if group == "savings":
-        recommended = round_to_50(group_allowance)
+    # Identify the selected category's group
+    if category in NEEDS_CATEGORIES:
+        group = "Needs"
+        group_budget = needs_budget
+        category_count = len(NEEDS_CATEGORIES)
 
+    elif category in WANTS_CATEGORIES:
+        group = "Wants"
+        group_budget = wants_budget
+        category_count = len(WANTS_CATEGORIES)
+
+    else:
         return {
-            "success": True,
-            "category": category,
-            "budget_group": group,
-            "percentage": 20,
-            "suggested_budget": recommended,
-            "placeholder": f"R{recommended:,.2f}",
-            "message": "Savings recommendation calculated."
+            "success": False,
+            "message": "Select a valid expense category.",
+            "suggested_budget": None
         }
 
-    # Find the previous three complete months
-    previous_months = get_previous_three_months(budget_period)
+    # Calculate the default income-based recommendation
+    income_based_budget = group_budget / category_count
 
-    monthly_totals = {
-        month: Decimal("0") for month in previous_months
-    }
+    # Check previous spending history
+    # Expected: three monthly totals in chronological order
+    # None means that month's history is unavailable.
+    history_available = (
+        monthly_expenses is not None
+        and len(monthly_expenses) == 3
+        and all(
+            amount is not None
+            for amount in monthly_expenses
+        )
+    )
 
-    months_with_history = set()
+    if history_available:
 
-    # Calculate spending for the selected user and category
-    for transaction in transactions:
+        # Calculate average spending over three months
+        expenses = [float(x) for x in monthly_expenses]
 
-        if transaction["user_id"] != user_id:
-            continue
+        if any(x < 0 for x in expenses):
+            return {
+                "success": False,
+                "message": "Invalid expense history.",
+                "suggested_budget": None
+            }
 
-        if transaction["category"].lower() != category.lower():
-            continue
+        average_spending = sum(expenses) / 3
 
-        if transaction["type"].lower() != "expense":
-            continue
+        # Use previous spending to personalise the budget
+        suggested_budget = average_spending
+        method = "Three-month spending average"
 
-        transaction_date = transaction["date"]
+    else:
 
-        month_key = (
-            transaction_date.year,
-            transaction_date.month
+        # Use 50/30/20 when history is insufficient
+        average_spending = None
+        suggested_budget = income_based_budget
+        method = "50/30/20 income-based allocation"
+
+    # Calculate remaining allocation for this group
+    try:
+        allocated = float(other_category_budgets)
+    except (TypeError, ValueError):
+        allocated = 0
+
+    if allocated < 0:
+        return {
+            "success": False,
+            "message": "Invalid existing budget allocation.",
+            "suggested_budget": None
+        }
+
+    remaining_budget = max(0, group_budget - allocated)
+
+    # Keep recommendation within the remaining limit
+    suggested_budget = min(
+        suggested_budget,
+        remaining_budget
+    )
+
+    # Round recommendation to a practical R50
+    suggested_budget = round_to_50(suggested_budget)
+
+    # Do not exceed the remaining allocation after rounding
+    if suggested_budget > remaining_budget:
+        suggested_budget = float(
+            Decimal(str(remaining_budget))
+            // Decimal("50") * Decimal("50")
         )
 
-        if month_key in monthly_totals:
-            amount = Decimal(str(transaction["amount"]))
-
-            if amount >= 0:
-                monthly_totals[month_key] += amount
-                months_with_history.add(month_key)
-
-    # Check whether enough spending history exists
-    if len(months_with_history) < 3:
-        return {
-            "success": False,
-            "message": "Insufficient spending history.",
-            "suggested_budget": None,
-            "placeholder": "Not enough spending history"
-        }
-
-    # Calculate the average spending over three months
-    total_spending = sum(monthly_totals.values())
-    average_spending = total_spending / 3
-
-    # Round the recommendation to the nearest R50
-    recommended = round_to_50(average_spending)
-
-    # Do not exceed the overall needs/wants allowance
-    maximum_budget = round_to_50(group_allowance)
-    recommended = min(recommended, maximum_budget)
-
-    # Return the result to the backend
+    # Return the result to the Flask backend
     return {
         "success": True,
         "user_id": user_id,
         "category": category,
-        "budget_group": group,
-        "percentage": int(percentage * 100),
-        "average_spending": round(float(average_spending), 2),
-        "group_allowance": float(group_allowance),
-        "suggested_budget": recommended,
-        "placeholder": f"R{recommended:,.2f}",
-        "message": "Budget recommendation calculated."
+        "period": period,
+        "group": group,
+        "monthly_income": round(monthly_income, 2),
+        "needs_budget": round(needs_budget, 2),
+        "wants_budget": round(wants_budget, 2),
+        "savings_budget": round(savings_budget, 2),
+        "average_spending": (
+            round(average_spending, 2)
+            if average_spending is not None
+            else None
+        ),
+        "method": method,
+        "suggested_budget": suggested_budget
     }
-
-
-# -------------------------------------------------
-# SAMPLE TEST DATA
-# This will be replaced by Daniel's database later.
-# -------------------------------------------------
-
-if __name__ == "__main__":
-
-    sample_transactions = [
-        {
-            "user_id": 1,
-            "category": "Groceries",
-            "type": "expense",
-            "amount": 1200,
-            "date": date(2026, 8, 10)
-        },
-        {
-            "user_id": 1,
-            "category": "Groceries",
-            "type": "expense",
-            "amount": 1400,
-            "date": date(2026, 9, 12)
-        },
-        {
-            "user_id": 1,
-            "category": "Groceries",
-            "type": "expense",
-            "amount": 1300,
-            "date": date(2026, 10, 15)
-        }
-    ]
-
-    result = calculate_suggested_budget(
-        user_id=1,
-        category="Groceries",
-        budget_period=date(2026, 11, 1),
-        monthly_income=10000,
-        transactions=sample_transactions
-    )
-
-    print("FINSYNC - BUDGET RECOMMENDATION")
-    print("--------------------------------")
-
-    if result["success"]:
-        print("Category:", result["category"])
-        print("Budget Group:", result["budget_group"])
-        print("Percentage:", result["percentage"], "%")
-        print("Average Spending: R", result.get("average_spending", "N/A"))
-        print("Recommended Budget:", result["placeholder"])
-    else:
-        print(result["message"])

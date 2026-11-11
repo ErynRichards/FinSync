@@ -34,6 +34,7 @@ async function updateSuggestedBudget() {
     const categoryId = categorySelect.value;
     const period = selectedPeriod();
     currentRecommendation = null;
+    monthlyAmount.placeholder = 'Enter budget amount';
     suggestionResult.hidden = true;
     if (!categoryId) { suggestionMessage.textContent = 'Select a category to view your suggested budget.'; return; }
     suggestionMessage.textContent = 'Calculating suggested budget...';
@@ -49,7 +50,15 @@ async function updateSuggestedBudget() {
             return;
         }
         currentRecommendation = Number(amount);
+        if (currentRecommendation <= 0) {
+            currentRecommendation = null;
+            suggestionMessage.textContent = data.message || 'No budget allocation remains.';
+            return;
+        }
         suggestedAmount.textContent = formatRand(currentRecommendation);
+        // MISHAYLE: Show Lashanya's recommendation in the amount field.
+        monthlyAmount.placeholder =
+              "Recommended: R" + currentRecommendation.toFixed(2);
         suggestionMessage.textContent = data.message || 'Based on your previous spending.';
         suggestionResult.hidden = false;
     } catch (error) {
