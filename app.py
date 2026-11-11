@@ -126,11 +126,11 @@ def dashboard():
 
 
 # REECE'S PART: Logout (existing placeholder preserved).
+# DANIEL: Logout now goes back to the landing page.
 @app.route("/logout")
 def logout():
     session.clear()
-    flash("You have been logged out.", "success")
-    return redirect(url_for("login"))
+    return redirect(url_for("index"))
 
 
 # ---------------------------------------------------------------------
