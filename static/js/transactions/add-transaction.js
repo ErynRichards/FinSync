@@ -34,15 +34,40 @@ const categories = {
 };
 
 // Load available categories from Daniel's database.
+// MISHAYLE: Load categories from the database
+// while keeping the additional categories.
+
 fetch("/api/transaction-options")
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Could not load categories");
+        }
+        return response.json();
+    })
     .then(options => {
-        if (!options.categories) return;
-        categories.Expense = options.categories.filter(c => c.category_type === "expense").map(c => c.category_name);
-        categories.Income = options.categories.filter(c => c.category_type === "income").map(c => c.category_name);
+        if (!Array.isArray(options.categories)) return;
+
+        const dbExpenses = options.categories
+            .filter(c => c.category_type === "expense")
+            .map(c => c.category_name);
+
+        const dbIncome = options.categories
+            .filter(c => c.category_type === "income")
+            .map(c => c.category_name);
+
+        categories.Expense = [
+            ...new Set([...categories.Expense, ...dbExpenses])
+        ];
+
+        categories.Income = [
+            ...new Set([...categories.Income, ...dbIncome])
+        ];
+
         updateCategories();
     })
-    .catch(error => console.error("Could not load categories", error));
+    .catch(error => {
+        console.error("Could not load categories", error);
+    });
 
 // Fill the category dropdown for the selected transaction type.
 function updateCategories() {

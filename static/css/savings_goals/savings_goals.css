@@ -327,3 +327,71 @@
     font-weight: 600;
     color: #132b78;
 }
+
+/* ERYN: Add Savings controls */
+/* Eryn: Add Savings button */
+.savings-page .contribute-btn {
+  margin-top: 12px;
+  padding: 9px;
+  border: 0;
+  border-radius: 5px;
+  background: #0902b1;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.savings-page .contribute-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Eryn: Add Savings popup */
+.contribution-dialog {
+  width: min(420px, calc(100% - 32px));
+  border: 0;
+  border-radius: 14px;
+  padding: 25px;
+  color: #050b35;
+  box-shadow: 0 12px 40px #0004;
+}
+
+.contribution-dialog::backdrop {
+  background: #0008;
+}
+
+.contribution-dialog h2 {
+  margin-top: 0;
+}
+
+.contribution-dialog label {
+  display: block;
+  margin: 18px 0 8px;
+  font-weight: 700;
+}
+
+.contribution-dialog input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #aab;
+  border-radius: 7px;
+}
+
+#contribution-error {
+  min-height: 20px;
+  color: #b42318;
+}
+
+.contribution-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.contribution-actions button {
+  padding: 10px 14px;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+

@@ -17,6 +17,12 @@ const cardTemplate = document.querySelector("#goal-card");
 const sortGoals = document.querySelector("#sort-goals");
 const goalsMessage = document.querySelector("#goals-message");
 let goals = [];
+let selectedGoalId = null;
+const contributionDialog = document.querySelector("#contribution-dialog");
+const contributionForm = document.querySelector("#contribution-form");
+const contributionAmount = document.querySelector("#contribution-amount");
+const contributionError = document.querySelector("#contribution-error");
+const contributionButton = document.querySelector("#save-contribution");
 
 const numberFormat = new Intl.NumberFormat("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const dateFormat = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
@@ -73,6 +79,10 @@ function renderGoals() {
     bar.value = progress;
     bar.setAttribute("aria-label", goal.name + " savings progress");
     card.querySelector(".goal-saved").textContent = rand(goal.savedAmount) + " saved";
+    // ERYN: Add Savings button, connected to Mishayle's Flask endpoint.
+    const contributeButton = card.querySelector(".contribute-btn");
+    contributeButton.hidden = complete;
+    contributeButton.addEventListener("click", () => openContribution(goal.id));
     card.querySelector(".goal-target").textContent = rand(goal.targetAmount) + " target";
 
     // The server supplies a date-only string (YYYY-MM-DD). UTC formatting
@@ -166,3 +176,47 @@ loadGoals();
 
 // MISHAYLE: Open Eryn's create goal form.
 document.querySelector("#add-goal").addEventListener("click", () => { window.location.href = "/savings-goals/create"; });
+
+// MISHAYLE: Show Eryn's contribution popup for the selected goal.
+function openContribution(goalId) {
+  const goal = goals.find(item => String(item.id) === String(goalId));
+  if (!goal || isComplete(goal)) return;
+  selectedGoalId = goal.id;
+  contributionForm.reset();
+  contributionError.textContent = "";
+  document.querySelector("#contribution-goal-name").textContent =
+    goal.name + " — " + rand(goal.savedAmount) + " of " + rand(goal.targetAmount) + " saved";
+  contributionDialog.showModal();
+}
+
+contributionForm.addEventListener("submit", async event => {
+  event.preventDefault();
+  const goal = goals.find(item => String(item.id) === String(selectedGoalId));
+  if (!goal) return;
+  const amount = Number(contributionAmount.value);
+  const remaining = Math.round((goal.targetAmount - goal.savedAmount) * 100) / 100;
+  if (!Number.isFinite(amount) || amount <= 0 || amount > remaining ||
+      Math.abs(amount * 100 - Math.round(amount * 100)) > 0.000001) {
+    contributionError.textContent = "Enter an amount between R0.01 and " + rand(remaining) + ".";
+    return;
+  }
+  contributionButton.disabled = true;
+  contributionError.textContent = "";
+  try {
+    const response = await fetch("/goals/" + encodeURIComponent(goal.id) + "/contributions", {
+      method: "POST", credentials: "same-origin",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({amount: amount})
+    });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error || "Could not add savings");
+    contributionDialog.close();
+    await loadGoals();
+  } catch (error) {
+    contributionError.textContent = error.message;
+  } finally {
+    contributionButton.disabled = false;
+  }
+});
+document.querySelector("#cancel-contribution").addEventListener("click", () => contributionDialog.close());
+contributionDialog.addEventListener("close", () => { selectedGoalId = null; });

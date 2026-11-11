@@ -83,12 +83,32 @@
             <progress max="100" value="0"></progress>
             <div class="goal-amounts"><span class="goal-saved"></span><span class="goal-target"></span></div>
           </div>
-          <p class="goal-date">Target Date: <time></time>
-              <!-- REECE: Monthly savings recommendation -->
-            <p class="goal-monthly-recommendation"></p>
-        </article>
+          <p class="goal-date">Target Date: <time></time></p>
+
+        <!-- REECE: Monthly savings recommendation -->
+        <p class="goal-monthly-recommendation"></p>
+
+        <!-- ERYN: Add money to this savings goal -->
+        <button type="button" class="contribute-btn">
+            + Add Savings
+        </button>
+</article>
       </template>
 
+      <!-- ERYN: Add Savings popup -->
+      <dialog id="contribution-dialog" class="contribution-dialog" aria-labelledby="contribution-title">
+        <form id="contribution-form">
+          <h2 id="contribution-title">Add Savings</h2>
+          <p id="contribution-goal-name"></p>
+          <label for="contribution-amount">Amount (R)</label>
+          <input id="contribution-amount" type="number" min="0.01" step="0.01" required placeholder="0.00">
+          <p id="contribution-error" role="alert"></p>
+          <div class="contribution-actions">
+            <button type="button" id="cancel-contribution">Cancel</button>
+            <button type="submit" id="save-contribution" class="primary-button">Add Savings</button>
+          </div>
+        </form>
+      </dialog>
     </main>
   </div>
 </body>

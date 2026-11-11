@@ -136,7 +136,14 @@ CREATE TABLE IF NOT EXISTS user_settings (
 -- so this script can be run again safely.
 INSERT IGNORE INTO categories (category_name, category_type) VALUES
     ('Salary', 'income'),
+    ('Freelance', 'income'),
+    ('Allowance', 'income'),
+    ('Other income', 'income'),
     ('Groceries', 'expense'),
     ('Transport', 'expense'),
     ('Entertainment', 'expense'),
-    ('Utilities', 'expense');
+    ('Utilities', 'expense'),
+    ('Housing', 'expense'),
+    ('Education', 'expense'),
+    ('Other expense', 'expense');
+    ;

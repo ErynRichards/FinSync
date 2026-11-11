@@ -166,9 +166,10 @@ const transactionsPage = `
             <option value="Transport">Transport</option>
             <option value="Freelance">Freelance</option>
             <option value="Entertainment">Entertainment</option>
+            <option value="Utilities">Utilities</option>
             <option value="Other">Other</option>
         </select>
-
+         
         <input type="month"
                id="month-filter"
                onchange="displayTransactions()">

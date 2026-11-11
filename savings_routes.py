@@ -202,3 +202,47 @@ def change_goal_status(goal_id):
         "status": status
     })
 
+
+
+# MISHAYLE: Add an amount to an existing goal (not replace its total).
+@savings_routes.route("/goals/<int:goal_id>/contributions", methods=["POST"])
+def add_goal_contribution(goal_id):
+    from decimal import Decimal, InvalidOperation
+    user_id = session.get("user_id")
+    if not user_id:
+        return jsonify({"error": "Please log in first"}), 401
+    goal = get_savings_goal(user_id, goal_id)
+    if not goal:
+        return jsonify({"error": "Goal not found"}), 404
+    data = request.get_json(silent=True) or {}
+    try:
+        amount = Decimal(str(data.get("amount")))
+    except (InvalidOperation, TypeError, ValueError):
+        return jsonify({"error": "Invalid amount"}), 400
+    if not amount.is_finite() or amount <= 0 or amount.as_tuple().exponent < -2:
+        return jsonify({"error": "Enter a positive amount with at most two decimal places"}), 400
+    # Lock the row to avoid lost updates if two contributions arrive together.
+    from db import get_connection
+    connection = get_connection()
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT current_amount, target_amount FROM savings_goals WHERE goal_id=%s AND user_id=%s FOR UPDATE", (goal_id, user_id))
+            row = cursor.fetchone()
+            if not row:
+                connection.rollback()
+                return jsonify({"error": "Goal not found"}), 404
+            current = Decimal(str(row["current_amount"]))
+            target = Decimal(str(row["target_amount"]))
+            new_amount = current + amount
+            if new_amount > target:
+                connection.rollback()
+                return jsonify({"error": "Contribution exceeds remaining goal amount"}), 400
+            status = "completed" if new_amount >= target else "active"
+            cursor.execute("UPDATE savings_goals SET current_amount=%s, status=%s WHERE goal_id=%s AND user_id=%s", (new_amount, status, goal_id, user_id))
+        connection.commit()
+    except Exception:
+        connection.rollback()
+        raise
+    finally:
+        connection.close()
+    return jsonify({"message": "Savings added", "goal": format_goal(get_savings_goal(user_id, goal_id))})
