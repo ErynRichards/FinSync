@@ -1,0 +1,446 @@
+
+/* Savings Goals page */
+.savings-page {
+  --navy: #040a31;
+  --blue: #c2dafc;
+  --accent: #0902b1;
+  margin: 0;
+  background: #fdfdfd;
+  color: #141414;
+  font: 14px Arial, sans-serif;
+}
+
+.savings-page *,
+.savings-page *::before,
+.savings-page *::after {
+  box-sizing: border-box;
+}
+
+.savings-page button,
+.savings-page input,
+.savings-page select {
+  font: inherit;
+}
+
+.savings-page button,
+.savings-page select {
+  cursor: pointer;
+}
+
+.savings-page :focus-visible {
+  outline: 3px solid #2878c4;
+  outline-offset: 3px;
+}
+
+/* Application layout */
+.savings-shell {
+  display: grid;
+  grid-template-columns: 217px minmax(0, 1fr);
+  max-width: 848px;
+  min-height: 674px;
+  margin: 23px auto 26px;
+}
+
+/* Sidebar */
+.savings-sidebar {
+  background: var(--navy);
+  color: white;
+  padding: 12px 14px;
+}
+
+.savings-sidebar .brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.brand-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #030812;
+  font-size: 30px;
+  filter: hue-rotate(185deg) saturate(1.4);
+}
+
+.savings-sidebar nav {
+  display: grid;
+  gap: 0;
+  width: 127px;
+  margin: 30px 0 0 6px;
+}
+
+.savings-sidebar a {
+  display: block;
+  padding: 10px 4px;
+  border-radius: 14px;
+  color: inherit;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.savings-sidebar a[aria-current="page"],
+.savings-sidebar a:hover {
+  background: var(--accent);
+}
+
+.savings-sidebar .logout {
+  margin-top: 51px;
+}
+
+/* Main content */
+.savings-main {
+  min-width: 0;
+  padding: 10px 27px 36px 12px;
+  background: var(--blue);
+}
+
+.account-icons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  padding-right: 52px;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid white;
+  border-radius: 50%;
+  background: #080808;
+  color: white;
+  font-weight: 700;
+}
+
+/* Page heading */
+.savings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 7px 10px 10px 0;
+}
+
+.savings-header h1 {
+  margin: 0 0 8px;
+  color: var(--navy);
+  font-size: 28px;
+}
+
+.savings-header p {
+  margin: 0;
+  color: #536276;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Primary buttons */
+.savings-page .primary-button {
+  border: 0;
+  border-radius: 4px;
+  padding: 10px 16px;
+  background: var(--accent);
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.savings-header .primary-button {
+  flex: 0 0 auto;
+  min-width: 159px;
+}
+
+/* Summary cards */
+.savings-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 543px;
+  margin: 0;
+}
+
+.savings-summary div {
+  min-height: 54px;
+  padding: 10px 5px;
+  border-radius: 4px;
+  background: white;
+  text-align: center;
+}
+
+.savings-summary dt {
+  color: #666;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.savings-summary dd {
+  margin: 4px 0 0;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+/* Sorting */
+.savings-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin: 24px 0 17px;
+}
+
+.savings-toolbar select {
+  width: 188px;
+  padding: 9px 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  color: inherit;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Savings goal cards */
+.goal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 238px));
+  gap: 57px 41px;
+  margin-left: 6px;
+}
+
+.goal-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 149px;
+  padding: 12px 8px 8px;
+  background: white;
+  overflow-wrap: anywhere;
+}
+
+.goal-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.goal-heading h2 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.goal-description {
+  margin: 1px 0 0;
+  color: #666;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.goal-status {
+  flex-shrink: 0;
+  padding: 3px 6px;
+  border-radius: 4px;
+  background: var(--accent);
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.goal-status.completed {
+  background: #63bd42;
+  color: #101610;
+}
+
+/* Progress bar */
+.goal-progress {
+  width: 92%;
+  margin: 12px 0 8px;
+}
+
+.goal-percent {
+  margin-bottom: 6px;
+  text-align: right;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.goal-progress progress {
+  display: block;
+  width: 100%;
+  height: 12px;
+  border: 0;
+  border-radius: 9px;
+  overflow: hidden;
+  appearance: none;
+  background: #d8d8d8;
+}
+
+.goal-progress progress::-webkit-progress-bar {
+  background: #d8d8d8;
+}
+
+.goal-progress progress::-webkit-progress-value {
+  background: repeating-linear-gradient(
+    58deg, #3885db 0 4px, #77b2fc 4px 7px
+  );
+}
+
+.goal-progress progress::-moz-progress-bar {
+  background: repeating-linear-gradient(
+    58deg, #3885db 0 4px, #77b2fc 4px 7px
+  );
+}
+
+.goal-card.completed progress::-webkit-progress-value {
+  background: repeating-linear-gradient(
+    125deg, #53a54d 0 3px, #7bc875 3px 5px
+  );
+}
+
+.goal-card.completed progress::-moz-progress-bar {
+  background: repeating-linear-gradient(
+    125deg, #53a54d 0 3px, #7bc875 3px 5px
+  );
+}
+
+.goal-amounts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 3px 5px;
+  margin-top: 5px;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.goal-date {
+  margin: auto 0 0;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* Eryn: Add Savings button */
+.savings-page .contribute-btn {
+  margin-top: 12px;
+  padding: 9px;
+  border: 0;
+  border-radius: 5px;
+  background: #0902b1;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.savings-page .contribute-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Eryn: Add Savings popup */
+.contribution-dialog {
+  width: min(420px, calc(100% - 32px));
+  border: 0;
+  border-radius: 14px;
+  padding: 25px;
+  color: #050b35;
+  box-shadow: 0 12px 40px #0004;
+}
+
+.contribution-dialog::backdrop {
+  background: #0008;
+}
+
+.contribution-dialog h2 {
+  margin-top: 0;
+}
+
+.contribution-dialog label {
+  display: block;
+  margin: 18px 0 8px;
+  font-weight: 700;
+}
+
+.contribution-dialog input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #aab;
+  border-radius: 7px;
+}
+
+#contribution-error {
+  min-height: 20px;
+  color: #b42318;
+}
+
+.contribution-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.contribution-actions button {
+  padding: 10px 14px;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Responsive layout */
+@media (max-width: 700px) {
+  .savings-shell {
+    grid-template-columns: 1fr;
+    margin: 0;
+  }
+
+  .savings-sidebar nav {
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
+    margin: 8px 0 0;
+    gap: 4px;
+  }
+
+  .savings-sidebar a {
+    padding: 8px 10px;
+  }
+
+  .savings-sidebar .logout {
+    margin: 0;
+  }
+
+  .savings-main {
+    padding: 14px;
+  }
+
+  .account-icons {
+    padding-right: 0;
+  }
+
+  .goal-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin: 0;
+  }
+}
+
+@media (max-width: 460px) {
+  .savings-header {
+    flex-direction: column;
+    margin-right: 0;
+  }
+
+  .savings-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .goal-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FinSync</title>
+
+    <!-- Connect CSS file -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../theme.css">
+</head>
+
+<body>
+
+    <!-- Main application layout -->
+    <div class="app">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <!-- FinSync logo and name -->
+            <div class="logo">
+                <img src="Images/logo.png" alt="FinSync Logo">
+                <h2>FinSync</h2>
+            </div>
+
+            <!-- Navigation menu -->
+            <nav>
+                <button class="nav-btn active" data-page="Dashboard">
+                    Dashboard
+                </button>
+
+                <button class="nav-btn" data-page="Transactions">
+                    Transactions
+                </button>
+
+                <button class="nav-btn" data-page="Budgets">
+                    Budgets
+                </button>
+
+                <button class="nav-btn" data-page="Savings Goals">
+                    Savings Goals
+                </button>
+
+                <button class="nav-btn" data-page="Reports">
+                    Reports
+                </button>
+
+                <button class="nav-btn" data-page="Settings">
+                    Settings
+                </button>
+            </nav>
+
+            <!-- Logout button -->
+            <button class="logout" id="logout-btn">
+                Logout
+            </button>
+
+        </aside>
+
+        <!-- Main application content -->
+        <main class="main-content">
+
+            <!-- Top header -->
+            <header class="top-header">
+
+                <!-- Notification bell -->
+                <img
+                    src="Images/Bell.png"
+                    alt="Notifications"
+                    class="bell-image"
+                >
+
+                <!-- User profile -->
+                <div class="profile">J</div>
+
+            </header>
+
+            <!-- Page heading -->
+            <section class="page-header">
+
+                <h1 id="page-title">Good morning, John!</h1>
+
+                <p id="page-description">
+                    Here's your financial overview
+                </p>
+
+            </section>
+
+            <!-- Selected page content -->
+            <section id="page-content"></section>
+
+        </main>
+
+    </div>
+
+    <!-- Connect JavaScript file -->
+    <script src="../theme.js" defer></script>
+    <script src="script.js"></script>
+
+</body>
+</html>

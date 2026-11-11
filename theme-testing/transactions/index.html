@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FinSync | Transactions</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="add-transaction.css">
+    <link rel="stylesheet" href="../theme.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <div class="logo">
+                <img src="Images/logo.png" alt="FinSync Logo">
+                <h2>FinSync</h2>
+            </div>
+
+            <nav>
+                <button class="nav-btn" data-page="Dashboard">
+                    Dashboard
+                </button>
+
+                <button class="nav-btn active" data-page="Transactions">
+                    Transactions
+                </button>
+
+                <button class="nav-btn" data-page="Budgets">
+                    Budgets
+                </button>
+
+                <button class="nav-btn" data-page="Goals">
+                    Goals
+                </button>
+
+                <button class="nav-btn" data-page="Reports">
+                    Reports
+                </button>
+
+                <button class="nav-btn" data-page="Settings">
+                    Settings
+                </button>
+            </nav>
+
+            <button class="logout" id="logout-btn">
+                Logout
+            </button>
+
+        </aside>
+
+        <!-- Main content -->
+        <main class="main-content">
+
+            <header class="top-header">
+
+                <img
+                    src="Images/Bell.png"
+                    alt="Notifications"
+                    class="bell-image"
+                >
+
+                <div class="profile">J</div>
+
+            </header>
+
+            <section class="page-header">
+
+                <h1 id="page-title">Transactions</h1>
+
+                <p id="page-description">
+                    View and manage all of your income and expenses
+                </p>
+
+            </section>
+
+            <section id="page-content"></section>
+
+        </main>
+
+    </div>
+
+    <!-- Add Transaction popup -->
+    <dialog id="transactionDialog" aria-labelledby="formTitle">
+
+        <div class="transaction-card">
+
+            <h2 id="formTitle">Add Transaction</h2>
+
+            <form id="transactionForm">
+
+                <!-- Transaction type -->
+                <div class="type-buttons">
+
+                    <button
+                        type="button"
+                        id="expenseButton"
+                        class="type-btn selected"
+                        aria-pressed="true"
+                    >
+                        Expense
+                    </button>
+
+                    <button
+                        type="button"
+                        id="incomeButton"
+                        class="type-btn"
+                        aria-pressed="false"
+                    >
+                        Income
+                    </button>
+
+                </div>
+
+                <!-- Amount -->
+                <div class="field">
+
+                    <label for="amount">Amount</label>
+
+                    <div class="amount-control">
+
+                        <span>R</span>
+
+                        <input
+                            type="number"
+                            id="amount"
+                            min="0.01"
+                            max="999999999.99"
+                            step="0.01"
+                            placeholder="0.00"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+                <!-- Description -->
+                <div class="field">
+
+                    <label for="description">Description</label>
+
+                    <input
+                        type="text"
+                        id="description"
+                        maxlength="150"
+                        placeholder="E.g. Checkers"
+                        required
+                    >
+
+                </div>
+
+                <!-- Category -->
+                <div class="field">
+
+                    <label for="category">Category</label>
+
+                    <select id="category" required>
+                        <option value="">Select category</option>
+                    </select>
+
+                </div>
+
+                <!-- Date -->
+                <div class="field date-field">
+
+                    <label>Date</label>
+
+                    <div class="date-inputs">
+
+                        <input
+                            type="number"
+                            id="day"
+                            min="1"
+                            max="31"
+                            step="1"
+                            placeholder="DD"
+                            aria-label="Day"
+                            required
+                        >
+
+                        <input
+                            type="number"
+                            id="month"
+                            min="1"
+                            max="12"
+                            step="1"
+                            placeholder="MM"
+                            aria-label="Month"
+                            required
+                        >
+
+                        <input
+                            type="number"
+                            id="year"
+                            min="1900"
+                            max="9999"
+                            step="1"
+                            placeholder="YYYY"
+                            aria-label="Year"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+                <!-- Buttons -->
+                <div class="action-buttons">
+
+                    <button type="button" id="cancelButton">
+                        Cancel
+                    </button>
+
+                    <button type="submit" id="saveButton">
+                        Save
+                    </button>
+
+                </div>
+
+                <p id="message" role="status"></p>
+
+            </form>
+
+        </div>
+
+    </dialog>
+
+    <script src="script.js"></script>
+    <script src="add-transaction.js"></script>
+    <script src="../theme.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FinSync | Reports</title>
+  <link rel="stylesheet" href="reports.css">
+  <link rel="stylesheet" href="../theme.css">
+  <!-- Load Chart.js first so reports.js can use it to draw the doughnut. -->
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
+  <script defer src="../theme.js"></script>
+  <script defer src="reports.js"></script>
+</head>
+<body class="reports-preview">
+  <div class="reports-shell">
+    <!-- Preview sidebar. The team can use its shared sidebar in the actual app. -->
+    <aside class="reports-sidebar">
+      <div class="reports-brand">
+        <!-- The inline SVG keeps the feather blue in every browser. -->
+        <svg class="reports-feather" viewBox="0 0 64 64" width="64" height="64"
+             aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="reports-feather-blue" x1="0" y1="1" x2="1" y2="0"
+                            gradientUnits="objectBoundingBox">
+              <stop stop-color="#17478b"/>
+              <stop offset=".55" stop-color="#2182cb"/>
+              <stop offset="1" stop-color="#86e4ff"/>
+            </linearGradient>
+          </defs>
+          <circle cx="32" cy="32" r="32" fill="#03050b"/>
+          <path fill="url(#reports-feather-blue)"
+                d="M8 54c1-7 4-14 9-21l-1 9 4-13c4-5 9-10 15-14l-2 8 6-10c4-3 9-10 15-14 3 3 3 8 1 13l-9 8 8-4c-2 5-5 9-9 13l-11 6 8-3c-7 8-16 13-28 14z"/>
+          <path d="M8 57c15-11 29-25 43-46" fill="none" stroke="#a0e8ff"
+                stroke-width="1.5" stroke-linecap="round"/>
+          <path d="m18 49 12-4m-7-1 16-7m-10 0 16-8m-9-1 12-8M19 47l4-17m4 9 5-18m5 7 4-14"
+                fill="none" stroke="#73c8f2" stroke-width=".8" stroke-linecap="round"/>
+        </svg>
+        FinSync
+      </div>
+      <div class="reports-navigation">
+        <span>Dashboard</span><span>Transaction</span><span>Budgets</span>
+        <span>Goals</span><span aria-current="page">Reports</span><span>Settings</span>
+      </div>
+      <span class="reports-logout">Logout</span>
+    </aside>
+
+    <main class="reports-main">
+      <header>
+        <div class="reports-profile" aria-hidden="true"><svg width="24" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M18 8a6 6 0 0 0-12 0v4c0 2-1 4-3 6h18c-2-2-3-4-3-6zM10 20a2 2 0 0 0 4 0M11 2V1h2v1"/></svg><b>J</b></div>
+        <h1>Reports</h1>
+        <p>Analyze your spending to see your financial trends</p>
+      </header>
+      <div class="reports-month">
+        <select id="report-month" aria-label="Report month">
+          <option value="2026-05">May 2026</option>
+          <option value="2026-06">June 2026</option>
+        </select>
+      </div>
+      <div class="reports-tabs" role="tablist" aria-label="Report type">
+        <button type="button" role="tab" id="tab-category" aria-controls="panel-category" aria-selected="true" tabindex="0" data-report-tab="category">Spending by Category</button>
+        <button type="button" role="tab" id="tab-trend" aria-controls="panel-trend" aria-selected="false" tabindex="-1" data-report-tab="trend">Monthly Trend</button>
+        <button type="button" role="tab" id="tab-comparison" aria-controls="panel-comparison" aria-selected="false" tabindex="-1" data-report-tab="comparison">Income vs Expenses</button>
+      </div>
+      <div class="report-period-control" id="report-period-control" hidden>
+        <label for="reportPeriod">Reporting Period</label>
+        <select id="reportPeriod">
+          <option value="1">1 Month</option><option value="3">3 Months</option>
+          <option value="6" selected>6 Months</option><option value="12">12 Months</option>
+        </select>
+      </div>
+
+      <!-- Copy this section into the team's Reports page when integrating. -->
+      <section id="panel-category" class="spending-category" role="tabpanel" aria-labelledby="tab-category" data-preview aria-describedby="spending-status">
+        <div class="spending-chart-card">
+          <div class="spending-heading">
+            <h2>EXPENSES</h2>
+            <select id="spending-period" aria-label="Expense period">
+              <option value="week">Week</option>
+              <option value="month">Month</option>
+            </select>
+          </div>
+          <div id="spending-plot" class="spending-plot" hidden>
+            <canvas id="spending-chart" role="img"
+                    aria-label="Expense shares by category. Exact values follow in the category list."></canvas>
+          </div>
+          <p id="spending-status" role="status">No expense information available.</p>
+        </div>
+
+        <!-- JavaScript adds a name, rand amount, percentage and bar for each category. -->
+        <ul id="spending-breakdown" class="spending-breakdown" aria-label="Expense category totals" hidden></ul>
+      </section>
+      <section id="panel-trend" class="report-chart-section" role="tabpanel" aria-labelledby="tab-trend" hidden>
+        <div class="report-chart-card">
+          <h2>Monthly Trend</h2>
+          <p>Track how your expenses change over time.</p>
+          <div class="report-chart-container"><canvas id="monthlyTrendChart" aria-label="Monthly expenses line chart" role="img"></canvas></div>
+          <p class="report-empty" id="trend-empty" hidden>No monthly expense information available.</p>
+        </div>
+      </section>
+      <section id="panel-comparison" class="report-chart-section" role="tabpanel" aria-labelledby="tab-comparison" hidden>
+        <div class="report-chart-card">
+          <h2>Income vs Expenses</h2>
+          <p>Compare your monthly income and expenses.</p>
+          <div class="report-chart-container"><canvas id="incomeExpensesChart" aria-label="Monthly income versus expenses bar chart" role="img"></canvas></div>
+          <p class="report-empty" id="comparison-empty" hidden>No income or expense information available.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+
+/* General styling */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Main page background */
+.savings-page {
+    min-height: 100vh;
+    background-color: #050b35;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px 20px;
+}
+
+/* White form container */
+.savings-card {
+    background-color: white;
+    width: 100%;
+    max-width: 600px;
+
+    padding: 40px;
+    border-radius: 25px;
+}
+
+/* Page heading */
+.savings-card h1 {
+    color: #050b35;
+    font-size: 30px;
+    margin: 0 0 35px;
+}
+
+/* Individual form fields */
+.form-group {
+    margin-bottom: 25px;
+}
+
+/* Input labels */
+.form-group label {
+    display: block;
+    color: #252d48;
+
+    font-size: 17px;
+    margin-bottom: 12px;
+}
+
+/* Input and dropdown styling */
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 15px;
+
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+
+    font-size: 16px;
+    background-color: white;
+    color: #252d48;
+}
+
+/* Highlight selected fields */
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #155eef;
+}
+
+/* Invalid input styling */
+.form-group .input-error {
+    border-color: #d93025;
+}
+
+/* Validation messages */
+.error-message {
+    display: block;
+    color: #d93025;
+
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+/* Button layout */
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+
+    margin-top: 30px;
+}
+
+/* Shared button styling */
+.form-buttons button {
+    flex: 1;
+    padding: 14px;
+
+    border: none;
+    border-radius: 30px;
+
+    font-size: 17px;
+    cursor: pointer;
+}
+
+/* Cancel button */
+.cancel-btn {
+    background-color: #76a0f5;
+    color: #050b35;
+}
+
+.cancel-btn:hover {
+    background-color: #5d8be9;
+}
+
+/* Save button */
+.save-btn {
+    background-color: #155eef;
+    color: white;
+}
+
+.save-btn:hover {
+    background-color: #104bc4;
+}
+
+/* Form feedback */
+.form-message {
+    text-align: center;
+    font-size: 14px;
+    margin: 15px 0 0;
+}
+
+.form-message:empty {
+    display: none;
+}
+
+.form-message.success {
+    color: #18794e;
+}
+
+.form-message.error {
+    color: #d93025;
+}
+
+/* Responsive layout */
+@media (max-width: 600px) {
+    .savings-card {
+        padding: 25px;
+    }
+
+    .savings-card h1 {
+        font-size: 25px;
+    }
+
+    .form-buttons {
+        gap: 12px;
+    }
+}

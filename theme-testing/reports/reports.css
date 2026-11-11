@@ -1,0 +1,91 @@
+
+/* The preview recreates the Reports page around the assigned section. */
+.reports-preview { margin: 0; background: #fdfdfd; color: #080d32; font: 16px Arial, sans-serif; }
+.reports-shell { max-width: 1100px; margin: 103px auto 56px; display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 40px; }
+.reports-sidebar { min-height: 555px; background: #070c30; color: white; display: flex; flex-direction: column; padding: 16px 26px 34px; box-sizing: border-box; }
+.reports-brand { display: flex; align-items: center; gap: 16px; font-size: 29px; font-weight: bold; margin-left: -7px; }
+.reports-feather { display: block; flex: 0 0 64px; }
+.reports-navigation { margin-top: 80px; }
+.reports-navigation span, .reports-logout { display: block; padding: 10px 0 10px 45px; font-weight: bold; }
+.reports-navigation [aria-current] { width: 176px; box-sizing: border-box; background: #1509ad; border-radius: 19px; padding-block: 15px; }
+.reports-logout { margin-top: auto; padding-bottom: 0; }
+.reports-main { padding-top: 32px; }
+.reports-main h1 { font-size: 39px; margin: 0 0 3px; }
+.reports-main header p { margin: 0; color: #808080; font-weight: bold; font-size: 18px; }
+.reports-profile { float: right; margin: -17px 38px 0 0; display: flex; align-items: center; gap: 10px; }
+.reports-profile b { display: grid; place-items: center; background: #000; color: #fff; border-radius: 50%; width: 32px; height: 32px; font-size: 22px; }
+.reports-month { display: flex; justify-content: flex-end; }
+.reports-month select { width: 224px; padding: 11px 16px; border: 2px solid #e4e4e4; border-radius: 12px; background: #fff; color: #222; font: inherit; font-size: 19px; }
+.reports-tabs { display: flex; flex-wrap: wrap; margin: -5px 0 8px; }
+.reports-tabs span { padding: 12px 20px 27px; font-size: 18px; font-weight: bold; }
+.reports-tabs span + span { border-left: 1px solid #101010; }
+.reports-tabs [aria-current] { padding-left: 0; color: #38b7dd; }
+
+/* Keep these styles with the Spending by Category section during integration. */
+.spending-category { display: grid; grid-template-columns: minmax(0, 278px) minmax(0, 355px); align-items: start; gap: 30px; font: 16px Arial, sans-serif; color: #262b60; }
+.spending-category [hidden] { display: none; }
+.spending-chart-card, .spending-breakdown { background: #f0f0f0; }
+.spending-chart-card { min-height: 325px; }
+.spending-heading { display: flex; align-items: start; justify-content: space-between; gap: 8px; padding: 3px 26px 0 7px; }
+.spending-heading h2 { margin: 0; font-size: 29px; }
+.spending-heading select { margin-top: 4px; padding: 1px 4px; border: 1px solid #ccc; border-radius: 4px; background: #d9d9d9; font-size: 11px; }
+.spending-plot { position: relative; height: 289px; }
+#spending-status { margin: 15px; text-align: center; }
+.spending-breakdown { margin: 90px 0 0; padding: 8px 26px; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px 15px; color: #444; }
+.spending-breakdown li { min-width: 0; }
+.spending-breakdown li:last-child:nth-child(odd) { grid-column: 1 / -1; width: calc((100% - 15px) / 2); justify-self: center; }
+.spending-breakdown strong, .spending-values { display: block; font-size: 11px; overflow-wrap: anywhere; }
+.spending-values { margin-top: 3px; }
+.spending-track { display: block; max-width: 88px; height: 12px; margin-top: 4px; background: #d5d5d5; border-radius: 20px; }
+.spending-fill { display: block; height: 100%; border-radius: inherit; }
+
+@media (max-width: 1150px) {
+  .reports-shell { margin-inline: 24px; grid-template-columns: 230px minmax(0, 1fr); gap: 24px; }
+}
+@media (max-width: 820px) {
+  .reports-shell { grid-template-columns: 1fr; margin-top: 24px; }
+  .reports-sidebar { min-height: auto; padding: 12px 20px; }
+  .reports-navigation, .reports-logout { display: none; }
+  .reports-main { padding-top: 12px; }
+  .reports-profile { margin: 0; }
+  .reports-month { margin: 12px 0; }
+}
+@media (max-width: 550px) {
+  .spending-category { grid-template-columns: minmax(0, 355px); gap: 12px; }
+  .spending-breakdown { margin-top: 0; }
+  .reports-tabs span { padding: 8px; font-size: 14px; }
+}
+
+/* FinSync Reports integration: consistent white cards and working tabs */
+[hidden] { display: none !important; }
+.reports-preview { background: #f5f7fc; }
+.reports-shell { max-width: 1440px; width: min(100%, 1440px); margin: 0 auto; gap: 0; grid-template-columns: 270px minmax(0, 1fr); min-height: 100vh; }
+.reports-sidebar { min-height: 100vh; }
+.reports-main { min-width: 0; padding: 42px 40px 55px; }
+.reports-tabs { margin: 24px 0 24px; border-bottom: 1px solid #dbe2f0; gap: 6px; }
+.reports-tabs button { appearance: none; background: none; border: 0; border-bottom: 3px solid transparent; color: #080d32; cursor: pointer; font: 700 16px Arial, sans-serif; padding: 12px 16px; }
+.reports-tabs button:hover, .reports-tabs button:focus-visible { color: #155eef; }
+.reports-tabs button[aria-selected="true"] { color: #155eef; border-bottom-color: #155eef; }
+.spending-category { grid-template-columns: minmax(270px, 1fr) minmax(290px, 1fr); align-items: stretch; gap: 22px; color: #080d32; }
+.spending-chart-card, .spending-breakdown, .report-chart-card { background: white; border: 1px solid #e8edf5; border-radius: 16px; box-shadow: 0 4px 16px rgba(8,13,50,.05); }
+.spending-chart-card { min-height: 360px; padding: 24px; }
+.spending-heading { padding: 0; align-items: center; }
+.spending-heading h2 { font-size: 23px; color: #080d32; }
+.spending-heading select { margin: 0; padding: 8px 10px; border-radius: 8px; background: white; border: 1px solid #d9dfeb; font-size: 14px; }
+.spending-plot { height: 295px; }
+.spending-breakdown { margin: 0; padding: 28px; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px 20px; align-content: center; }
+.spending-breakdown li:last-child:nth-child(odd) { width: auto; grid-column: auto; justify-self: stretch; }
+.spending-breakdown strong { font-size: 14px; color: #080d32; }
+.spending-values { font-size: 12px; color: #52617c; margin-top: 8px; }
+.spending-track { max-width: none; width: 100%; height: 9px; background: #e9edf4; margin-top: 8px; }
+.report-period-control { display: flex; justify-content: flex-end; align-items: center; gap: 14px; margin-bottom: 18px; }
+.report-period-control label { font-weight: 700; }
+.report-period-control select { padding: 11px 14px; border-radius: 10px; background: white; border: 1px solid #d9dfeb; font: inherit; }
+.report-chart-card { padding: 28px; }
+.report-chart-card h2 { font-size: 23px; margin: 0 0 8px; }
+.report-chart-card p { color: #62708a; margin: 0 0 22px; }
+.report-chart-container { height: 340px; position: relative; }
+.report-empty { padding: 24px; text-align: center; }
+@media(max-width: 1000px) { .spending-category { grid-template-columns: 1fr; } .reports-main { padding: 30px 24px; } }
+@media(max-width: 820px) { .reports-shell { grid-template-columns: 1fr; margin: 0; } .reports-sidebar { min-height: auto; } }
+@media(max-width: 550px) { .reports-main { padding: 22px 14px; } .reports-tabs button { padding: 10px 8px; font-size: 13px; } .spending-chart-card,.spending-breakdown,.report-chart-card { padding: 18px; } .spending-breakdown { grid-template-columns: 1fr 1fr; gap: 16px; } .report-chart-container { height: 280px; } .report-period-control { justify-content: flex-start; flex-wrap: wrap; } }

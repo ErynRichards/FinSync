@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Savings Goals | FinSync</title>
+  <link rel="stylesheet" href="savings-goals.css">
+  <link rel="stylesheet" href="../theme.css">
+  <script src="../theme.js" defer></script>
+  <script src="savings-goals.js" defer></script>
+</head>
+
+<body class="savings-page">
+  <div class="savings-shell">
+
+    <!-- Sidebar navigation -->
+    <aside class="savings-sidebar">
+      <div class="brand">
+        <span class="brand-icon" aria-hidden="true">🪶</span>
+        FinSync
+      </div>
+
+      <nav aria-label="FinSync navigation">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="transactions.html">Transaction</a>
+        <a href="budgets.html">Budgets</a>
+        <a href="savings-goals.html" aria-current="page">Goals</a>
+        <a href="reports.html">Reports</a>
+        <a href="settings.html">Settings</a>
+        <a class="logout" href="logout">Logout</a>
+      </nav>
+    </aside>
+
+    <main class="savings-main">
+
+      <!-- Account controls -->
+      <div class="account-icons" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20"
+             fill="white" stroke="#080c31">
+          <path d="M12 3c-4 0-6 3-6 7v4l-3 4h18l-3-4v-4c0-4-2-7-6-7zm-2 17a2 2 0 0 0 4 0M12 1v2"/>
+        </svg>
+        <span class="avatar">J</span>
+      </div>
+
+      <!-- Page heading -->
+      <header class="savings-header">
+        <div>
+          <h1>Savings goals</h1>
+          <p>
+            Set your goals, track your progress and
+            make your dream a reality
+          </p>
+        </div>
+
+        <button class="primary-button"
+                id="add-goal"
+                type="button">
+          + Add New Goal
+        </button>
+      </header>
+
+      <!-- Savings summary -->
+      <dl class="savings-summary"
+          aria-label="Savings summary">
+        <div>
+          <dt>Total Goals</dt>
+          <dd id="goal-count">—</dd>
+        </div>
+
+        <div>
+          <dt>Total target amount</dt>
+          <dd id="total-target">—</dd>
+        </div>
+
+        <div>
+          <dt>Total Saved</dt>
+          <dd id="total-saved">—</dd>
+        </div>
+
+        <div>
+          <dt>Average progress</dt>
+          <dd id="average-progress">—</dd>
+        </div>
+      </dl>
+
+      <!-- Sort goals -->
+      <div class="savings-toolbar">
+        <select id="sort-goals"
+                aria-label="Sort goals">
+          <option value="soonest">
+            Target Date (soonest)
+          </option>
+          <option value="latest">
+            Target Date (latest)
+          </option>
+        </select>
+      </div>
+
+      <p id="goals-message" role="status" hidden></p>
+
+      <section id="goal-list"
+               class="goal-grid"
+               aria-label="Savings goals">
+      </section>
+
+      <!-- Savings goal card template -->
+      <template id="goal-card">
+        <article class="goal-card">
+
+          <div class="goal-heading">
+            <div>
+              <h2></h2>
+              <p class="goal-description"></p>
+            </div>
+            <span class="goal-status"></span>
+          </div>
+
+          <div class="goal-progress">
+            <div class="goal-percent"
+                 aria-hidden="true"></div>
+
+            <progress max="100" value="0"></progress>
+
+            <div class="goal-amounts">
+              <span class="goal-saved"></span>
+              <span class="goal-target"></span>
+            </div>
+          </div>
+
+          <p class="goal-date">
+            Target Date: <time></time>
+          </p>
+
+          <!-- Eryn: Allocate money to a goal -->
+          <button type="button"
+                  class="contribute-btn">
+            + Add Savings
+          </button>
+
+        </article>
+      </template>
+
+      <!-- Add Savings modal -->
+      <dialog id="contribution-dialog"
+              class="contribution-dialog"
+              aria-labelledby="contribution-title">
+
+        <form id="contribution-form">
+          <h2 id="contribution-title">Add Savings</h2>
+
+          <p id="contribution-goal-name"></p>
+
+          <label for="contribution-amount">
+            Amount (R)
+          </label>
+
+          <input id="contribution-amount"
+                 type="number"
+                 min="0.01"
+                 step="0.01"
+                 required
+                 placeholder="0.00">
+
+          <p id="contribution-error"
+             role="alert"></p>
+
+          <div class="contribution-actions">
+            <button type="button"
+                    id="cancel-contribution">
+              Cancel
+            </button>
+
+            <button type="submit"
+                    id="save-contribution"
+                    class="primary-button">
+              Add Savings
+            </button>
+          </div>
+        </form>
+      </dialog>
+
+    </main>
+  </div>
+</body>
+</html>
