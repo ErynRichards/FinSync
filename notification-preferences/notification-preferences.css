@@ -1,0 +1,312 @@
+
+/* --------------------------------------------------
+   FinSync - Notification Preferences
+   Responsive page styling
+-------------------------------------------------- */
+
+/* Apply consistent sizing across the page. */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main page styling. */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f7fb;
+    color: #253047;
+    min-height: 100vh;
+}
+
+/* Main content container. */
+.page-container {
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+
+/* Page heading. */
+.page-header {
+    margin-bottom: 28px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: #52627a;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.back-link:hover {
+    color: #3157a4;
+}
+
+.page-header h1 {
+    margin-bottom: 10px;
+    font-size: 30px;
+    font-weight: 700;
+    color: #202b40;
+}
+
+.page-header p {
+    color: #68758a;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* Main preferences card. */
+.preferences-card {
+    background-color: #ffffff;
+    border: 1px solid #e5eaf1;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 18px rgba(30, 45, 70, 0.05);
+}
+
+/* Section heading. */
+.section-heading {
+    margin-bottom: 24px;
+}
+
+.section-heading h2 {
+    margin-bottom: 8px;
+    font-size: 20px;
+    color: #253047;
+}
+
+.section-heading p {
+    color: #748096;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Each notification preference row. */
+.preference-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding: 20px 0;
+}
+
+/* Information on the left side of each row. */
+.preference-information {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+}
+
+/* Simple preference icon. */
+.preference-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background-color: #edf2fb;
+    color: #3157a4;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+/* Preference title and description. */
+.preference-text h3 {
+    margin-bottom: 7px;
+    color: #29354b;
+    font-size: 16px;
+}
+
+.preference-text p {
+    max-width: 520px;
+    color: #748096;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* Divider between preferences. */
+.preference-divider {
+    height: 1px;
+    background-color: #edf0f5;
+}
+
+/* Toggle switch container. */
+.switch {
+    position: relative;
+    display: inline-block;
+    flex-shrink: 0;
+    width: 48px;
+    height: 26px;
+}
+
+/* Hide the default checkbox visually but retain accessibility. */
+.switch input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+/* Toggle background. */
+.slider {
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+    background-color: #cbd2dc;
+    border-radius: 30px;
+    transition: background-color 0.2s ease;
+}
+
+/* Toggle circle. */
+.slider::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 3px;
+    top: 3px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Enabled toggle. */
+.switch input:checked + .slider {
+    background-color: #3157a4;
+}
+
+.switch input:checked + .slider::before {
+    transform: translateX(22px);
+}
+
+/* Keyboard focus indicator. */
+.switch input:focus-visible + .slider {
+    outline: 3px solid rgba(49, 87, 164, 0.25);
+    outline-offset: 3px;
+}
+
+/* Disabled interaction state. */
+.switch input:disabled + .slider {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Feedback message. */
+.message {
+    min-height: 22px;
+    margin-top: 18px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.message.success {
+    color: #21834a;
+}
+
+.message.error {
+    color: #c0392b;
+}
+
+/* Action buttons. */
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.button-group button {
+    min-height: 42px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.primary-button {
+    background-color: #3157a4;
+    color: #ffffff;
+}
+
+.primary-button:hover {
+    background-color: #264783;
+}
+
+.secondary-button {
+    background-color: #edf0f5;
+    color: #43516a;
+}
+
+.secondary-button:hover {
+    background-color: #dfe5ee;
+}
+
+.button-group button:focus-visible {
+    outline: 3px solid rgba(49, 87, 164, 0.25);
+    outline-offset: 3px;
+}
+
+/* Page footer. */
+.page-footer {
+    margin-top: 28px;
+    color: #8993a4;
+    font-size: 12px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* Responsive layout for tablets and mobile devices. */
+@media (max-width: 600px) {
+
+    .page-container {
+        padding: 26px 16px;
+    }
+
+    .page-header h1 {
+        font-size: 25px;
+    }
+
+    .preferences-card {
+        padding: 22px 18px;
+    }
+
+    .preference-item {
+        gap: 12px;
+    }
+
+    .preference-information {
+        gap: 11px;
+    }
+
+    .preference-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 18px;
+    }
+
+    .preference-text h3 {
+        font-size: 14px;
+    }
+
+    .preference-text p {
+        font-size: 12px;
+    }
+
+    .button-group {
+        flex-direction: column-reverse;
+    }
+
+    .button-group button {
+        width: 100%;
+    }
+}

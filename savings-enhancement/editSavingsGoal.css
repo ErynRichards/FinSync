@@ -1,0 +1,240 @@
+
+/* Apply consistent sizing across all page elements. */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main page styling. */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f3f6fc;
+    color: #17233c;
+    line-height: 1.6;
+}
+
+/* Keep the content centred and responsive. */
+.page-container {
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 35px 24px;
+}
+
+/* Page heading and navigation. */
+.page-header {
+    margin-bottom: 25px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 18px;
+    color: #2456a6;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.page-header h1 {
+    font-size: 30px;
+    margin-bottom: 8px;
+    color: #17233c;
+}
+
+.page-header p {
+    color: #68758b;
+    font-size: 15px;
+}
+
+/* Main form card. */
+.edit-card {
+    background-color: #ffffff;
+    padding: 32px;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px rgba(24, 45, 80, 0.07);
+    border: 1px solid #e5eaf2;
+}
+
+/* Individual form fields. */
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #273750;
+}
+
+.form-group input {
+    width: 100%;
+    min-height: 46px;
+    padding: 11px 13px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    font-size: 15px;
+    color: #17233c;
+    background-color: #ffffff;
+    outline: none;
+}
+
+/* Highlight the field currently being edited. */
+.form-group input:focus {
+    border-color: #376fc4;
+    box-shadow: 0 0 0 3px rgba(55, 111, 196, 0.12);
+}
+
+/* Existing savings amount is read-only. */
+.form-group input[readonly] {
+    background-color: #f1f4f8;
+    color: #596579;
+    cursor: not-allowed;
+}
+
+.field-hint {
+    display: block;
+    margin-top: 6px;
+    color: #788499;
+    font-size: 12px;
+}
+
+/* Validation messages. */
+.error-message {
+    display: block;
+    margin-top: 5px;
+    color: #c0392b;
+    font-size: 12px;
+}
+
+/* Monthly recommendation panel. */
+.recommendation-card {
+    margin-top: 10px;
+    margin-bottom: 25px;
+    padding: 23px;
+    border-radius: 10px;
+    background-color: #edf4ff;
+    border: 1px solid #d5e4fa;
+}
+
+.recommendation-card h2 {
+    font-size: 17px;
+    margin-bottom: 8px;
+    color: #1e467f;
+}
+
+.recommendation-card p {
+    font-size: 13px;
+    color: #566783;
+    margin-bottom: 12px;
+}
+
+.recommendation-amount {
+    font-size: 30px;
+    font-weight: 700;
+    color: #2456a6;
+    margin-bottom: 5px;
+}
+
+.recommendation-card small {
+    color: #566783;
+    font-size: 12px;
+}
+
+/* Form feedback. */
+#formMessage {
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+#formMessage.success {
+    color: #21834a;
+}
+
+#formMessage.error {
+    color: #c0392b;
+}
+
+/* Action buttons. */
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.button-group button {
+    min-height: 44px;
+    padding: 11px 22px;
+    border: none;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.primary-button {
+    background-color: #2456a6;
+    color: #ffffff;
+}
+
+.primary-button:hover {
+    background-color: #193f80;
+}
+
+.secondary-button {
+    background-color: #e9edf4;
+    color: #273750;
+}
+
+.secondary-button:hover {
+    background-color: #d9e0eb;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid #80a9e8;
+    outline-offset: 3px;
+}
+
+/* Footer. */
+.page-footer {
+    margin-top: 25px;
+    text-align: center;
+    color: #8590a2;
+    font-size: 12px;
+}
+
+/* Adjust the layout for smaller screens. */
+@media (max-width: 600px) {
+
+    .page-container {
+        padding: 22px 14px;
+    }
+
+    .edit-card {
+        padding: 22px 17px;
+    }
+
+    .page-header h1 {
+        font-size: 25px;
+    }
+
+    .recommendation-amount {
+        font-size: 26px;
+    }
+
+    .button-group {
+        flex-direction: column-reverse;
+    }
+
+    .button-group button {
+        width: 100%;
+    }
+}

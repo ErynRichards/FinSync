@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinSync | Budget Recommendations</title>
+    <link rel="stylesheet" href="Budget.css">
+    <script src="createBudget.js" defer></script>
+</head>
+
+<body>
+    <main class="budget-container">
+        <header class="page-header">
+            <h1>Create and Manage Budgets</h1>
+            <p>Plan your monthly spending with intelligent recommendations.</p>
+        </header>
+
+        <div id="alertMessage" class="alert" role="alert" aria-live="polite" hidden></div>
+
+        <section class="panel">
+            <h2>Create a Budget</h2>
+
+            <form id="budgetForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category" name="category" required>
+                            <option value="">Select a category</option>
+                            <option value="housing">Housing</option>
+                            <option value="groceries">Groceries</option>
+                            <option value="transport">Transport</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="utilities">Utilities</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="budgetMonth">Budget month</label>
+                        <input type="month" id="budgetMonth" name="budgetMonth" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="monthlyAmount">Monthly budget amount (R)</label>
+                        <input
+                            type="number"
+                            id="monthlyAmount"
+                            name="monthlyAmount"
+                            min="0.01"
+                            step="0.01"
+                            placeholder="Enter your budget amount"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <section id="recommendationPanel" class="recommendation-panel">
+                    <h3>Suggested Budget</h3>
+                    <p id="suggestionMessage" aria-live="polite">
+                        Select a category to view a suggested budget.
+                    </p>
+
+                    <div id="suggestionResult" hidden>
+                        <p class="suggestion-label">Recommended amount</p>
+                        <p id="suggestedAmount" class="suggested-amount">R0.00</p>
+                        <button type="button" id="useAmountBtn" class="secondary-button">
+                            Use Amount
+                        </button>
+                    </div>
+                </section>
+
+                <div class="form-actions">
+                    <button type="submit" id="saveBudgetBtn" class="primary-button">
+                        Save Budget
+                    </button>
+                    <button type="button" id="cancelBtn" class="secondary-button">
+                        Cancel
+                    </button>
+                </div>
+
+                <p id="formMessage" aria-live="polite"></p>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2>Your Budgets</h2>
+            <p class="section-description">
+                Review, edit or delete budgets you have added during this session.
+            </p>
+            <div id="budgetList">
+                <p id="emptyBudgetMessage">No budgets have been added yet.</p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

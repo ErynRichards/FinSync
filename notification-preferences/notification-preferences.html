@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FinSync | Notification Preferences</title>
+
+    <!-- Connect the notification preferences stylesheet. -->
+    <link rel="stylesheet" href="notification-preferences.css">
+</head>
+
+<body>
+
+    <main class="page-container">
+
+        <!-- Page heading and description. -->
+        <header class="page-header">
+
+            <a href="#" class="back-link" id="backButton">
+                &larr; Back to Settings
+            </a>
+
+            <h1>Notification Preferences</h1>
+
+            <p>
+                Manage the notifications you would like to receive
+                from FinSync.
+            </p>
+
+        </header>
+
+        <!-- Main notification preferences card. -->
+        <section class="preferences-card">
+
+            <div class="section-heading">
+
+                <h2>Manage Notifications</h2>
+
+                <p>
+                    Choose which financial updates you want FinSync
+                    to notify you about.
+                </p>
+
+            </div>
+
+            <!-- Budget warning preference. -->
+            <div class="preference-item">
+
+                <div class="preference-information">
+
+                    <div class="preference-icon" aria-hidden="true">
+                        $
+                    </div>
+
+                    <div class="preference-text">
+
+                        <h3>Budget Warnings</h3>
+
+                        <p>
+                            Receive notifications when your spending
+                            approaches or exceeds your budget limits.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="budgetWarnings"
+                        aria-label="Enable budget warnings"
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+            <div class="preference-divider"></div>
+
+            <!-- Savings goal notification preference. -->
+            <div class="preference-item">
+
+                <div class="preference-information">
+
+                    <div class="preference-icon" aria-hidden="true">
+                        %
+                    </div>
+
+                    <div class="preference-text">
+
+                        <h3>Savings Goal Notifications</h3>
+
+                        <p>
+                            Receive updates about your savings progress
+                            and important savings goal milestones.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="savingsGoalNotifications"
+                        aria-label="Enable savings goal notifications"
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+            <!-- Display save and validation feedback. -->
+            <p
+                id="preferenceMessage"
+                class="message"
+                role="status"
+                aria-live="polite"
+            ></p>
+
+            <!-- Action buttons. -->
+            <div class="button-group">
+
+                <button
+                    type="button"
+                    id="cancelButton"
+                    class="secondary-button"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="button"
+                    id="saveButton"
+                    class="primary-button"
+                >
+                    Save Preferences
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- Footer. -->
+        <footer class="page-footer">
+
+            FinSync - Helping users understand their money,
+            not just see their balance.
+
+        </footer>
+
+    </main>
+
+    <!-- Connect the notification preferences JavaScript. -->
+    <script src="notification-preferences.js"></script>
+
+</body>
+
+</html>

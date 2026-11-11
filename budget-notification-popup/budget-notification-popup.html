@@ -1,0 +1,126 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FinSync - Budget Notification</title>
+
+    <!-- Connect the notification stylesheet -->
+    <link rel="stylesheet" href="budget-notification-popup.css">
+
+    <!-- Load the notification JavaScript -->
+    <script src="budget-notification-popup.js" defer></script>
+</head>
+
+<body>
+
+    <main class="test-container">
+
+        <header class="page-header">
+            <h1>FinSync Budget Notifications</h1>
+
+            <p>
+                Test the notification displayed when monthly
+                spending exceeds a budget.
+            </p>
+        </header>
+
+        <!-- Notification preference controls -->
+        <section class="test-panel">
+
+            <h2>Notification Preferences</h2>
+
+            <label class="preference-option">
+                <input
+                    type="checkbox"
+                    id="budgetWarningsToggle"
+                >
+
+                Enable budget warning notifications
+            </label>
+
+            <p class="help-text">
+                This setting uses the existing FinSync
+                notification preference stored in this browser.
+            </p>
+
+        </section>
+
+        <!-- Notification test controls -->
+        <section class="test-panel">
+
+            <h2>Simulate Budget Events</h2>
+
+            <p>
+                These buttons simulate different budget events.
+                They do not save actual expenses.
+            </p>
+
+            <div class="test-buttons">
+
+                <button type="button" id="triggerBudgetExceeded">
+                    Simulate Successful Expense
+                </button>
+
+                <button type="button" id="triggerDuplicate">
+                    Simulate Duplicate Event
+                </button>
+
+                <button type="button" id="triggerNextMonth">
+                    Simulate New Month
+                </button>
+
+                <button type="button" id="simulateFailedSave">
+                    Simulate Failed Expense Save
+                </button>
+
+            </div>
+
+            <p
+                id="testStatus"
+                class="test-status"
+                aria-live="polite"
+            >
+                Ready for testing.
+            </p>
+
+        </section>
+
+    </main>
+
+    <!-- Budget notification popup -->
+    <dialog
+        id="budgetNotificationDialog"
+        class="budget-notification-dialog"
+        aria-labelledby="notificationTitle"
+    >
+
+        <div class="notification-content">
+
+            <div class="notification-icon" aria-hidden="true">
+                !
+            </div>
+
+            <h2 id="notificationTitle">
+                Budget Exceeded
+            </h2>
+
+            <p id="notificationMessage">
+                Your monthly budget has been exceeded.
+            </p>
+
+            <button
+                type="button"
+                id="dismissBudgetNotification"
+            >
+                Got it
+            </button>
+
+        </div>
+
+    </dialog>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Make the page responsive on desktop, tablet and mobile. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FinSync | Edit Savings Goal</title>
+
+    <!-- Load the styling for the Edit Savings Goal page. -->
+    <link rel="stylesheet" href="editSavingsGoal.css">
+</head>
+
+<body>
+
+    <main class="page-container">
+
+        <header class="page-header">
+            <a href="#" class="back-link" id="backButton">
+                &larr; Back to Savings Goals
+            </a>
+
+            <h1>Edit Savings Goal</h1>
+
+            <p>
+                Update your savings target and see how much you
+                should save each month to reach your goal.
+            </p>
+        </header>
+
+        <section class="edit-card">
+
+            <form id="editSavingsForm" novalidate>
+
+                <!-- Goal name can be changed by the user. -->
+                <div class="form-group">
+                    <label for="goalName">Goal Name</label>
+
+                    <input
+                        type="text"
+                        id="goalName"
+                        maxlength="100"
+                        placeholder="e.g. New Laptop"
+                        required
+                    >
+
+                    <small class="error-message" id="goalNameError"></small>
+                </div>
+
+                <!-- Existing saved amount is displayed but cannot be edited here. -->
+                <div class="form-group">
+                    <label for="currentAmount">Amount Already Saved (R)</label>
+
+                    <input
+                        type="number"
+                        id="currentAmount"
+                        readonly
+                    >
+
+                    <small class="field-hint">
+                        Your existing savings are protected when editing this goal.
+                    </small>
+                </div>
+
+                <!-- User can update the target amount. -->
+                <div class="form-group">
+                    <label for="targetAmount">Target Amount (R)</label>
+
+                    <input
+                        type="number"
+                        id="targetAmount"
+                        min="0.01"
+                        step="0.01"
+                        required
+                    >
+
+                    <small class="error-message" id="targetAmountError"></small>
+                </div>
+
+                <!-- User can update the target date. -->
+                <div class="form-group">
+                    <label for="targetDate">Target Date</label>
+
+                    <input
+                        type="date"
+                        id="targetDate"
+                        required
+                    >
+
+                    <small class="error-message" id="targetDateError"></small>
+                </div>
+
+                <!-- Display the monthly savings recommendation. -->
+                <section class="recommendation-card" aria-live="polite">
+
+                    <h2>Monthly Savings Recommendation</h2>
+
+                    <p id="recommendationMessage">
+                        Update your target amount or date to calculate
+                        your recommended monthly savings.
+                    </p>
+
+                    <div class="recommendation-amount" id="monthlyRecommendation">
+                        R0.00
+                    </div>
+
+                    <small id="remainingAmount">
+                        Remaining amount: R0.00
+                    </small>
+
+                </section>
+
+                <!-- Display form feedback after saving or validation. -->
+                <p id="formMessage" role="status" aria-live="polite"></p>
+
+                <div class="button-group">
+
+                    <button type="button" id="cancelButton" class="secondary-button">
+                        Cancel
+                    </button>
+
+                    <button type="submit" id="saveButton" class="primary-button">
+                        Save Changes
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+        <footer class="page-footer">
+            FinSync - Helping users understand their money, not just see their balance.
+        </footer>
+
+    </main>
+
+    <!-- Load the JavaScript functionality after the page content. -->
+    <script src="editSavingsGoal.js"></script>
+
+</body>
+</html>
