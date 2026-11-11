@@ -1,0 +1,535 @@
+/*
+ * FinSync shared theme stylesheet.
+ *
+ * Uses the existing data-theme attribute:
+ * - light
+ * - dark
+ *
+ * The colour variables match the existing Settings stylesheet.
+ */
+
+:root,
+:root[data-theme="light"] {
+    color-scheme: light;
+
+    --theme-page: #e2f5fd;
+    --theme-card: #ffffff;
+    --theme-text: #172536;
+    --theme-muted: #65717c;
+    --theme-input: #ffffff;
+    --theme-border: #dce2e9;
+    --theme-sidebar: #060b37;
+    --theme-primary: #1300bd;
+    --theme-hover: #f8f9fc;
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+
+    --theme-page: #111827;
+    --theme-card: #1e293b;
+    --theme-text: #f1f5f9;
+    --theme-muted: #c2cbd7;
+    --theme-input: #0f172a;
+    --theme-border: #475569;
+    --theme-sidebar: #03061d;
+    --theme-primary: #5145ed;
+    --theme-hover: #334155;
+}
+
+/* Main Dashboard layout */
+
+:root[data-theme="dark"] body {
+    background-color: var(--theme-page);
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .sidebar {
+    background-color: var(--theme-sidebar);
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .main-content {
+    background-color: var(--theme-page);
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .top-header {
+    background-color: var(--theme-page);
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .page-header h1,
+:root[data-theme="dark"] #page-title {
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .page-header p,
+:root[data-theme="dark"] #page-description {
+    color: var(--theme-muted);
+}
+
+/* Dashboard cards and content sections */
+
+:root[data-theme="dark"] .page-box,
+:root[data-theme="dark"] .summary-card,
+:root[data-theme="dark"] .dashboard-chart,
+:root[data-theme="dark"] .chart-placeholder {
+    background-color: var(--theme-card);
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+}
+
+:root[data-theme="dark"] .page-box h2,
+:root[data-theme="dark"] .page-box h3,
+:root[data-theme="dark"] .summary-card h3,
+:root[data-theme="dark"] #page-content h1,
+:root[data-theme="dark"] #page-content h2,
+:root[data-theme="dark"] #page-content h3,
+:root[data-theme="dark"] #page-content h4 {
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .summary-amount {
+    background-color: var(--theme-card);
+    color: var(--theme-text);
+}
+
+/* Transaction filters and form controls */
+
+:root[data-theme="dark"] .transaction-filters input,
+:root[data-theme="dark"] .transaction-filters select,
+:root[data-theme="dark"] #page-content input,
+:root[data-theme="dark"] #page-content select,
+:root[data-theme="dark"] #page-content textarea {
+    background-color: var(--theme-input);
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+}
+
+:root[data-theme="dark"] #page-content input::placeholder,
+:root[data-theme="dark"] #page-content textarea::placeholder {
+    color: var(--theme-muted);
+}
+
+/* Transaction tables */
+
+:root[data-theme="dark"] .transaction-table,
+:root[data-theme="dark"] #page-content table {
+    background-color: var(--theme-card);
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+}
+
+:root[data-theme="dark"] .transaction-table th,
+:root[data-theme="dark"] #page-content table th {
+    background-color: var(--theme-page);
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+}
+
+:root[data-theme="dark"] .transaction-table td,
+:root[data-theme="dark"] #page-content table td {
+    background-color: var(--theme-card);
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+}
+
+:root[data-theme="dark"] .transaction-table tr:hover td,
+:root[data-theme="dark"] #page-content table tr:hover td {
+    background-color: var(--theme-hover);
+}
+
+/* Buttons */
+
+:root[data-theme="dark"] #page-content button,
+:root[data-theme="dark"] .transaction-filters button {
+    border-color: var(--theme-border);
+}
+
+/* Common text elements */
+
+:root[data-theme="dark"] #page-content p,
+:root[data-theme="dark"] #page-content label,
+:root[data-theme="dark"] #page-content span,
+:root[data-theme="dark"] #page-content small {
+    color: var(--theme-muted);
+}
+
+/* Keep financial status colours readable */
+
+:root[data-theme="dark"] .income {
+    color: #4ade80;
+}
+
+:root[data-theme="dark"] .expense {
+    color: #f87171;
+}
+
+
+/* Dark mode: Add Transaction popup */
+
+:root[data-theme="dark"] #transactionDialog,
+:root[data-theme="dark"] #transactionDialog .transaction-card {
+    background-color: var(--theme-card);
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] #transactionDialog {
+    border: 1px solid var(--theme-border);
+}
+
+:root[data-theme="dark"] #transactionDialog h2 {
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] #transactionDialog label,
+:root[data-theme="dark"] #transactionDialog .amount-control span {
+    color: var(--theme-muted);
+}
+
+:root[data-theme="dark"] #transactionDialog input,
+:root[data-theme="dark"] #transactionDialog select {
+    background-color: var(--theme-input);
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+    box-shadow: none;
+}
+
+:root[data-theme="dark"] #transactionDialog .amount-control {
+    border-color: var(--theme-border);
+    box-shadow: none;
+}
+
+:root[data-theme="dark"] #transactionDialog #amount {
+    background-color: transparent;
+}
+
+:root[data-theme="dark"] #transactionDialog input::placeholder {
+    color: var(--theme-muted);
+}
+
+:root[data-theme="dark"] #transactionDialog #message {
+    color: #86efac;
+}
+
+:root[data-theme="dark"] #transactionDialog #message.error {
+    color: #fca5a5;
+}
+
+
+/* Dark mode: Create Budget page */
+
+:root[data-theme="dark"] body:has(.budget-page) {
+    background-color: var(--theme-page);
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .budget-card {
+    background-color: var(--theme-card);
+    color: var(--theme-text);
+    border: 1px solid var(--theme-border);
+}
+
+:root[data-theme="dark"] .budget-card h1,
+:root[data-theme="dark"] .budget-card h3 {
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .budget-card .form-group label {
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .budget-card .form-group input,
+:root[data-theme="dark"] .budget-card .form-group select {
+    background-color: var(--theme-input);
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+}
+
+:root[data-theme="dark"] .budget-card .form-group input::placeholder {
+    color: var(--theme-muted);
+}
+
+:root[data-theme="dark"] .budget-card .suggestion-box {
+    background-color: var(--theme-page);
+    border-color: var(--theme-border);
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .budget-card .suggestion-box p {
+    color: var(--theme-muted);
+}
+
+:root[data-theme="dark"] .budget-card #suggestedAmount {
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .budget-card #formMessage {
+    color: #86efac;
+}
+
+
+/* =========================================================
+   Dark mode: Savings Goals dashboard
+   ========================================================= */
+
+:root[data-theme="dark"] body.savings-page {
+    background-color: var(--theme-page);
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .savings-main,
+:root[data-theme="dark"] main.savings-page {
+    background-color: var(--theme-page);
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .savings-sidebar {
+    background-color: var(--theme-sidebar);
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .savings-header h1,
+:root[data-theme="dark"] .savings-header p,
+:root[data-theme="dark"] .savings-main h1,
+:root[data-theme="dark"] .savings-main h2 {
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .savings-summary div,
+:root[data-theme="dark"] .goal-card,
+:root[data-theme="dark"] .savings-card {
+    background-color: var(--theme-card);
+    color: var(--theme-text);
+    border: 1px solid var(--theme-border);
+}
+
+:root[data-theme="dark"] .savings-summary dt,
+:root[data-theme="dark"] .goal-description,
+:root[data-theme="dark"] .goal-date,
+:root[data-theme="dark"] .goal-amounts,
+:root[data-theme="dark"] .goal-percent {
+    color: var(--theme-muted);
+}
+
+:root[data-theme="dark"] .savings-toolbar select {
+    background-color: var(--theme-input);
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+}
+
+:root[data-theme="dark"] .goal-status {
+    color: white;
+}
+
+:root[data-theme="dark"] .goal-progress progress,
+:root[data-theme="dark"] .goal-progress progress::-webkit-progress-bar {
+    background-color: var(--theme-border);
+}
+
+:root[data-theme="dark"] .savings-page .primary-button,
+:root[data-theme="dark"] .savings-page .contribute-btn {
+    background-color: var(--theme-primary);
+    color: white;
+}
+
+:root[data-theme="dark"] .avatar {
+    background-color: var(--theme-input);
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+}
+
+/* Savings contribution dialog */
+
+:root[data-theme="dark"] .contribution-dialog {
+    background-color: var(--theme-card);
+    color: var(--theme-text);
+    border: 1px solid var(--theme-border);
+}
+
+:root[data-theme="dark"] .contribution-dialog h2,
+:root[data-theme="dark"] .contribution-dialog label,
+:root[data-theme="dark"] #contribution-goal-name {
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .contribution-dialog input {
+    background-color: var(--theme-input);
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+}
+
+:root[data-theme="dark"] .contribution-dialog input::placeholder {
+    color: var(--theme-muted);
+}
+
+:root[data-theme="dark"] .contribution-actions button {
+    background-color: var(--theme-input);
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+}
+
+:root[data-theme="dark"] #contribution-error {
+    color: #fca5a5;
+}
+
+/* =========================================================
+   Dark mode: Create Savings Goal form
+   ========================================================= */
+
+:root[data-theme="dark"] body:has(.savings-card) {
+    background-color: var(--theme-page);
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .savings-card h1 {
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .savings-card .form-group label {
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .savings-card .form-group input,
+:root[data-theme="dark"] .savings-card .form-group select {
+    background-color: var(--theme-input);
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+}
+
+:root[data-theme="dark"] .savings-card .form-group input::placeholder {
+    color: var(--theme-muted);
+}
+
+:root[data-theme="dark"] .savings-card .cancel-btn {
+    background-color: #334155;
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .savings-card .save-btn {
+    background-color: var(--theme-primary);
+    color: white;
+}
+
+:root[data-theme="dark"] .savings-card .form-message.success {
+    color: #86efac;
+}
+
+:root[data-theme="dark"] .savings-card .form-message.error,
+:root[data-theme="dark"] .savings-card .error-message {
+    color: #fca5a5;
+}
+
+/* =========================================================
+   Dark mode: FinSync Reports
+   ========================================================= */
+
+:root[data-theme="dark"] body.reports-preview {
+    background-color: var(--theme-page);
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .reports-main {
+    background-color: var(--theme-page);
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .reports-sidebar {
+    background-color: var(--theme-sidebar);
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .reports-main h1,
+:root[data-theme="dark"] .reports-main h2,
+:root[data-theme="dark"] .reports-brand {
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .reports-main header p,
+:root[data-theme="dark"] .reports-chart-card p {
+    color: var(--theme-muted);
+}
+
+:root[data-theme="dark"] .reports-profile {
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .reports-profile b {
+    background-color: var(--theme-input);
+    color: var(--theme-text);
+    border: 1px solid var(--theme-border);
+}
+
+:root[data-theme="dark"] .reports-navigation span,
+:root[data-theme="dark"] .reports-logout {
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .reports-navigation [aria-current] {
+    background-color: var(--theme-primary);
+    color: #ffffff;
+}
+
+:root[data-theme="dark"] .reports-tabs {
+    border-bottom-color: var(--theme-border);
+}
+
+:root[data-theme="dark"] .reports-tabs button {
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .reports-tabs button:hover,
+:root[data-theme="dark"] .reports-tabs button:focus-visible,
+:root[data-theme="dark"] .reports-tabs button[aria-selected="true"] {
+    color: #93c5fd;
+}
+
+:root[data-theme="dark"] .reports-tabs button[aria-selected="true"] {
+    border-bottom-color: #93c5fd;
+}
+
+:root[data-theme="dark"] .reports-month select,
+:root[data-theme="dark"] .spending-heading select,
+:root[data-theme="dark"] .report-period-control select {
+    background-color: var(--theme-input);
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+}
+
+:root[data-theme="dark"] .report-period-control label {
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .spending-category {
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .spending-chart-card,
+:root[data-theme="dark"] .spending-breakdown,
+:root[data-theme="dark"] .report-chart-card {
+    background-color: var(--theme-card);
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+    box-shadow: none;
+}
+
+:root[data-theme="dark"] .spending-heading h2,
+:root[data-theme="dark"] .spending-breakdown strong,
+:root[data-theme="dark"] .report-chart-card h2 {
+    color: var(--theme-text);
+}
+
+:root[data-theme="dark"] .spending-values,
+:root[data-theme="dark"] .report-chart-card p {
+    color: var(--theme-muted);
+}
+
+:root[data-theme="dark"] .spending-track {
+    background-color: var(--theme-border);
+}
+
+:root[data-theme="dark"] #spending-status,
+:root[data-theme="dark"] .report-empty {
+    color: var(--theme-muted);
+}

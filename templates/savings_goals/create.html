@@ -3,6 +3,8 @@
 <html lang="en">
 
 <head>
+    <!-- REECE: Load the saved theme across FinSync -->
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
@@ -11,6 +13,8 @@
 
     <!-- Connect CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/savings_goals/createSavingsGoal.css') }}">
+    <!-- REECE: Shared light and dark mode styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
 </head>
 
 <body>

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- REECE: Load the saved theme across FinSync -->
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
     <meta charset="UTF-8">
 
     <!-- Allow the form to adjust to phone and desktop screens. -->
@@ -10,6 +12,8 @@
 
     <!-- CSS controls the appearance of this component. -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/budgets/budget_recommendations.css') }}">
+    <!-- REECE: Shared light and dark mode styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
 
     <!--
         defer makes the script run after the HTML has been parsed.
