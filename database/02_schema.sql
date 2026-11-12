@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS password_reset_tokens (
 -- Financial accounts belonging to each user (e.g. Cheque, Savings, Credit Card, Cash)
 CREATE TABLE IF NOT EXISTS accounts (
     account_id       INT UNSIGNED   NOT NULL AUTO_INCREMENT,
-    user_id          INT UNSIGNED   NOT NULL,
+    user_id          INT UNSIGNED   UNIQUE,
     account_name     VARCHAR(100)   NOT NULL,
     account_type     VARCHAR(30)    NOT NULL,
     opening_balance  DECIMAL(12,2)  NOT NULL DEFAULT 0.00,  -- the balance when the account was added
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS budgets (
 -- Record budget-exceeded notifications to prevent duplicates
 CREATE TABLE IF NOT EXISTS budget_notification_history (
     notification_id  INT UNSIGNED  NOT NULL AUTO_INCREMENT,
-    user_id          INT UNSIGNED  NOT NULL,
+    user_id          INT UNSIGNED  UNIQUE,
     budget_id        INT UNSIGNED  NOT NULL,
     budget_month     CHAR(7)       NOT NULL,   -- e.g. 2026-11
     created_at       DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,

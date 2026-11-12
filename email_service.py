@@ -46,6 +46,7 @@ The FinSync team
 
     try:
         with smtplib.SMTP(config.MAIL_SERVER, config.MAIL_PORT, timeout=10) as server:
+            server.set_debuglevel(1)
             server.starttls()  # encrypt the connection
             server.login(config.MAIL_USERNAME, config.MAIL_PASSWORD)
             server.send_message(message)

@@ -2,7 +2,6 @@
 Password-reset tokens (Daniel).
 
 Design
-------
 1. A token is 32 random bytes from Python's `secrets` module (the module
    meant for security), encoded for URLs -> ~43 characters. Guessing one is
    practically impossible.

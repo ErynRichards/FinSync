@@ -75,8 +75,8 @@ def features():
 
 
 # MISHAYLE'S PART: REGISTRATION, LOGIN AND AUTHENTICATION BACKEND
-# Uses Daniel's users.py (database) and security.py (password hashing).
-# The HTML forms are Lashanya's part. Logout below is Reece's part.
+# Uses Daniel's users.py (database) and security.py (password hashing)
+# The HTML forms are Lashanya's part. Logout below is Reece's part
 
 # MISHAYLE: Register a new FinSync user.
 @app.route("/signup", methods=["GET", "POST"])
@@ -94,6 +94,10 @@ def signup():
     errors = []
     if not full_name:
         errors.append("Full name is required.")
+    elif not all(char.isalpha() or char in " -'" for char in full_name):
+        errors.append("Name can only contain letters, spaces, hyphens and apostrophes.")
+    elif not any(char.isalpha() for char in full_name):
+        errors.append("Name must contain letters.")
     if not is_valid_email(email):
         errors.append("Please enter a valid email address.")
     errors += check_password_rules(password, confirm_password)

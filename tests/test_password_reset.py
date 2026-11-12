@@ -39,8 +39,6 @@ def token_rows(app):
         return query_all("SELECT * FROM password_reset_tokens ORDER BY token_id")
 
 
-# ---------------------------------------------------------------------------
-
 def test_full_reset_flow(app, client, sent_emails):
     make_user(app)
     r = request_reset(client, "USER@example.com")
@@ -213,7 +211,7 @@ def test_cleanup_tokens(app, client, sent_emails):
         assert reset_tokens.delete_old_tokens(7) == 1
 
 
-# --- real email_service code paths (SMTP mocked, console backend) ----------
+#real email_service code paths (SMTP mocked, console backend)
 
 class FakeSMTP:
     instances = []

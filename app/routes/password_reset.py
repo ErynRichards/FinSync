@@ -51,9 +51,8 @@ def _field(name):
     return request.form.get(name, "")
 
 
-# ---------------------------------------------------------------------------
+
 # Forgot password
-# ---------------------------------------------------------------------------
 @bp.route("/forgot-password", methods=["GET", "POST"])
 @csrf_protect
 def forgot_password():
@@ -96,9 +95,8 @@ def forgot_password():
     return render_template("forgot_password.html", success=GENERIC_SENT_MESSAGE)
 
 
-# ---------------------------------------------------------------------------
+
 # Reset password (link from the email)
-# ---------------------------------------------------------------------------
 def _invalid_link(reason):
     msg = TOKEN_MESSAGES.get(reason, TOKEN_MESSAGES[reset_tokens.INVALID])
     status = 410 if reason in (reset_tokens.EXPIRED, reset_tokens.USED) else 400

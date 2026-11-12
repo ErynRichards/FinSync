@@ -2,7 +2,7 @@
 MySQL connection handling.
 
 How it works
-------------
+
 * get_db() opens ONE connection per web request and stores it on Flask's
   `g` object, so every function in the same request shares it.
 * close_db() runs automatically at the end of every request and closes it.

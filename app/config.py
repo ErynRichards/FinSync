@@ -21,7 +21,7 @@ def _int(name, default):
 
 
 class Config:
-    # --- Flask ---------------------------------------------------------
+    #Flask
     # Signs the session cookie. Must be long and random in real use.
     SECRET_KEY = os.environ.get("SECRET_KEY", "")
 
@@ -30,7 +30,7 @@ class Config:
     SESSION_COOKIE_SAMESITE = "Lax"         # basic cross-site protection
     SESSION_COOKIE_SECURE = _bool("SESSION_COOKIE_SECURE", False)  # True when using HTTPS
 
-    # --- MySQL ---------------------------------------------------------
+    #MySQL
     DB_HOST = os.environ.get("DB_HOST", "localhost")
     DB_PORT = _int("DB_PORT", 3306)
     DB_NAME = os.environ.get("DB_NAME", "finsync")
@@ -38,7 +38,7 @@ class Config:
     DB_PASSWORD = os.environ.get("DB_PASSWORD", "")
     DB_CONNECT_TIMEOUT = _int("DB_CONNECT_TIMEOUT", 5)
 
-    # --- Password reset ------------------------------------------------
+    #  Password reset
     # Public address of the site, used to build the link in the email.
     # Locally: http://127.0.0.1:5000   In production: https://your-domain
     # (We do NOT build the link from the request's Host header, because an
@@ -49,7 +49,7 @@ class Config:
     RESET_MAX_REQUESTS = _int("RESET_MAX_REQUESTS", 3)
     RESET_WINDOW_MINUTES = _int("RESET_WINDOW_MINUTES", 15)
 
-    # --- Email ---------------------------------------------------------
+    #  Email
     # "console" = print the email in the terminal (LOCAL TESTING ONLY)
     # "smtp"    = really send it through the SMTP server below
     MAIL_BACKEND = os.environ.get("MAIL_BACKEND", "console").strip().lower()

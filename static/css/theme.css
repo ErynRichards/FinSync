@@ -270,9 +270,7 @@
 }
 
 
-/* =========================================================
-   Dark mode: Savings Goals dashboard
-   ========================================================= */
+/* Dark mode: Savings Goals dashboard*/
 
 :root[data-theme="dark"] body.savings-page {
     background-color: var(--theme-page);
@@ -374,9 +372,7 @@
     color: #fca5a5;
 }
 
-/* =========================================================
-   Dark mode: Create Savings Goal form
-   ========================================================= */
+/*Dark mode: Create Savings Goal form*/
 
 :root[data-theme="dark"] body:has(.savings-card) {
     background-color: var(--theme-page);
@@ -421,9 +417,7 @@
     color: #fca5a5;
 }
 
-/* =========================================================
-   Dark mode: FinSync Reports
-   ========================================================= */
+/* Dark mode: FinSync Reports*/
 
 :root[data-theme="dark"] body.reports-preview {
     background-color: var(--theme-page);

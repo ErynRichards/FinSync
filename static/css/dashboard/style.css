@@ -100,9 +100,7 @@ body {
 }
 
 
-/* ==========================================
-   DASHBOARD MAIN CONTENT
-   ========================================== */
+/*DASHBOARD MAIN CONTENT*/
 
 .main-content {
     flex: 1;
@@ -141,9 +139,7 @@ body {
     font-weight: bold;
 }
 
-/* ==========================================
-   DASHBOARD HEADING
-   ========================================== */
+/*DASHBOARD HEADING */
 
 .page-header {
     margin-bottom: 30px;
@@ -161,9 +157,7 @@ body {
     margin: 0;
 }
 
-/* ==========================================
-   FINANCIAL SUMMARY CARDS
-   ========================================== */
+/*FINANCIAL SUMMARY CARDS*/
 
 .dashboard-summary {
     display: grid;
@@ -194,9 +188,7 @@ body {
     overflow-wrap: anywhere;
 }
 
-/* ==========================================
-   CASH FLOW GRAPH
-   ========================================== */
+/*CASH FLOW GRAPH*/
 
 .dashboard-chart {
     background-color: white;
@@ -214,9 +206,7 @@ body {
     height: auto;
 }
 
-/* ==========================================
-   OTHER PAGE CONTENT
-   ========================================== */
+/*OTHER PAGE CONTENT*/
 
 .page-box {
     background-color: white;
@@ -225,9 +215,7 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
-/* ==========================================
-   RESPONSIVE DESIGN
-   ========================================== */
+/* RESPONSIVE DESIGN*/
 
 @media (max-width: 1200px) {
     .dashboard-summary {

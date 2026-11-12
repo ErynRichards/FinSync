@@ -1,21 +1,3 @@
-"""
-=====================================================================
- PLACEHOLDER ROUTES - TO BE REPLACED BY TEAMMATES
-=====================================================================
-These minimal routes exist ONLY so the password-reset feature can be
-tested end-to-end (register -> forget password -> reset -> log in).
-
-  /signup, /login, /dashboard  -> Mishayle (registration, login, sessions)
-  /logout                      -> Reece    (logout route)
-
-When replacing them, please keep:
-  * blueprint name "auth" and endpoint names login / signup / logout / dashboard
-    (the reset page redirects to url_for("auth.login"))
-  * users.create_user(...) / users.get_user_by_email(...) for database access
-  * security.hash_password(...) / security.verify_password(...) for hashing,
-    otherwise passwords set via the reset page will not work at login.
-=====================================================================
-"""
 from functools import wraps
 
 from flask import (Blueprint, flash, redirect, render_template, request,
