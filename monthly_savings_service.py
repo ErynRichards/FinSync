@@ -1,8 +1,12 @@
 
+# Use functions and classes from another file.
 from datetime import date
+
+# Use functions and classes from another file.
 from decimal import Decimal, InvalidOperation, ROUND_CEILING
 
 
+# Handle calculate monthly savings requests or data.
 def calculate_monthly_savings(
     target_amount,
     current_amount,
@@ -25,36 +29,57 @@ def calculate_monthly_savings(
         target = Decimal(str(target_amount))
         current = Decimal(str(current_amount))
     except (InvalidOperation, ValueError, TypeError):
+        # Stop the operation and report an error.
         raise ValueError("Savings amounts must be valid numbers.")
 
     # Reject invalid monetary values.
     if not target.is_finite() or not current.is_finite():
+
+        # Stop the operation and report an error.
         raise ValueError("Savings amounts must be finite numbers.")
 
+    # Check the condition before continuing.
     if target <= 0:
+
+        # Stop the operation and report an error.
         raise ValueError("Target amount must be greater than zero.")
 
+    # Check the condition before continuing.
     if current < 0:
+
+        # Stop the operation and report an error.
         raise ValueError("Current savings cannot be negative.")
 
     # Convert the target date into a date object when necessary.
     if isinstance(target_date, str):
+
+        # Try the operation and handle any errors.
         try:
             target_date = date.fromisoformat(target_date)
         except ValueError:
+
+            # Stop the operation and report an error.
             raise ValueError("Target date must use YYYY-MM-DD format.")
 
+    # Check the condition before continuing.
     if not isinstance(target_date, date):
+
+        # Stop the operation and report an error.
         raise ValueError("A valid target date is required.")
 
+    # Check the condition before continuing.
     if not isinstance(today, date):
+
+        # Stop the operation and report an error.
         raise ValueError("Today's date must be valid.")
 
     # Calculate how much remains to be saved.
     remaining = max(Decimal("0.00"), target - current)
 
     # Return a completed status if the goal has been reached.
+
     if remaining == 0:
+        # Send the result back to the code that called this function.
         return {
             "status": "completed",
             "remaining_amount": "0.00",
@@ -64,6 +89,8 @@ def calculate_monthly_savings(
 
     # Do not calculate a recommendation for an overdue goal.
     if target_date < today:
+
+        # Send the result back to the code that called this function.
         return {
             "status": "overdue",
             "remaining_amount": f"{remaining:.2f}",
@@ -89,6 +116,7 @@ def calculate_monthly_savings(
         rounding=ROUND_CEILING
     )
 
+    # Send the result back to the code that called this function.
     return {
         "status": "active",
         "remaining_amount": f"{remaining:.2f}",

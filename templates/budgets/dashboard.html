@@ -11,6 +11,7 @@
 
     <!-- Connect CSS file -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard/style.css') }}">
+<!-- Load styling or another page resource. -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/budgets/budgets.css') }}">
     <!-- REECE: Shared light and dark mode styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
@@ -32,26 +33,32 @@
 
             <!-- Navigation menu -->
             <nav>
+<!-- Run an action when this button is clicked. -->
                 <button class="nav-btn active" data-page="Dashboard">
                     Dashboard
                 </button>
 
+<!-- Run an action when this button is clicked. -->
                 <button class="nav-btn" data-page="Transactions">
                     Transactions
                 </button>
 
+<!-- Run an action when this button is clicked. -->
                 <button class="nav-btn" data-page="Budgets">
                     Budgets
                 </button>
 
+<!-- Run an action when this button is clicked. -->
                 <button class="nav-btn" data-page="Savings Goals">
                     Savings Goals
                 </button>
 
+<!-- Run an action when this button is clicked. -->
                 <button class="nav-btn" data-page="Reports">
                     Reports
                 </button>
 
+<!-- Run an action when this button is clicked. -->
                 <button class="nav-btn" data-page="Settings">
                     Settings
                 </button>
@@ -100,16 +107,20 @@
 
     </div>
 
+<!-- Load JavaScript used by this page. -->
     <script>
         window.finSyncUsername = {{ user.first_name|tojson }};
         window.finSyncLogoutUrl = {{ url_for('logout')|tojson }};
         window.finSyncTransactionsUrl = {{ url_for('transactions_page')|tojson }};
         window.finSyncInitialBudgetPeriod = {{ selected_period|tojson }};
     </script>
+<!-- Load JavaScript used by this page. -->
     <script src="{{ url_for('static', filename='js/budgets/budgets.js') }}"></script>
 
+<!-- Load styling or another page resource. -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/notifications/budget_warning.css') }}">
     {% include 'notifications/budget_warning.html' %}
+<!-- Load JavaScript used by this page. -->
     <script src="{{ url_for('static', filename='js/notifications/budget_warning.js') }}" defer></script>
 </body>
 </html>

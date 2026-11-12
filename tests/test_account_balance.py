@@ -9,14 +9,17 @@ from decimal import Decimal
 from backend.transactions.account_balance import calculate_account_balance
 
 
+# Define TestAccountBalance for this part of the program.
 class TestAccountBalance(unittest.TestCase):
 
     # Test that income and expenses are correctly added
     # to and deducted from the opening balance.
     def test_calculate_account_balance(self):
 
+        # Save an amount for a calculation or database update.
         opening_balance = 10000.00
 
+        # Keep these records for the next step.
         transactions = [
             {
                 "transaction_id": 1,
@@ -54,6 +57,7 @@ class TestAccountBalance(unittest.TestCase):
     # retains its original opening balance.
     def test_balance_without_transactions(self):
 
+        # Save an amount for a calculation or database update.
         balance = calculate_account_balance(5000.00, [])
 
         self.assertEqual(balance, Decimal("5000.0"))
@@ -61,6 +65,7 @@ class TestAccountBalance(unittest.TestCase):
     # Test that income increases the account balance.
     def test_income_increases_balance(self):
 
+        # Keep these records for the next step.
         transactions = [
             {
                 "transaction_id": 1,
@@ -71,6 +76,7 @@ class TestAccountBalance(unittest.TestCase):
             }
         ]
 
+        # Save an amount for a calculation or database update.
         balance = calculate_account_balance(2000.00, transactions)
 
         self.assertEqual(balance, Decimal("5000.00"))
@@ -78,6 +84,7 @@ class TestAccountBalance(unittest.TestCase):
     # Test that expenses decrease the account balance.
     def test_expense_decreases_balance(self):
 
+        # Keep these records for the next step.
         transactions = [
             {
                 "transaction_id": 1,
@@ -88,6 +95,7 @@ class TestAccountBalance(unittest.TestCase):
             }
         ]
 
+        # Save an amount for a calculation or database update.
         balance = calculate_account_balance(5000.00, transactions)
 
         self.assertEqual(balance, Decimal("3800.00"))
@@ -95,6 +103,7 @@ class TestAccountBalance(unittest.TestCase):
     # Test that invalid transactions are rejected.
     def test_invalid_transaction_is_rejected(self):
 
+        # Keep these records for the next step.
         transactions = [
             {
                 "transaction_id": 1,
@@ -112,6 +121,7 @@ class TestAccountBalance(unittest.TestCase):
     # Test that an invalid opening balance is rejected.
     def test_invalid_opening_balance_is_rejected(self):
 
+        # Keep these records for the next step.
         transactions = []
 
         # A non-numeric opening balance must not be accepted.

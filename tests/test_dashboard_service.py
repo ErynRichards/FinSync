@@ -1,4 +1,5 @@
 
+# Load the tools needed in this file.
 import unittest
 
 # Import json to verify that Dashboard data can be converted to JSON.
@@ -8,8 +9,10 @@ import json
 from backend.dashboard_service import build_dashboard_data
 
 
+# Define TestDashboardService for this part of the program.
 class TestDashboardService(unittest.TestCase):
 
+    # Test case: verify the dashboard returns correct information behavior.
     def test_dashboard_returns_correct_information(self):
 
         # Create sample financial transactions for a FinSync user.
@@ -98,6 +101,7 @@ class TestDashboardService(unittest.TestCase):
             "Internet"
         )
 
+    # Test case: verify the dashboard with no transactions behavior.
     def test_dashboard_with_no_transactions(self):
 
         # Test what happens when a user has not recorded transactions.
@@ -150,6 +154,7 @@ class TestDashboardService(unittest.TestCase):
     # valid and invalid transactions.
     def test_dashboard_rejects_mixed_transactions(self):
 
+        # Keep these records for the next step.
         transactions = [
             {
                 "transaction_id": 1,
@@ -186,6 +191,7 @@ class TestDashboardService(unittest.TestCase):
     # Test that the Dashboard calculates the account balance correctly.
     def test_dashboard_calculates_account_balance(self):
 
+        # Keep these records for the next step.
         transactions = [
             {
                 "transaction_id": 1,
@@ -219,6 +225,7 @@ class TestDashboardService(unittest.TestCase):
     # when no opening balance has been supplied.
     def test_dashboard_without_opening_balance(self):
 
+        # Keep these records for the next step.
         transactions = []
 
         dashboard = build_dashboard_data(transactions)
@@ -228,8 +235,10 @@ class TestDashboardService(unittest.TestCase):
     # Test that an invalid opening balance is rejected.
     def test_dashboard_rejects_invalid_opening_balance(self):
 
+        # Keep these records for the next step.
         transactions = []
 
+        # Use this resource and close it when finished.
         with self.assertRaises(ValueError):
             build_dashboard_data(
                 transactions,

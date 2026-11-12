@@ -1,12 +1,15 @@
 
+# Load the tools needed in this file.
 import unittest
 
 # Import the function we want to test.
 from backend.transactions.recent_transactions import get_recent_transactions
 
 
+# Define TestRecentTransactions for this part of the program.
 class TestRecentTransactions(unittest.TestCase):
 
+    # Test case: verify the returns only five most recent transactions behavior.
     def test_returns_only_five_most_recent_transactions(self):
 
         # Create seven transactions in deliberately mixed date order.
@@ -36,6 +39,7 @@ class TestRecentTransactions(unittest.TestCase):
 
         self.assertEqual(actual_ids, expected_ids)
 
+    # Test case: verify the returns empty list when no transactions exist behavior.
     def test_returns_empty_list_when_no_transactions_exist(self):
 
         # An account with no recorded transactions should return an empty list.
@@ -43,6 +47,7 @@ class TestRecentTransactions(unittest.TestCase):
 
         self.assertEqual(recent, [])
 
+    # Test case: verify the returns all transactions when fewer than five exist behavior.
     def test_returns_all_transactions_when_fewer_than_five_exist(self):
 
         # Create only two transactions.

@@ -3,6 +3,7 @@
     box-sizing: border-box;
 }
 
+/* Set the appearance of body. */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -93,6 +94,7 @@ body {
     cursor: pointer;
 }
 
+/* Set the appearance of .bell-image. */
 .bell-image {
     width: 25px;
     height: 25px;
@@ -102,6 +104,7 @@ body {
 
 /*DASHBOARD MAIN CONTENT*/
 
+/* Set the appearance of .main-content. */
 .main-content {
     flex: 1;
     min-width: 0;
@@ -141,16 +144,19 @@ body {
 
 /*DASHBOARD HEADING */
 
+/* Set the appearance of .page-header. */
 .page-header {
     margin-bottom: 30px;
 }
 
+/* Set the appearance of .page-header h1. */
 .page-header h1 {
     font-size: 30px;
     color: #050b35;
     margin: 0 0 10px;
 }
 
+/* Set the appearance of .page-header p. */
 .page-header p {
     color: #666;
     font-size: 16px;
@@ -159,6 +165,7 @@ body {
 
 /*FINANCIAL SUMMARY CARDS*/
 
+/* Set the appearance of .dashboard-summary. */
 .dashboard-summary {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -166,6 +173,7 @@ body {
     margin-bottom: 30px;
 }
 
+/* Set the appearance of .summary-card. */
 .summary-card {
     background-color: white;
     padding: 25px;
@@ -174,6 +182,7 @@ body {
     min-width: 0;
 }
 
+/* Set the appearance of .summary-card h3. */
 .summary-card h3 {
     font-size: 16px;
     color: #666;
@@ -181,6 +190,7 @@ body {
     font-weight: 500;
 }
 
+/* Set the appearance of .summary-amount. */
 .summary-amount {
     font-size: 25px;
     font-weight: bold;
@@ -190,6 +200,7 @@ body {
 
 /*CASH FLOW GRAPH*/
 
+/* Set the appearance of .dashboard-chart. */
 .dashboard-chart {
     background-color: white;
     padding: 25px;
@@ -199,6 +210,7 @@ body {
     overflow: hidden;
 }
 
+/* Set the appearance of .dashboard-chart img. */
 .dashboard-chart img {
     display: block;
     width: 100%;
@@ -208,6 +220,7 @@ body {
 
 /*OTHER PAGE CONTENT*/
 
+/* Set the appearance of .page-box. */
 .page-box {
     background-color: white;
     padding: 25px;
@@ -217,21 +230,27 @@ body {
 
 /* RESPONSIVE DESIGN*/
 
+/* Adjust the layout for this screen size. */
 @media (max-width: 1200px) {
+/* Set the appearance of .dashboard-summary. */
     .dashboard-summary {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
+/* Adjust the layout for this screen size. */
 @media (max-width: 700px) {
+/* Set the appearance of .dashboard-summary. */
     .dashboard-summary {
         grid-template-columns: 1fr;
     }
 
+/* Set the appearance of .main-content. */
     .main-content {
         padding: 15px;
     }
 
+/* Set the appearance of .page-header h1. */
     .page-header h1 {
         font-size: 24px;
     }

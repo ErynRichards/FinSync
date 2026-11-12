@@ -5,15 +5,20 @@
 <meta charset="UTF-8">
 <meta name="viewport"  content="width-device-width, initial-scale=1.0">
 <title>Features | FinSync</title>
+<!-- Load styling or another page resource. -->
 <link rel="stylesheet" href="{{ url_for('static', filename='css/landingStyle.css') }}">
+<!-- Load JavaScript used by this page. -->
 <script src="{{ url_for('static', filename='js/landingScript.js') }}"  defer></script>
 </head>
 
 <body>
+<!-- Show the page heading and navigation. -->
 <header class="header">
+<!-- Links to other pages. -->
 <nav class="navbar">
 <a href="{{ url_for('index') }}" class="logo">FinSync</a>
 
+<!-- Run an action when this button is clicked. -->
 <button class="menu-toggle"
 aria-label="Toggle navigation"
 aria-expanded="false"
@@ -32,7 +37,9 @@ aria-controls="navLinks">
 </header>
 
 
+<!-- Show the main content of this page. -->
 <main>
+<!-- Group related content on the page. -->
 <section class="features-section">
 <h2>Explore FinSync Features</h2>
 
@@ -47,7 +54,7 @@ of your financial future
 <h3>Transaction Management</h3>
 <p>
 Easily record income and expenses,
-categorise transactions and maintain 
+categorise transactions and maintain
 an organised financial history.
 </p>
 </article>
@@ -56,7 +63,7 @@ an organised financial history.
 <h3>Financial Dashboard</h3>
 <p>
 View a summary of your income,
-expennses and financial activity
+expenses and financial activity
 in one convenient dashboard.
 </p>
 </article>
@@ -65,28 +72,28 @@ in one convenient dashboard.
 <article class="feature-card">
 <h3>Budget Management</h3>
 <p>
-Set spending limits for different 
+Set spending limits for different
 categories and monitor your budget
 against actual expenses.
-<//p>
+</p>
 </article>
 
 <article class="feature-card">
 <h3>Savings Goals</h3>
 <p>
 Create personal savings goals,
-set target amounts and monitor 
+set target amounts and monitor
 your progress over time.
-<//p>
+</p>
 </article>
 
 <article class="feature-card">
 <h3>Financial Reports</h3>
 <p>
 Understand your spending habits
-using financial summaries  and 
+using financial summaries  and
 visual charts.
-<//p>
+</p>
 </article>
 
 
@@ -95,6 +102,7 @@ visual charts.
 </section>
 </main>
 
+<!-- Footer containing secondary page information. -->
 <footer class="footer">
 <p>&copy; <span id="year"></span> FinSync.
 All rights reserved.</p>

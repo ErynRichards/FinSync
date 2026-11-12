@@ -18,6 +18,7 @@ FinSync Flask application for use on the
 Dashboard, Transactions and Reports screens.
 """
 
+# Use functions and classes from another file.
 from decimal import Decimal
 
 
@@ -25,6 +26,7 @@ from decimal import Decimal
 # FUNCTION 1: CALCULATE TOTAL INCOME
 
 
+# Handle calculate total income requests or data.
 def calculate_total_income(transactions):
     """
     Calculates the total income received by a user.
@@ -55,6 +57,7 @@ def calculate_total_income(transactions):
 # FUNCTION 2: CALCULATE TOTAL EXPENSES
 
 
+# Handle calculate total expenses requests or data.
 def calculate_total_expenses(transactions):
     """
     Calculates the total expenses recorded by a user.
@@ -85,6 +88,7 @@ def calculate_total_expenses(transactions):
 # FUNCTION 3: CALCULATE AVAILABLE BALANCE
 
 
+# Handle calculate balance requests or data.
 def calculate_balance(transactions):
     """
     Calculates the user's balance.
@@ -110,6 +114,7 @@ def calculate_balance(transactions):
 # FUNCTION 4: CALCULATE SPENDING BY CATEGORY
 
 
+# Handle calculate spending by category requests or data.
 def calculate_spending_by_category(transactions):
     """
     Calculates how much a user spends in each category.
@@ -154,6 +159,7 @@ def calculate_spending_by_category(transactions):
 # FUNCTION 5: GENERATE FINANCIAL SUMMARY
 
 
+# Handle get financial summary requests or data.
 def get_financial_summary(transactions):
     """
     Combines all financial calculations into

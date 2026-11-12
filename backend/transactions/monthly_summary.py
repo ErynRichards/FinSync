@@ -6,6 +6,7 @@ from datetime import date
 from decimal import Decimal, InvalidOperation
 
 
+# Handle calculate monthly summary requests or data.
 def calculate_monthly_summary(transactions):
     """
     Calculate monthly income and expenses from financial transactions.
@@ -30,16 +31,21 @@ def calculate_monthly_summary(transactions):
                 transaction["transaction_date"]
             )
         except (ValueError, TypeError, KeyError):
+            # Stop the operation and report an error.
             raise ValueError("A transaction contains an invalid date.")
 
         # Convert the transaction amount into Decimal.
         try:
+            # Save an amount for a calculation or database update.
             amount = Decimal(str(transaction["amount"]))
 
+            # Check the condition before continuing.
             if not amount.is_finite() or amount <= 0:
+                # Stop the operation and report an error.
                 raise ValueError("Transaction amount must be positive.")
 
         except (InvalidOperation, ValueError):
+            # Stop the operation and report an error.
             raise ValueError("A transaction contains an invalid amount.")
 
         # Extract the year and month.
@@ -55,13 +61,16 @@ def calculate_monthly_summary(transactions):
         # Add income or expenses to the relevant monthly total.
         transaction_type = transaction["transaction_type"]
 
+        # Check the condition before continuing.
         if transaction_type == "income":
             monthly_totals[month]["total_income"] += amount
 
+        # Check the condition before continuing.
         elif transaction_type == "expense":
             monthly_totals[month]["total_expenses"] += amount
 
         else:
+            # Stop the operation and report an error.
             raise ValueError(
                 "Transaction type must be income or expense."
             )
@@ -72,6 +81,7 @@ def calculate_monthly_summary(transactions):
     # Prepare the monthly summary for the Dashboard.
     monthly_summary = []
 
+    # Go through each item one at a time.
     for month in sorted_months:
 
         # Retrieve the totals for the current month.
@@ -84,4 +94,5 @@ def calculate_monthly_summary(transactions):
             "total_expenses": totals["total_expenses"]
         })
 
+    # Send the result back to the code that called this function.
     return monthly_summary

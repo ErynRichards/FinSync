@@ -1,7 +1,9 @@
 
+# Use functions and classes from another file.
 from decimal import Decimal
 
 
+# Handle calculate transaction summary requests or data.
 def calculate_transaction_summary(transactions):
     """
     Calculate the income, expenses and net cash flow
@@ -18,6 +20,7 @@ def calculate_transaction_summary(transactions):
     # Decimal is used to avoid common floating-point rounding issues
     # when working with money.
     total_income = Decimal("0.00")
+    # Save an amount for a calculation or database update.
     total_expenses = Decimal("0.00")
 
     # Go through each transaction in the supplied list.

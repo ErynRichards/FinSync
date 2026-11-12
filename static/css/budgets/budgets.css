@@ -5,6 +5,7 @@
     gap: 26px;
     margin: 14px 15px 18px 0;
 }
+/* Set the appearance of .budget-actions input[type="month"]. */
 .budget-actions input[type="month"] {
     width: 220px;
     height: 48px;
@@ -15,6 +16,7 @@
     color: #333333;
     font: 18px Arial, sans-serif;
 }
+/* Set the appearance of #add-budget-btn. */
 #add-budget-btn {
     width: 218px;
     border: 0;
@@ -26,6 +28,7 @@
 }
 #add-budget-btn:hover { background: #090099; }
 .budget-table-wrap { overflow-x: auto; margin: 0 30px 0 42px; }
+/* Set the appearance of .budget-table. */
 .budget-table {
     width: 100%;
     min-width: 600px;
@@ -35,6 +38,7 @@
     color: #222222;
     font-size: 11px;
 }
+/* Set the appearance of .budget-table th, .budget-table td. */
 .budget-table th, .budget-table td {
     text-align: left;
     border-bottom: 1px solid #eeeeee;
@@ -57,10 +61,12 @@
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .logo-fallback { width: 65px; height: 65px; border-radius: 50%; background: #124c80; text-align: center; line-height: 65px; font-size: 30px; }
 .logo-fallback[hidden] { display: none; }
+/* Adjust the layout for this screen size. */
 @media (max-width: 900px) {
     .budget-table-wrap { margin: 0; }
     .budget-actions { margin-right: 0; gap: 15px; }
 }
+/* Adjust the layout for this screen size. */
 @media (max-width: 650px) {
     .budget-actions { flex-wrap: wrap; }
     .budget-actions input[type="month"], #add-budget-btn { flex: 1; min-width: 155px; height: 48px; }

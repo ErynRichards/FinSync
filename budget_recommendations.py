@@ -1,12 +1,15 @@
 # FinSync - Budget Recommendation Calculations
 # Uses the 50/30/20 rule and previous spending history.
 
+# Use functions and classes from another file.
 from datetime import datetime
+# Use functions and classes from another file.
 from decimal import Decimal, ROUND_HALF_UP
 
 
 # Categories used in FinSync
 
+# Read the income categories setting.
 INCOME_CATEGORIES = [
     "Salary",
     "Freelance",
@@ -14,6 +17,7 @@ INCOME_CATEGORIES = [
     "Other income"
 ]
 
+# Read the needs categories setting.
 NEEDS_CATEGORIES = [
     "Housing",
     "Groceries",
@@ -22,6 +26,7 @@ NEEDS_CATEGORIES = [
     "Utilities"
 ]
 
+# Read the wants categories setting.
 WANTS_CATEGORIES = [
     "Entertainment",
     "Other expense"
@@ -31,9 +36,11 @@ WANTS_CATEGORIES = [
 # it may represent either income or an expense.
 
 
+# Handle round to 50 requests or data.
 def round_to_50(amount):
     """Round an amount to the nearest R50."""
     value = Decimal(str(amount))
+    # Send the result back to the code that called this function.
     return float(
         (value / Decimal("50")).quantize(
             Decimal("1"),
@@ -42,6 +49,7 @@ def round_to_50(amount):
     )
 
 
+# Calculate a budget suggestion using income, spending history, and category allocations.
 def calculate_suggested_budget(
     user_id,
     category,
@@ -66,6 +74,7 @@ def calculate_suggested_budget(
     try:
         datetime.strptime(period, "%Y-%m")
     except (ValueError, TypeError):
+        # Send the result back to the code that called this function.
         return {
             "success": False,
             "message": "Invalid budget period.",
@@ -74,11 +83,19 @@ def calculate_suggested_budget(
 
     # Validate monthly income
     try:
+        # Save an amount for a calculation or database update.
+
         monthly_income = float(monthly_income)
     except (TypeError, ValueError):
+
+        # Save an amount for a calculation or database update.
         monthly_income = 0
 
+    # Check the condition before continuing.
+
     if monthly_income <= 0:
+
+        # Send the result back to the code that called this function.
         return {
             "success": False,
             "message": "Add your monthly income first.",
@@ -87,21 +104,30 @@ def calculate_suggested_budget(
 
     # Calculate the 50/30/20 allocations
     needs_budget = monthly_income * 0.50
+
+    # Save an amount for a calculation or database update.
     wants_budget = monthly_income * 0.30
+
+    # Save an amount for a calculation or database update.
     savings_budget = monthly_income * 0.20
 
     # Identify the selected category's group
     if category in NEEDS_CATEGORIES:
         group = "Needs"
+
+        # Save an amount for a calculation or database update.
         group_budget = needs_budget
         category_count = len(NEEDS_CATEGORIES)
 
+    # Check the condition before continuing.
     elif category in WANTS_CATEGORIES:
         group = "Wants"
+        # Save an amount for a calculation or database update.
         group_budget = wants_budget
         category_count = len(WANTS_CATEGORIES)
 
     else:
+        # Send the result back to the code that called this function.
         return {
             "success": False,
             "message": "Select a valid expense category.",
@@ -123,12 +149,15 @@ def calculate_suggested_budget(
         )
     )
 
+    # Check the condition before continuing.
     if history_available:
 
         # Calculate average spending over three months
         expenses = [float(x) for x in monthly_expenses]
 
+        # Check the condition before continuing.
         if any(x < 0 for x in expenses):
+            # Send the result back to the code that called this function.
             return {
                 "success": False,
                 "message": "Invalid expense history.",
@@ -145,6 +174,7 @@ def calculate_suggested_budget(
 
         # Use 50/30/20 when history is insufficient
         average_spending = None
+        # Save an amount for a calculation or database update.
         suggested_budget = income_based_budget
         method = "50/30/20 income-based allocation"
 
@@ -154,13 +184,17 @@ def calculate_suggested_budget(
     except (TypeError, ValueError):
         allocated = 0
 
+    # Check the condition before continuing.
     if allocated < 0:
+
+        # Send the result back to the code that called this function.
         return {
             "success": False,
             "message": "Invalid existing budget allocation.",
             "suggested_budget": None
         }
 
+    # Save an amount for a calculation or database update.
     remaining_budget = max(0, group_budget - allocated)
 
     # Keep recommendation within the remaining limit
@@ -174,6 +208,7 @@ def calculate_suggested_budget(
 
     # Do not exceed the remaining allocation after rounding
     if suggested_budget > remaining_budget:
+        # Save an amount for a calculation or database update.
         suggested_budget = float(
             Decimal(str(remaining_budget))
             // Decimal("50") * Decimal("50")

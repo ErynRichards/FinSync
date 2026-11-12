@@ -4,11 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}FinSync{% endblock %} - FinSync</title>
+<!-- Load styling or another page resource. -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+<!-- Show the page heading and navigation. -->
   <header class="topbar">
     <a class="brand" href="{{ url_for('index') }}">FinSync</a>
+<!-- Links to other pages. -->
     <nav>
       {% if session.get('user_id') %}
         <a href="{{ url_for('dashboard') }}">Dashboard</a>
@@ -20,6 +23,7 @@
     </nav>
   </header>
 
+<!-- Show the main content of this page. -->
   <main class="container">
     <!-- Messages from flash() in app.py -->
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -31,6 +35,7 @@
     {% block content %}{% endblock %}
   </main>
 
+<!-- Load JavaScript used by this page. -->
   <script src="{{ url_for('static', filename='js/validation.js') }}"></script>
 </body>
 </html>

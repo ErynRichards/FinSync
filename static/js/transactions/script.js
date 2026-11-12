@@ -27,15 +27,17 @@ const transactionsPage = `
 
     <p id="transactions-status" role="status"></p>
     <p class="preview-note">Transactions are saved to your FinSync account.</p>
+    
     <!-- Transaction filters -->
     <div class="transaction-filters">
-
+    <!-- transaction filters (sorting by transaction type, either income or expenses)-->
         <select aria-label="Transaction type" id="type-filter" onchange="displayTransactions()">
             <option value="All">All Transactions</option>
             <option value="Income">Income</option>
             <option value="Expense">Expense</option>
         </select>
-
+        
+    <!-- category filters -->
         <select aria-label="Category filter" id="category-filter" onchange="displayTransactions()">
             <option value="All">All Categories</option>
             <option value="Salary">Salary</option>
@@ -267,10 +269,12 @@ function clearTransactionFilters() {
 
 // Connect navigation buttons
 
+// Find the part of the page this code will update.
 const navButtons = document.querySelectorAll(".nav-btn");
 
 navButtons.forEach(function(button) {
 
+    // Run this code when the user interacts with the page.
     button.addEventListener("click", function() {
 
         // Open the main Dashboard

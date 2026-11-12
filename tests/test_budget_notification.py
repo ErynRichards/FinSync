@@ -1,15 +1,20 @@
 
+# Load the tools needed in this file.
 import unittest
 
+# Use functions and classes from another file.
 from decimal import Decimal
 
+# Use functions and classes from another file.
 from backend.transactions.budget_notification import (
     check_budget_notification
 )
 
 
+# Define TestBudgetNotification for this part of the program.
 class TestBudgetNotification(unittest.TestCase):
 
+    # Handle setUp requests or data.
     def setUp(self):
         # Common test budget for November 2026.
         self.common_details = {
@@ -21,6 +26,7 @@ class TestBudgetNotification(unittest.TestCase):
             "current_spending": "5200.00"
         }
 
+    # Test case: verify the notification triggers when budget is exceeded behavior.
     def test_notification_triggers_when_budget_is_exceeded(self):
 
         result = check_budget_notification(
@@ -37,6 +43,7 @@ class TestBudgetNotification(unittest.TestCase):
             "Monthly budget exceeded."
         )
 
+    # Test case: verify the notification does not trigger within budget behavior.
     def test_notification_does_not_trigger_within_budget(self):
 
         details = {
@@ -49,6 +56,7 @@ class TestBudgetNotification(unittest.TestCase):
 
         self.assertFalse(result["should_notify"])
 
+    # Test case: verify the notification does not trigger when already over budget behavior.
     def test_notification_does_not_trigger_when_already_over_budget(self):
 
         details = {
@@ -61,6 +69,7 @@ class TestBudgetNotification(unittest.TestCase):
 
         self.assertFalse(result["should_notify"])
 
+    # Test case: verify the notification does not trigger when preference disabled behavior.
     def test_notification_does_not_trigger_when_preference_disabled(self):
 
         result = check_budget_notification(
@@ -74,6 +83,7 @@ class TestBudgetNotification(unittest.TestCase):
             "Budget notifications are disabled."
         )
 
+    # Test case: verify the notification does not repeat for recorded event behavior.
     def test_notification_does_not_repeat_for_recorded_event(self):
 
         event_id = (
@@ -91,6 +101,7 @@ class TestBudgetNotification(unittest.TestCase):
             "This budget notification was already recorded."
         )
 
+    # Test case: verify the new month has a different event id behavior.
     def test_new_month_has_a_different_event_id(self):
 
         november_result = check_budget_notification(
@@ -111,6 +122,7 @@ class TestBudgetNotification(unittest.TestCase):
             december_result["event_id"]
         )
 
+    # Test case: verify the exact budget limit does not trigger behavior.
     def test_exact_budget_limit_does_not_trigger(self):
 
         details = {
@@ -123,6 +135,7 @@ class TestBudgetNotification(unittest.TestCase):
 
         self.assertFalse(result["should_notify"])
 
+    # Test case: verify the invalid budget amount is rejected behavior.
     def test_invalid_budget_amount_is_rejected(self):
 
         details = {
@@ -130,9 +143,11 @@ class TestBudgetNotification(unittest.TestCase):
             "budget_amount": "0"
         }
 
+        # Use this resource and close it when finished.
         with self.assertRaises(ValueError):
             check_budget_notification(**details)
 
+    # Test case: verify the invalid month is rejected behavior.
     def test_invalid_month_is_rejected(self):
 
         details = {
@@ -140,9 +155,11 @@ class TestBudgetNotification(unittest.TestCase):
             "budget_month": "November 2026"
         }
 
+        # Use this resource and close it when finished.
         with self.assertRaises(ValueError):
             check_budget_notification(**details)
 
 
+# Check the condition before continuing.
 if __name__ == "__main__":
     unittest.main()

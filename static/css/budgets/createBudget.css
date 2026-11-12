@@ -6,6 +6,7 @@
     box-sizing: border-box;
 }
 
+/* Set the appearance of body. */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -41,6 +42,7 @@ body {
     margin-bottom: 25px;
 }
 
+/* Set the appearance of .back-btn. */
 .back-btn:hover {
     text-decoration: underline;
 }
@@ -57,6 +59,7 @@ h1 {
     margin-bottom: 25px;
 }
 
+/* Set the appearance of .form-group label. */
 .form-group label {
     display: block;
     font-size: 17px;
@@ -65,6 +68,7 @@ h1 {
 
 /* Input and dropdown styling */
 .form-group input,
+/* Set the appearance of .form-group select. */
 .form-group select {
     width: 100%;
     padding: 14px 16px;
@@ -77,6 +81,7 @@ h1 {
 
 /* Input focus styling */
 .form-group input:focus,
+/* Set the appearance of .form-group select. */
 .form-group select:focus {
     outline: 2px solid #1558e8;
     border-color: #1558e8;
@@ -84,6 +89,7 @@ h1 {
 
 /* Suggested Budget Section*/
 
+/* Set the appearance of .suggestion-box. */
 .suggestion-box {
     background-color: #eef4ff;
     border: 1px solid #d7e4ff;
@@ -92,12 +98,14 @@ h1 {
     margin-bottom: 25px;
 }
 
+/* Set the appearance of .suggestion-box h3. */
 .suggestion-box h3 {
     margin: 0 0 12px;
     font-size: 17px;
     color: #050b35;
 }
 
+/* Set the appearance of .suggestion-box p. */
 .suggestion-box p {
     font-size: 14px;
     line-height: 1.5;
@@ -134,35 +142,41 @@ h1 {
     cursor: pointer;
 }
 
+/* Set the appearance of #useAmountBtn. */
 #useAmountBtn:hover {
     background-color: #003fc0;
 }
 
 /*Form Feedback*/
 
+/* Set the appearance of #formMessage. */
 #formMessage {
     font-size: 14px;
     line-height: 1.5;
 }
 
+/* Set the appearance of #formMessage. */
 #formMessage:empty {
     display: none;
 }
 
 /* Form Action Buttons */
 
+/* Set the appearance of .form-actions. */
 .form-actions {
     display: flex;
     gap: 25px;
     margin-top: 35px;
 }
 
+/* Set the appearance of .form-actions > *. */
 .form-actions > * {
     min-width: 0;
 }
 
 /* Shared button styling */
 .cancel-btn,
+/* Set the appearance of .save-btn. */
 .save-btn {
     flex: 1;
     text-align: center;
@@ -189,6 +203,7 @@ h1 {
 
 /* Hover effects */
 .cancel-btn:hover,
+/* Set the appearance of .save-btn. */
 .save-btn:hover {
     background-color: #003fc0;
 }
@@ -197,6 +212,7 @@ h1 {
 .back-btn:focus-visible,
 .cancel-btn:focus-visible,
 .save-btn:focus-visible,
+/* Set the appearance of #useAmountBtn. */
 #useAmountBtn:focus-visible {
     outline: 3px solid #1558e8;
     outline-offset: 3px;
@@ -206,25 +222,31 @@ h1 {
 /* Responsive Design */
 
 
+/* Adjust the layout for this screen size. */
 @media (max-width: 600px) {
 
+/* Set the appearance of .budget-page. */
     .budget-page {
         padding: 20px 12px;
     }
 
+/* Set the appearance of .budget-card. */
     .budget-card {
         padding: 30px 22px;
         border-radius: 20px;
     }
 
+/* Set the appearance of h1. */
     h1 {
         font-size: 28px;
     }
 
+/* Set the appearance of .form-actions. */
     .form-actions {
         gap: 12px;
     }
 
+/* Set the appearance of .suggestion-result. */
     .suggestion-result {
         flex-wrap: wrap;
     }
@@ -272,6 +294,7 @@ body {
 
 /* Make all form fields full width */
 .budget-card .form-group input,
+/* Set the appearance of .budget-card .form-group select. */
 .budget-card .form-group select {
     display: block;
     width: 100%;
@@ -289,6 +312,7 @@ body {
     margin-bottom: 25px;
 }
 
+/* Set the appearance of .budget-card .form-group label. */
 .budget-card .form-group label {
     display: block;
     margin-bottom: 12px;
@@ -318,6 +342,7 @@ body {
     display: none;
 }
 
+/* Set the appearance of .budget-card #suggestedAmount. */
 .budget-card #suggestedAmount {
     font-size: 24px;
     font-weight: bold;
@@ -341,6 +366,7 @@ body {
 }
 
 .budget-card .cancel-btn,
+/* Set the appearance of .budget-card .save-btn. */
 .budget-card .save-btn {
     flex: 1;
     padding: 15px;
@@ -353,29 +379,35 @@ body {
     cursor: pointer;
 }
 
+/* Set the appearance of .budget-card .cancel-btn. */
 .budget-card .cancel-btn {
     background: #1558e8;
 }
 
+/* Set the appearance of .budget-card .save-btn. */
 .budget-card .save-btn {
     background: #7399ef;
 }
 
 /* Smaller screens */
 @media (max-width: 600px) {
+/* Set the appearance of .budget-page. */
     .budget-page {
         padding: 20px 12px;
     }
 
+/* Set the appearance of .budget-card. */
     .budget-card {
         padding: 30px 22px;
         border-radius: 20px;
     }
 
+/* Set the appearance of .budget-card h1. */
     .budget-card h1 {
         font-size: 28px;
     }
 
+/* Set the appearance of .budget-card .form-actions. */
     .budget-card .form-actions {
         gap: 12px;
     }

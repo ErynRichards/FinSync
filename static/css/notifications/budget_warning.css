@@ -140,26 +140,31 @@
 /* Mobile responsiveness */
 @media (max-width: 550px) {
 
+/* Set the appearance of .budget-warning. */
     .budget-warning {
         width: 92vw;
         padding: 20px;
         border-radius: 12px;
     }
 
+/* Set the appearance of .budget-warning-content. */
     .budget-warning-content {
         grid-template-columns: 1fr;
         gap: 12px;
     }
 
+/* Set the appearance of .budget-warning h2. */
     .budget-warning h2 {
         font-size: 19px;
     }
 
+/* Set the appearance of .budget-warning dl div. */
     .budget-warning dl div {
         flex-direction: column;
         gap: 5px;
     }
 
+/* Set the appearance of .budget-warning button. */
     .budget-warning button {
         width: 100%;
     }

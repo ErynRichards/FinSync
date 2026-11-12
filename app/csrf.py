@@ -1,5 +1,5 @@
 """
-Minimal CSRF protection (stops other websites from submitting our forms
+CSRF protection (stops other websites from submitting our forms
 on a logged-in user's behalf).
 
 In a template form:   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">

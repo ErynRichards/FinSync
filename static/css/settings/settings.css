@@ -36,6 +36,7 @@
     box-sizing: border-box;
 }
 
+/* Set the appearance of body. */
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -89,6 +90,7 @@ body {
 }
 
 .nav a,
+/* Set the appearance of .logout. */
 .logout {
     color: #f0f2ff;
     text-decoration: none;
@@ -98,15 +100,18 @@ body {
 }
 
 .nav a:hover,
+/* Set the appearance of .logout. */
 .logout:hover {
     background: #252e6b;
 }
 
+/* Set the appearance of .nav a.active. */
 .nav a.active {
     background: #1500b7;
     font-weight: bold;
 }
 
+/* Set the appearance of .logout. */
 .logout {
     margin-top: auto;
 }
@@ -126,17 +131,20 @@ body {
     margin-bottom: 54px;
 }
 
+/* Set the appearance of h1. */
 h1 {
     font-size: 30px;
     margin: 0 0 5px;
 }
 
+/* Set the appearance of .page-header p. */
 .page-header p {
     margin: 0;
     color: var(--muted);
     font-size: 13px;
 }
 
+/* Set the appearance of .header-icons. */
 .header-icons {
     color: var(--text);
 }
@@ -158,17 +166,20 @@ h1 {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
+/* Set the appearance of h2. */
 h2 {
     font-size: 17px;
     margin: 0 0 3px;
 }
 
+/* Set the appearance of .hint. */
 .hint {
     font-size: 12px;
     color: var(--muted);
     margin: 0 0 18px;
 }
 
+/* Set the appearance of .placeholder. */
 .placeholder {
     color: var(--muted);
     font-size: 13px;
@@ -184,11 +195,13 @@ h2 {
     margin: 0 0 12px;
 }
 
+/* Set the appearance of .form-row label. */
 .form-row label {
     font-size: 13px;
     font-weight: bold;
 }
 
+/* Set the appearance of .form-row input. */
 .form-row input {
     min-width: 0;
     width: 100%;
@@ -201,6 +214,7 @@ h2 {
     font-size: 13px;
 }
 
+/* Set the appearance of .form-row input. */
 .form-row input:focus-visible {
     outline: 2px solid var(--primary);
     outline-offset: 2px;
@@ -213,6 +227,7 @@ h2 {
     margin-top: 12px;
 }
 
+/* Set the appearance of button. */
 button {
     background: var(--primary);
     color: white;
@@ -223,10 +238,12 @@ button {
     cursor: pointer;
 }
 
+/* Set the appearance of button. */
 button:hover {
     filter: brightness(1.15);
 }
 
+/* Set the appearance of button. */
 button:disabled {
     opacity: 0.65;
     cursor: wait;
@@ -239,14 +256,17 @@ button:disabled {
     min-height: 0;
 }
 
+/* Set the appearance of .message. */
 .message:empty {
     display: none;
 }
 
+/* Set the appearance of .message.success. */
 .message.success {
     color: var(--message-ok);
 }
 
+/* Set the appearance of .message.error. */
 .message.error {
     color: var(--message-error);
 }
@@ -294,6 +314,7 @@ button:disabled {
     border-color: #5145ed;
 }
 
+/* Set the appearance of .theme-choice input. */
 .theme-choice input {
     position: absolute;
     opacity: 0;
@@ -301,6 +322,7 @@ button:disabled {
     height: 1px;
 }
 
+/* Set the appearance of .theme-choice. */
 .theme-choice:has(input:focus-visible) {
     outline: 3px solid #5145ed;
     outline-offset: 3px;
@@ -315,6 +337,7 @@ button:disabled {
     position: relative;
 }
 
+/* Set the appearance of .switch. */
 .switch::after {
     content: "";
     position: absolute;
@@ -327,10 +350,12 @@ button:disabled {
     transition: transform 0.2s;
 }
 
+/* Set the appearance of .theme-choice input. */
 .theme-choice input:checked + .switch {
     background: #5145ed;
 }
 
+/* Set the appearance of .theme-choice input. */
 .theme-choice input:checked + .switch::after {
     transform: translateX(37px);
 }
@@ -350,15 +375,18 @@ button:disabled {
 
 /* Tablet responsiveness */
 @media (max-width: 850px) {
+/* Set the appearance of .settings-grid. */
     .settings-grid {
         grid-template-columns: 1fr;
         gap: 20px;
     }
 
+/* Set the appearance of .main. */
     .main {
         padding: 30px 22px;
     }
 
+/* Set the appearance of .page-header. */
     .page-header {
         margin-bottom: 30px;
     }
@@ -366,33 +394,40 @@ button:disabled {
 
 /* Mobile responsiveness */
 @media (max-width: 550px) {
+/* Set the appearance of .app. */
     .app {
         display: block;
     }
 
+/* Set the appearance of .sidebar. */
     .sidebar {
         width: 100%;
         padding: 15px;
     }
 
+/* Set the appearance of .brand. */
     .brand {
         margin-bottom: 12px;
     }
 
+/* Set the appearance of .nav. */
     .nav {
         flex-direction: row;
         overflow-x: auto;
     }
 
+/* Set the appearance of .nav a. */
     .nav a {
         white-space: nowrap;
         padding: 9px;
     }
 
+/* Set the appearance of .logout. */
     .logout {
         margin-top: 10px;
     }
 
+/* Set the appearance of .form-row. */
     .form-row {
         grid-template-columns: 1fr;
         gap: 5px;
@@ -439,6 +474,7 @@ button:disabled {
     min-width: 0;
 }
 
+/* Set the appearance of .profile-fields label. */
 .profile-fields label {
     display: block;
     margin: 8px 0 4px;
@@ -462,6 +498,7 @@ button:disabled {
 
 /* Input focus */
 .profile-fields input:focus-visible,
+/* Set the appearance of .profile-save. */
 .profile-save:focus-visible {
     outline: 2px solid var(--primary);
     outline-offset: 2px;
@@ -506,26 +543,31 @@ button:disabled {
     font-size: 12px;
 }
 
+/* Set the appearance of .profile-status[data-error="true"]. */
 .profile-status[data-error="true"] {
     color: var(--message-error);
 }
 
 /* Hide empty messages */
 .profile-error:empty,
+/* Set the appearance of .profile-status. */
 .profile-status:empty {
     display: none;
 }
 
 /* Responsive Profile Information form */
 @media (max-width: 550px) {
+/* Set the appearance of #profile-form. */
     #profile-form {
         grid-template-columns: 1fr;
     }
 
+/* Set the appearance of .profile-fields input. */
     .profile-fields input {
         max-width: none;
     }
 
+/* Set the appearance of .profile-save. */
     .profile-save {
         justify-self: end;
     }

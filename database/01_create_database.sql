@@ -2,6 +2,7 @@
 -- Run once as root in MySQL Workbench (File > Open SQL Script > Execute).
 -- Change the password below first, and use the same one for DB_PASSWORD in .env.
 
+-- Create the MySQL database used by FinSync.
 CREATE DATABASE IF NOT EXISTS finsync
     CHARACTER SET utf8mb4
     COLLATE utf8mb4_unicode_ci;

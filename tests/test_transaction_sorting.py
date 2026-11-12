@@ -6,8 +6,10 @@ import unittest
 from backend.transactions.transaction_sorting import sort_transactions
 
 
+# Define TestTransactionSorting for this part of the program.
 class TestTransactionSorting(unittest.TestCase):
 
+    # Test case: verify the transactions sorted newest first behavior.
     def test_transactions_sorted_newest_first(self):
 
         # Create sample transactions to simulate FinSync user activity.
@@ -55,6 +57,7 @@ class TestTransactionSorting(unittest.TestCase):
         # Check whether the actual order matches our expected order.
         self.assertEqual(actual_order, expected_order)
 
+    # Test case: verify the original transactions remain unchanged behavior.
     def test_original_transactions_remain_unchanged(self):
 
         # Create a small sample list of transactions.

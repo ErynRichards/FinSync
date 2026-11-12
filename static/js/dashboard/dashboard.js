@@ -16,6 +16,7 @@ let username = window.finSyncUsername || "User";
 
 // Display the user's first initial in the profile icon.
 function updateProfile() {
+    // Find the part of the page this code will update.
     const profile = document.querySelector(".profile");
 
     if (profile) {
@@ -57,6 +58,7 @@ function formatCurrency(amount) {
 }
 
 // Update the financial summary when new data becomes available.
+
 function updateFinancialSummary(data) {
     // Keep the latest figures for when the Dashboard is opened again.
     dashboardData = data;
@@ -82,6 +84,7 @@ function updateFinancialSummary(data) {
 
 /* DASHBOARD PAGE */
 
+// Handle this part of the page.
 function loadDashboard() {
     // Update the Dashboard heading and description.
     document.getElementById("page-title").textContent =
@@ -367,9 +370,11 @@ function clearTransactionFilters() {
 
 /* NAVIGATION BUTTON EVENTS */
 
+// Find the part of the page this code will update.
 const navButtons = document.querySelectorAll(".nav-btn");
 
 navButtons.forEach(function (button) {
+    // Run this code when the user interacts with the page.
     button.addEventListener("click", function () {
 
         // Open Transactions

@@ -2,6 +2,7 @@
 (() => {
   "use strict";
 
+  // Find the part of the page this code will update.
   const section = document.querySelector(".spending-category");
   if (!section) return;
 
@@ -10,6 +11,7 @@
   const status = section.querySelector("#spending-status");
   const breakdown = section.querySelector("#spending-breakdown");
   const period = section.querySelector("#spending-period");
+  // Find the part of the page this code will update.
   const month = document.querySelector("#report-month");
 
   const rand = new Intl.NumberFormat("en-ZA", {
@@ -18,16 +20,27 @@
   });
 
   const colors = {
-    shopping: "#8de0e6",
-    food: "#61b0ca",
-    bills: "#4484ab",
-    medicine: "#385988",
-    others: "#303262"
-  };
+    groceries: "#3498DB",       // Blue
+    entertainment: "#9B59B6",   // Purple
+    utilities: "#2ECC71",       // Green
+    "other expense": "#E74C3C", // Red
+    transport: "#F39C12",       // Orange
+    housing: "#1ABC9C",         // Turquoise
+    education: "#F1C40F",       // Yellow
+    shopping: "#E91E63",        // Pink
+    food: "#8E44AD",            // Dark purple
+    bills: "#16A085",           // Teal
+    medicine: "#D35400",        // Dark orange
+    others: "#7F8C8D"           // Grey
+};
 
-  const extraColors = [
-    "#467b9a", "#71518e", "#34908c", "#a56072"
-  ];
+const extraColors = [
+    "#2E86C1",
+    "#AF7AC5",
+    "#48C9B0",
+    "#E59866",
+    "#F4D03F"
+];
 
   let chart;
   let categories = [];
@@ -303,7 +316,9 @@
     );
   }
 
+  // Run this code when the user interacts with the page.
   period.addEventListener("change", changeFilters);
+  // Run this code when the user interacts with the page.
   month?.addEventListener("change", changeFilters);
 
   if (section.hasAttribute("data-preview")) {
@@ -323,6 +338,7 @@
   let trendChart;
   let comparisonChart;
 
+  // Find the part of the page this code will update.
   const period = document.querySelector("#reportPeriod");
 
   const tabs = [
@@ -384,10 +400,12 @@
 
   // Add click and keyboard navigation to Reports tabs.
   tabs.forEach((tab, index) => {
+    // Run this code when the user interacts with the page.
     tab.addEventListener("click", () => {
       activateTab(tab.dataset.reportTab);
     });
 
+    // Run this code when the user interacts with the page.
     tab.addEventListener("keydown", event => {
       if (![
         "ArrowLeft", "ArrowRight", "Home", "End"

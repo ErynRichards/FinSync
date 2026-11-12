@@ -6,6 +6,7 @@ import unittest
 from backend.transactions.transaction_validation import validate_transaction
 
 
+# Define TestTransactionValidation for this part of the program.
 class TestTransactionValidation(unittest.TestCase):
 
     # Test that a correctly completed transaction is accepted.
@@ -31,6 +32,7 @@ class TestTransactionValidation(unittest.TestCase):
             "transaction_date": "2026-11-01"
         }
 
+        # Collect any input errors to show the user.
         errors = validate_transaction(transaction)
 
         self.assertIn(
@@ -48,6 +50,7 @@ class TestTransactionValidation(unittest.TestCase):
             "transaction_date": "2026-11-02"
         }
 
+        # Collect any input errors to show the user.
         errors = validate_transaction(transaction)
 
         self.assertIn(
@@ -65,6 +68,7 @@ class TestTransactionValidation(unittest.TestCase):
             "transaction_date": "2026-15-40"
         }
 
+        # Collect any input errors to show the user.
         errors = validate_transaction(transaction)
 
         self.assertIn(
@@ -82,6 +86,7 @@ class TestTransactionValidation(unittest.TestCase):
             "transaction_date": "2026-11-03"
         }
 
+        # Collect any input errors to show the user.
         errors = validate_transaction(transaction)
 
         self.assertIn(
@@ -98,6 +103,7 @@ class TestTransactionValidation(unittest.TestCase):
             "transaction_type": "expense"
         }
 
+        # Collect any input errors to show the user.
         errors = validate_transaction(transaction)
 
         self.assertIn(
@@ -115,6 +121,7 @@ class TestTransactionValidation(unittest.TestCase):
             "transaction_date": "2026-11-03"
         }
 
+        # Collect any input errors to show the user.
         errors = validate_transaction(transaction)
 
         self.assertIn(
@@ -132,6 +139,7 @@ class TestTransactionValidation(unittest.TestCase):
             "transaction_date": "2026-11-03"
         }
 
+        # Collect any input errors to show the user.
         errors = validate_transaction(transaction)
 
         self.assertIn(

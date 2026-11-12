@@ -1,6 +1,10 @@
+// Run this code when the user interacts with the page.
 document.addEventListener("DOMContentLoaded", function() {
     // mobile navigation menu
+
     const menuToggle= document.querySelector(".menu-toggle");
+
+    // Find the part of the page this code will update.
     const navLinks = document.querySelector(".nav-links");
     
     if (menuToggle && navLinks) {
@@ -15,7 +19,9 @@ document.addEventListener("DOMContentLoaded", function() {
         
         // close menu after clicking a navigation Link
         navLinks.querySelectorAll("a").forEach(function (link){
+
             link.addEventListener("click", function(){
+
                 navLinks.classList.remove("active");
                 menuToggle.setAttribute("aria-expanded", "false");
             });

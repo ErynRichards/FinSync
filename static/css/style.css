@@ -1,5 +1,6 @@
 /* style.css - simple placeholder styling. Teammates can replace it with their own. */
 
+/* Set the appearance of body. */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -17,12 +18,14 @@ body {
   background: white;
   border-bottom: 1px solid #d1d5db;
 }
+/* Set the appearance of .brand. */
 .brand {
   font-weight: bold;
   font-size: 1.2rem;
   color: #0f766e;
   text-decoration: none;
 }
+/* Set the appearance of .topbar nav a. */
 .topbar nav a {
   margin-left: 16px;
   color: #1f2937;
@@ -35,12 +38,14 @@ body {
   margin: 40px auto;
   padding: 0 16px;
 }
+/* Set the appearance of .card. */
 .card {
   background: white;
   border: 1px solid #d1d5db;
   border-radius: 10px;
   padding: 28px;
 }
+/* Set the appearance of h1. */
 h1 {
   margin-top: 0;
   font-size: 1.5rem;
@@ -52,6 +57,7 @@ label {
   margin: 14px 0 4px;
   font-weight: bold;
 }
+/* Set the appearance of input. */
 input {
   width: 100%;
   box-sizing: border-box;
@@ -60,6 +66,7 @@ input {
   border-radius: 6px;
   font-size: 1rem;
 }
+/* Set the appearance of button, .button. */
 button, .button {
   display: inline-block;
   margin-top: 18px;
@@ -72,15 +79,19 @@ button, .button {
   text-decoration: none;
   cursor: pointer;
 }
+/* Set the appearance of button. */
 button:hover, .button:hover {
   background: #115e59;
 }
+/* Set the appearance of a. */
 a {
   color: #0f766e;
 }
+/* Set the appearance of .muted. */
 .muted {
   color: #6b7280;
 }
+/* Set the appearance of .small. */
 .small {
   font-size: 0.85rem;
 }
@@ -91,14 +102,17 @@ a {
   border-radius: 6px;
   margin: 12px 0;
 }
+/* Set the appearance of .alert ul. */
 .alert ul {
   margin: 0;
   padding-left: 18px;
 }
+/* Set the appearance of .alert-error. */
 .alert-error {
   background: #fef2f2;
   color: #b91c1c;
 }
+/* Set the appearance of .alert-success. */
 .alert-success {
   background: #ecfdf5;
   color: #047857;

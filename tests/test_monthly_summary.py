@@ -5,9 +5,11 @@ import pytest
 from backend.transactions.monthly_summary import calculate_monthly_summary
 
 
+# Test case: verify the monthly summary calculates income and expenses behavior.
 def test_monthly_summary_calculates_income_and_expenses():
     """Check that income and expenses are correctly grouped by month."""
 
+    # Keep these records for the next step.
     transactions = [
         {
             "transaction_id": 1,
@@ -32,9 +34,11 @@ def test_monthly_summary_calculates_income_and_expenses():
     assert result[0]["total_expenses"] == 1200
 
 
+# Test case: verify the monthly summary orders months chronologically behavior.
 def test_monthly_summary_orders_months_chronologically():
     """Check that months are returned from oldest to newest."""
 
+    # Keep these records for the next step.
     transactions = [
         {
             "transaction_id": 1,
@@ -58,6 +62,7 @@ def test_monthly_summary_orders_months_chronologically():
     assert result[1]["month"] == "2026-11"
 
 
+# Test case: verify the monthly summary handles empty transactions behavior.
 def test_monthly_summary_handles_empty_transactions():
     """Check that an empty transaction list returns an empty result."""
 
@@ -66,9 +71,11 @@ def test_monthly_summary_handles_empty_transactions():
     assert result == []
 
 
+# Test case: verify the monthly summary rejects invalid transaction type behavior.
 def test_monthly_summary_rejects_invalid_transaction_type():
     """Check that unsupported transaction types are rejected."""
 
+    # Keep these records for the next step.
     transactions = [
         {
             "transaction_id": 1,
@@ -79,5 +86,6 @@ def test_monthly_summary_rejects_invalid_transaction_type():
         }
     ]
 
+    # Use this resource and close it when finished.
     with pytest.raises(ValueError):
         calculate_monthly_summary(transactions)

@@ -4,6 +4,7 @@
 
 const signupForm = document.getElementById("signupForm");
 if (signupForm) {
+    // Run this code when the user interacts with the page.
     signupForm.addEventListener("submit", function(event) {
         const password = document.getElementById("signupPassword").value;
         const confirmation = document.getElementById("confirmPassword").value;

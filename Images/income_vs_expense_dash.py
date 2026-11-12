@@ -1,8 +1,14 @@
+# Load the tools needed in this file.
 import matplotlib
 matplotlib.use("Agg")
 
+# Load the tools needed in this file.
 import matplotlib.pyplot as plt
+
+# Use functions and classes from another file.
 from datetime import date, timedelta
+
+# Use functions and classes from another file.
 from io import BytesIO
 
 
@@ -10,7 +16,9 @@ from io import BytesIO
 # MISHAYLE'S PART calculates the daily data before this function is called.
 def create_cash_flow_graph(daily_data):
     dates = list(daily_data.keys())
+    # Save an amount for a calculation or database update.
     income = [float(daily_data[day]["income"]) for day in dates]
+    # Save an amount for a calculation or database update.
     expenses = [float(daily_data[day]["expenses"]) for day in dates]
     net_cash_flow = [float(daily_data[day]["net_cash_flow"]) for day in dates]
     dates = [date.fromisoformat(day) for day in dates]
@@ -97,8 +105,10 @@ def create_cash_flow_graph(daily_data):
         bbox_inches="tight"
     )
 
+    # Close this resource when finished.
     plt.close(fig)
 
     image.seek(0)
 
+    # Send the result back to the code that called this function.
     return image

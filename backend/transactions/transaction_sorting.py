@@ -1,4 +1,5 @@
 
+# Handle sort transactions requests or data.
 def sort_transactions(transactions):
     """
     Sort transactions from newest to oldest.

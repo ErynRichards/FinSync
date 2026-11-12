@@ -13,10 +13,13 @@ This module does not save transactions or display pop-ups.
 Those responsibilities are handled during integration.
 """
 
+# Use functions and classes from another file.
 from datetime import datetime
+# Use functions and classes from another file.
 from decimal import Decimal, InvalidOperation
 
 
+# Handle  to decimal requests or data.
 def _to_decimal(value, field_name):
     """
     Convert a supplied financial value to Decimal.
@@ -25,17 +28,24 @@ def _to_decimal(value, field_name):
     when working with money.
     """
 
+    # Try the operation and handle any errors.
     try:
+        # Save an amount for a calculation or database update.
         amount = Decimal(str(value))
     except (InvalidOperation, TypeError, ValueError):
+        # Stop the operation and report an error.
         raise ValueError(f"{field_name} must be a valid number.")
 
+    # Check the condition before continuing.
     if not amount.is_finite():
+        # Stop the operation and report an error.
         raise ValueError(f"{field_name} must be a finite number.")
 
+    # Send the result back to the code that called this function.
     return amount
 
 
+# Handle check budget notification requests or data.
 def check_budget_notification(
     user_id,
     budget_id,
@@ -65,34 +75,45 @@ def check_budget_notification(
 
     # Validate the identifiers.
     if user_id is None or str(user_id).strip() == "":
+        # Stop the operation and report an error.
         raise ValueError("A valid user ID is required.")
 
+    # Check the condition before continuing.
     if budget_id is None or str(budget_id).strip() == "":
+        # Stop the operation and report an error.
         raise ValueError("A valid budget ID is required.")
 
     # Validate the month format.
     try:
         datetime.strptime(budget_month, "%Y-%m")
     except (ValueError, TypeError):
+        # Stop the operation and report an error.
         raise ValueError("Budget month must use YYYY-MM format.")
 
     # Convert financial values to Decimal.
     budget = _to_decimal(budget_amount, "Budget amount")
+    # Save an amount for a calculation or database update.
     previous_total = _to_decimal(
         previous_spending, "Previous spending"
     )
+    # Save an amount for a calculation or database update.
     current_total = _to_decimal(
         current_spending, "Current spending"
     )
 
     # Validate the financial values.
     if budget <= Decimal("0"):
+        # Stop the operation and report an error.
         raise ValueError("Budget amount must be greater than zero.")
 
+    # Check the condition before continuing.
     if previous_total < Decimal("0"):
+        # Stop the operation and report an error.
         raise ValueError("Previous spending cannot be negative.")
 
+    # Check the condition before continuing.
     if current_total < Decimal("0"):
+        # Stop the operation and report an error.
         raise ValueError("Current spending cannot be negative.")
 
     # Generate a unique event ID for this user's budget and month.
@@ -106,6 +127,7 @@ def check_budget_notification(
 
     # Check whether the user has enabled budget warnings.
     if not notifications_enabled:
+        # Send the result back to the code that called this function.
         return {
             "should_notify": False,
             "reason": "Budget notifications are disabled.",
@@ -114,6 +136,7 @@ def check_budget_notification(
 
     # Check whether this event has already been recorded.
     if event_id in notified_event_ids:
+        # Send the result back to the code that called this function.
         return {
             "should_notify": False,
             "reason": "This budget notification was already recorded.",
@@ -126,7 +149,9 @@ def check_budget_notification(
             previous_total <= budget < current_total
     )
 
+    # Check the condition before continuing.
     if not crossed_budget_limit:
+        # Send the result back to the code that called this function.
         return {
             "should_notify": False,
             "reason": "No new budget limit crossing occurred.",
@@ -136,6 +161,7 @@ def check_budget_notification(
     # Calculate how much spending is above the budget.
     amount_over_budget = current_total - budget
 
+    # Send the result back to the code that called this function.
     return {
         "should_notify": True,
         "reason": "Monthly budget exceeded.",

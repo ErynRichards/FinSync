@@ -4,6 +4,7 @@
 from backend.transactions.transaction_sorting import sort_transactions
 
 
+# Handle get recent transactions requests or data.
 def get_recent_transactions(transactions, limit=5):
     """
     Retrieve the most recent financial transactions.
@@ -19,6 +20,7 @@ def get_recent_transactions(transactions, limit=5):
 
     # Check that the requested limit is a valid positive number.
     if not isinstance(limit, int) or isinstance(limit, bool) or limit < 0:
+        # Stop the operation and report an error.
         raise ValueError("The limit must be a non-negative integer.")
 
     # First arrange all transactions from newest to oldest.
@@ -28,4 +30,5 @@ def get_recent_transactions(transactions, limit=5):
     # [:5] means we take the first five items from the sorted list.
     recent_transactions = sorted_transactions[:limit]
 
+    # Send the result back to the code that called this function.
     return recent_transactions

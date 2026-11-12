@@ -7,19 +7,31 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FinSync | Reports</title>
+
+    <!-- Load styling or another page resource. -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/reports/reports.css') }}">
+
     <!-- REECE: Shared light and dark mode styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
-  <!-- Load Chart.js first so reports.js can use it to draw the doughnut. -->
+
+    <!-- Load Chart.js first so reports.js can use it to draw the doughnut. -->
   <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
+
+    <!-- Load JavaScript used by this page. -->
   <script defer src="{{ url_for('static', filename='js/reports/reports.js') }}"></script>
+
+    <!-- Load JavaScript used by this page. -->
   <script defer src="{{ url_for('static', filename='js/reports/reports_api.js') }}"></script>
+
 </head>
 <body class="reports-preview">
   <div class="reports-shell">
+
     <!-- Shared FinSync navigation -->
     <aside class="sidebar">
       <div class="logo"><img src="{{ url_for('static', filename='images/transactions/logo.png') }}" alt="FinSync logo"><h2>FinSync</h2></div>
+
+        <!-- Links to other pages. -->
       <nav aria-label="FinSync navigation">
         <a class="nav-btn" href="/dashboard">Dashboard</a>
         <a class="nav-btn" href="/transactions">Transactions</a>
@@ -31,22 +43,33 @@
       <a class="logout" href="/logout">Logout</a>
     </aside>
 
+
+<!-- Show the main content of this page. -->
     <main class="reports-main">
+
+<!-- Show the page heading and navigation. -->
       <header>
         <div class="reports-profile" aria-hidden="true"><svg width="24" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M18 8a6 6 0 0 0-12 0v4c0 2-1 4-3 6h18c-2-2-3-4-3-6zM10 20a2 2 0 0 0 4 0M11 2V1h2v1"/></svg><b>J</b></div>
         <h1>Reports</h1>
         <p>Analyze your spending to see your financial trends</p>
       </header>
+
       <div class="reports-month">
         <select id="report-month" aria-label="Report month">
-          
+
         </select>
       </div>
       <div class="reports-tabs" role="tablist" aria-label="Report type">
+        <!-- Run an action when this button is clicked. -->
         <button type="button" role="tab" id="tab-category" aria-controls="panel-category" aria-selected="true" tabindex="0" data-report-tab="category">Spending by Category</button>
+
+        <!-- Run an action when this button is clicked. -->
         <button type="button" role="tab" id="tab-trend" aria-controls="panel-trend" aria-selected="false" tabindex="-1" data-report-tab="trend">Monthly Trend</button>
+
+          <!-- Run an action when this button is clicked. -->
         <button type="button" role="tab" id="tab-comparison" aria-controls="panel-comparison" aria-selected="false" tabindex="-1" data-report-tab="comparison">Income vs Expenses</button>
       </div>
+
       <div class="report-period-control" id="report-period-control" hidden>
         <label for="reportPeriod">Reporting Period</label>
         <select id="reportPeriod">
@@ -66,6 +89,8 @@
             </select>
           </div>
           <div id="spending-plot" class="spending-plot" hidden>
+
+<!-- Canvas used by JavaScript to draw a chart. -->
             <canvas id="spending-chart" role="img"
                     aria-label="Expense shares by category. Exact values follow in the category list."></canvas>
           </div>
@@ -75,6 +100,8 @@
         <!-- JavaScript adds a name, rand amount, percentage and bar for each category. -->
         <ul id="spending-breakdown" class="spending-breakdown" aria-label="Expense category totals" hidden></ul>
       </section>
+
+<!-- Group related content on the page. -->
       <section id="panel-trend" class="report-chart-section" role="tabpanel" aria-labelledby="tab-trend" hidden>
         <div class="report-chart-card">
           <h2>Monthly Trend</h2>
@@ -83,6 +110,8 @@
           <p class="report-empty" id="trend-empty" hidden>No monthly expense information available.</p>
         </div>
       </section>
+
+<!-- Group related content on the page. -->
       <section id="panel-comparison" class="report-chart-section" role="tabpanel" aria-labelledby="tab-comparison" hidden>
         <div class="report-chart-card">
           <h2>Income vs Expenses</h2>

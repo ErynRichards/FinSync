@@ -234,23 +234,33 @@ document.getElementById("saveThemeButton")
   const save = document.getElementById("saveNotificationsButton");
   const message = document.getElementById("notificationsMessage");
   if (!budget || !savings || !save) return;
+
   try {
     const response = await fetch("/api/settings/preferences", {credentials:"same-origin"});
     if (!response.ok) throw new Error("Unable to load preferences");
+
     const data = await response.json();
     budget.checked = Boolean(data.budget_notifications);
     savings.checked = Boolean(data.savings_notifications);
+
   } catch(e) { message.textContent = e.message; }
+
+  // Run this code when the user interacts with the page.
   save.addEventListener("click", async function () {
     save.disabled = true;
+
     try {
       const response = await fetch("/api/settings/preferences", {
         method:"PUT", credentials:"same-origin", headers:{"Content-Type":"application/json"},
         body:JSON.stringify({budget_notifications:budget.checked,savings_notifications:savings.checked})
+
       });
+
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || "Could not save preferences");
+
       message.textContent = "Notification preferences saved.";
+
     } catch(e) { message.textContent = e.message; }
     finally { save.disabled = false; }
   });

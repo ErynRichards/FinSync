@@ -12,41 +12,66 @@ const demoGoals = [
   { name: "Save for a laptop", description: "For studies and personal use", savedAmount: 7500, targetAmount: 7500, targetDate: "2026-10-01" }
 ];
 
+// Find the part of the page this code will update.
 const goalList = document.querySelector("#goal-list");
+
+// Find the part of the page this code will update.
 const cardTemplate = document.querySelector("#goal-card");
+
+// Find the part of the page this code will update.
 const sortGoals = document.querySelector("#sort-goals");
+
+// Find the part of the page this code will update.
 const goalsMessage = document.querySelector("#goals-message");
+
 let goals = [];
 let selectedGoalId = null;
+
+// Find the part of the page this code will update.
 const contributionDialog = document.querySelector("#contribution-dialog");
+
+// Find the part of the page this code will update.
 const contributionForm = document.querySelector("#contribution-form");
+
+// Find the part of the page this code will update.
 const contributionAmount = document.querySelector("#contribution-amount");
+
+// Find the part of the page this code will update.
 const contributionError = document.querySelector("#contribution-error");
+
+// Find the part of the page this code will update.
 const contributionButton = document.querySelector("#save-contribution");
 
 const numberFormat = new Intl.NumberFormat("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const dateFormat = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 
+// Handle this part of the page.
 function rand(amount) {
   return "R " + numberFormat.format(amount).replace(/,/g, " ");
 }
 
+// Handle this part of the page.
 function isComplete(goal) {
   return goal.savedAmount >= goal.targetAmount;
 }
 
+// Handle this part of the page.
 function progressOf(goal) {
+
   // A goal can exceed its target, but the progress bar stops at 100%.
   return Math.min(100, goal.savedAmount / goal.targetAmount * 100);
 }
 
+// Handle this part of the page.
 function showMessage(element, message) {
   element.textContent = message;
   element.hidden = message === "";
 }
 
+// Handle this part of the page.
 function renderGoals() {
   const direction = sortGoals.value === "latest" ? -1 : 1;
+
   // Copy the array before sorting. Keep completed goals below active goals,
   // like the design, and sort target dates inside each group.
   const sortedGoals = [...goals].sort((first, second) =>
@@ -56,20 +81,25 @@ function renderGoals() {
 
   const cards = document.createDocumentFragment();
   for (const goal of sortedGoals) {
+
     const card = cardTemplate.content.cloneNode(true);
     const description = goal.description || goal.category || "";
     const complete = isComplete(goal);
     const progress = progressOf(goal);
+
     // An unfinished goal should never display 100% due to rounding.
     const percent = complete ? 100 : Math.min(99, Math.round(progress));
 
     // textContent displays backend values as text, even if they contain HTML.
     card.querySelector("h2").textContent = goal.name;
+
     const descriptionElement = card.querySelector(".goal-description");
+
     descriptionElement.textContent = description;
     descriptionElement.hidden = !description;
 
     const badge = card.querySelector(".goal-status");
+
     badge.textContent = complete ? "Completed" : "In Progress";
     badge.classList.toggle("completed", complete);
     card.querySelector(".goal-card").classList.toggle("completed", complete);
@@ -77,11 +107,15 @@ function renderGoals() {
     card.querySelector(".goal-percent").textContent = percent + "%";
     const bar = card.querySelector("progress");
     bar.value = progress;
+
     bar.setAttribute("aria-label", goal.name + " savings progress");
     card.querySelector(".goal-saved").textContent = rand(goal.savedAmount) + " saved";
+
     // ERYN: Add Savings button, connected to Mishayle's Flask endpoint.
     const contributeButton = card.querySelector(".contribute-btn");
     contributeButton.hidden = complete;
+
+    // Run this code when the user interacts with the page.
     contributeButton.addEventListener("click", () => openContribution(goal.id));
     card.querySelector(".goal-target").textContent = rand(goal.targetAmount) + " target";
 
@@ -127,6 +161,7 @@ function renderGoals() {
 // Convert amounts to numbers in case the database sends decimals as strings.
 // Update this function if your teammate's API uses different field names.
 
+// Handle this part of the page.
 function readGoal(goal) {
     const savedAmount = Number(goal.saved_amount);
     const targetAmount = Number(goal.target_amount);
@@ -148,6 +183,7 @@ function readGoal(goal) {
 }
 
 
+// Handle this part of the page.
 async function loadGoals() {
   if (!goalsUrl) {
     goals = [...demoGoals];
@@ -170,6 +206,7 @@ async function loadGoals() {
   }
 }
 
+// Run this code when the user interacts with the page.
 sortGoals.addEventListener("change", renderGoals);
 
 loadGoals();
@@ -181,6 +218,7 @@ document.querySelector("#add-goal").addEventListener("click", () => { window.loc
 function openContribution(goalId) {
   const goal = goals.find(item => String(item.id) === String(goalId));
   if (!goal || isComplete(goal)) return;
+
   selectedGoalId = goal.id;
   contributionForm.reset();
   contributionError.textContent = "";
@@ -189,6 +227,7 @@ function openContribution(goalId) {
   contributionDialog.showModal();
 }
 
+// Run this code when the user interacts with the page.
 contributionForm.addEventListener("submit", async event => {
   event.preventDefault();
   const goal = goals.find(item => String(item.id) === String(selectedGoalId));
@@ -202,21 +241,28 @@ contributionForm.addEventListener("submit", async event => {
   }
   contributionButton.disabled = true;
   contributionError.textContent = "";
+
   try {
     const response = await fetch("/goals/" + encodeURIComponent(goal.id) + "/contributions", {
       method: "POST", credentials: "same-origin",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({amount: amount})
     });
+
     const result = await response.json();
+
     if (!response.ok) throw new Error(result.error || "Could not add savings");
     contributionDialog.close();
     await loadGoals();
+
   } catch (error) {
     contributionError.textContent = error.message;
+
   } finally {
     contributionButton.disabled = false;
   }
 });
 document.querySelector("#cancel-contribution").addEventListener("click", () => contributionDialog.close());
+
+// Run this code when the user interacts with the page.
 contributionDialog.addEventListener("close", () => { selectedGoalId = null; });

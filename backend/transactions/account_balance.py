@@ -6,6 +6,7 @@ from decimal import Decimal, InvalidOperation
 from backend.transactions.transaction_validation import validate_transaction
 
 
+# Handle calculate account balance requests or data.
 def calculate_account_balance(opening_balance, transactions):
     """
     Calculate an account's current balance using its opening balance
@@ -24,17 +25,21 @@ def calculate_account_balance(opening_balance, transactions):
 
     # Convert the opening balance into a Decimal value.
     try:
+        # Save an amount for a calculation or database update.
         opening_balance = Decimal(str(opening_balance))
 
         # Ensure the opening balance is a valid finite number.
         if not opening_balance.is_finite():
+            # Stop the operation and report an error.
             raise ValueError("Opening balance must be a valid number.")
 
     except (InvalidOperation, ValueError):
+        # Stop the operation and report an error.
         raise ValueError("Opening balance must be a valid number.")
 
     # Check that the transaction information is supplied as a list.
     if not isinstance(transactions, list):
+        # Stop the operation and report an error.
         raise ValueError("Transactions must be provided as a list.")
 
     # Start calculating from the account's opening balance.
@@ -48,6 +53,7 @@ def calculate_account_balance(opening_balance, transactions):
 
         # Reject invalid transactions instead of using incorrect data.
         if errors:
+            # Stop the operation and report an error.
             raise ValueError(
                 f"Transaction {index + 1} is invalid: {'; '.join(errors)}"
             )

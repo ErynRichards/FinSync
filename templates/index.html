@@ -6,17 +6,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FinSync | Take Control of Your Finances</title>
 
+<!-- Load styling or another page resource. -->
 <link rel="stylesheet" href="{{ url_for('static', filename='css/landingStyle.css') }}">
+<!-- Load JavaScript used by this page. -->
 <script src="{{ url_for('static', filename='js/landingScript.js') }}" defer></script>
 
 </head>
 
 
-<body> 
+<body>
 
 
 <!-- navigation bar -->
 <header class="header">
+<!-- Links to other pages. -->
 <nav class="navbar">
 
 <a href="{{ url_for('index') }}" class="logo">
@@ -24,7 +27,7 @@ FinSync
 
 </a>
 
-<!-- mobile menu button --> 
+<!-- mobile menu button -->
 <button class="menu-toggle"
 aria-label="Toggle navigation"
 aria-expanded="false"
@@ -51,6 +54,7 @@ Login
 
 
 
+<!-- Show the main content of this page. -->
 <main>
 <!-- home/landing page -->
 <section id="home" class="hero">

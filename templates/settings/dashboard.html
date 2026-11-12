@@ -7,6 +7,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FinSync - Settings</title>
+<!-- Load JavaScript used by this page. -->
   <script>
     try {
       document.documentElement.dataset.theme =
@@ -16,10 +17,17 @@
       document.documentElement.dataset.theme = 'light';
     }
   </script>
+
+<!-- Load styling or another page resource. -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/settings/settings.css') }}">
+
     <!-- REECE: Shared light and dark mode styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
+
+    <!-- Load JavaScript used by this page. -->
   <script src="{{ url_for('static', filename='js/settings/settings.js') }}" defer></script>
+
+    <!-- Load JavaScript used by this page. -->
   <script src="{{ url_for('static', filename='js/settings/profile.js') }}" defer></script>
 </head>
 
@@ -28,6 +36,7 @@
 
     <!-- FinSync sidebar -->
     <aside class="sidebar" aria-label="Main navigation">
+
       <!-- FinSync Logo and Brand Name -->
 <a class="brand" href="/dashboard">
 
@@ -39,6 +48,7 @@
 
 </a>
 
+<!-- Links to other pages. -->
       <nav class="nav">
         <a href="/dashboard">Dashboard</a>
         <a href="/transactions">Transactions</a>
@@ -55,6 +65,7 @@
     <!-- Main Settings content -->
     <main class="main">
 
+<!-- Show the page heading and navigation. -->
       <header class="page-header">
         <div>
           <h1>Settings</h1>
@@ -65,7 +76,7 @@
 
       <div class="settings-grid">
 
-        
+
 <!-- Michalyn: Profile Information -->
 <section class="card profile-card" aria-labelledby="profile-title">
 
@@ -79,6 +90,7 @@
 
             <!-- Full Name -->
             <label for="profile-name">Full Name</label>
+                <!-- Let the user enter or choose a value. -->
             <input id="profile-name"
                    name="fullName"
                    autocomplete="name"
@@ -90,6 +102,7 @@
 
             <!-- Email Address -->
             <label for="profile-email">Email address</label>
+                <!-- Let the user enter or choose a value. -->
             <input id="profile-email"
                    name="email"
                    type="email"
@@ -102,6 +115,7 @@
 
             <!-- Contact Number -->
             <label for="profile-phone">Contact number (optional)</label>
+                <!-- Let the user enter or choose a value. -->
             <input id="profile-phone"
                    name="contactNumber"
                    type="tel"
@@ -137,10 +151,12 @@
           <h2 id="password-heading">Change Password</h2>
           <p class="hint">Keep your account secure</p>
 
+                <!-- Collect information entered by the user. -->
           <form id="passwordForm" novalidate>
 
             <div class="form-row">
               <label for="currentPassword">Current Password</label>
+<!-- Let the user enter or choose a value. -->
               <input
                 id="currentPassword"
                 type="password"
@@ -151,6 +167,7 @@
 
             <div class="form-row">
               <label for="newPassword">New Password</label>
+<!-- Let the user enter or choose a value. -->
               <input
                 id="newPassword"
                 type="password"
@@ -162,6 +179,7 @@
 
             <div class="form-row">
               <label for="confirmPassword">Confirm New Password</label>
+<!-- Let the user enter or choose a value. -->
               <input
                 id="confirmPassword"
                 type="password"
@@ -171,6 +189,7 @@
             </div>
 
             <div class="form-actions">
+<!-- Run an action when this button is clicked. -->
               <button type="submit" id="changePasswordButton">
                 Change Password
               </button>
@@ -196,6 +215,7 @@
             <!-- Light Mode -->
             <label class="theme-choice light-preview">
               <span>Light Mode</span>
+<!-- Let the user enter or choose a value. -->
               <input type="radio" name="theme" value="light">
               <span class="switch" aria-hidden="true"></span>
             </label>
@@ -203,12 +223,14 @@
             <!-- Dark Mode -->
             <label class="theme-choice dark-preview">
               <span>Dark Mode</span>
+<!-- Let the user enter or choose a value. -->
               <input type="radio" name="theme" value="dark">
               <span class="switch" aria-hidden="true"></span>
             </label>
           </fieldset>
 
           <div class="form-actions">
+<!-- Run an action when this button is clicked. -->
             <button type="button" id="saveThemeButton">
               Save Changes
             </button>
@@ -219,6 +241,7 @@
              role="status"
              aria-live="polite"></p>
         </section>
+<!-- Group related content on the page. -->
         <section class="card" aria-labelledby="notifications-heading">
           <h2 id="notifications-heading">Notification Preferences</h2>
           <p class="hint">Choose which alerts you want to receive</p>

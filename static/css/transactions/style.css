@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+/* Set the appearance of body. */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -170,6 +171,7 @@ body {
     margin-bottom: 25px;
 }
 
+/* Set the appearance of .transaction-actions button. */
 .transaction-actions button {
     background-color: #1100cc;
     color: white;
@@ -195,6 +197,7 @@ body {
 
 /* Filter dropdowns */
 .transaction-filters select,
+/* Set the appearance of .transaction-filters input. */
 .transaction-filters input {
     padding: 12px;
     border: 1px solid #dddddd;
@@ -238,6 +241,7 @@ body {
 
 /* Amount column */
 .transaction-table th:last-child,
+/* Set the appearance of .transaction-table td. */
 .transaction-table td:last-child {
     text-align: right;
 }
@@ -265,23 +269,28 @@ body {
 /* Smaller screen layout */
 @media (max-width: 650px) {
 
+/* Set the appearance of .app. */
     .app {
         flex-direction: column;
     }
 
+/* Set the appearance of .sidebar. */
     .sidebar {
         width: 100%;
     }
 
+/* Set the appearance of .logo. */
     .logo {
         margin-bottom: 20px;
     }
 
+/* Set the appearance of .main-content. */
     .main-content {
         padding: 20px;
     }
 
     .transaction-filters select,
+/* Set the appearance of .transaction-filters input. */
     .transaction-filters input {
         width: 100%;
     }
@@ -313,6 +322,7 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px s
     min-width: 200px;
 }
 
+/* Set the appearance of .month-filter-container input[type="month"]. */
 .month-filter-container input[type="month"] {
     width: 100%;
     height: 55px;

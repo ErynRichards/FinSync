@@ -1,14 +1,18 @@
 
+# Load the tools needed in this file.
 import unittest
 
+# Use functions and classes from another file.
 from decimal import Decimal
 
 # Import the function we want to test.
 from backend.transactions.transaction_summary import calculate_transaction_summary
 
 
+# Define TestTransactionSummary for this part of the program.
 class TestTransactionSummary(unittest.TestCase):
 
+    # Test case: verify the income expenses and net cash flow behavior.
     def test_income_expenses_and_net_cash_flow(self):
 
         # Create sample financial transactions.

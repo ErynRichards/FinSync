@@ -13,6 +13,7 @@ body {
     Match the navy outer frame in the supplied FinSync design.
     max-width prevents the component from exceeding the screen width.
 */
+/* Set the appearance of .budget-frame. */
 .budget-frame {
     box-sizing: border-box;
     width: 550px;
@@ -35,6 +36,7 @@ body {
     color: #10132b;
 }
 
+/* Set the appearance of .budget-card h1. */
 .budget-card h1 {
     margin: 0 0 25px;
     font-size: 25px;
@@ -49,6 +51,7 @@ body {
 
 /* Apply a consistent appearance to dropdowns and input fields. */
 .budget-card input,
+/* Set the appearance of .budget-card select. */
 .budget-card select {
     width: 100%;
     min-width: 0;
@@ -73,6 +76,7 @@ body {
     The recommendation appears directly below Category.
     textContent in JavaScript replaces this text whenever the state changes.
 */
+/* Set the appearance of .budget-card #suggestion. */
 .budget-card #suggestion {
     margin: 10px 0 25px;
     color: #1755eb;
@@ -113,6 +117,7 @@ body {
     margin-top: 12px;
 }
 
+/* Set the appearance of .budget-card button. */
 .budget-card button {
     flex: 1;
     padding: 10px;
@@ -128,6 +133,7 @@ body {
     color: white;
 }
 
+/* Set the appearance of .budget-card .save. */
 .budget-card .save {
     background: #7598ee;
     color: #10132b;
@@ -136,12 +142,14 @@ body {
 /* Make keyboard focus visible. */
 .budget-card input:focus,
 .budget-card select:focus,
+/* Set the appearance of .budget-card button. */
 .budget-card button:focus-visible {
     outline: 3px solid #9bbcff;
     outline-offset: 2px;
 }
 
 .budget-card .demo-note,
+/* Set the appearance of .budget-card #formMessage. */
 .budget-card #formMessage {
     font-size: 12px;
     line-height: 1.5;
@@ -150,10 +158,12 @@ body {
 
 /* Reduce padding on smaller screens. */
 @media (max-width: 480px) {
+/* Set the appearance of .budget-frame. */
     .budget-frame {
         padding: 16px;
     }
 
+/* Set the appearance of .budget-card. */
     .budget-card {
         padding: 23px;
     }

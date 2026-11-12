@@ -43,6 +43,7 @@ fetch("/api/transaction-options")
             throw new Error("Could not load categories");
         }
         return response.json();
+
     })
     .then(options => {
         if (!Array.isArray(options.categories)) return;
@@ -109,6 +110,7 @@ function validateDescription() {
 
 // Check that the entered day, month and year form a real date.
 function validateDate() {
+
     // Clear any previous calendar error before checking again.
     dayInput.setCustomValidity("");
 
@@ -159,6 +161,7 @@ function resetForm() {
 const expenseButton = document.getElementById("expenseButton");
 const incomeButton = document.getElementById("incomeButton");
 
+// Handle this part of the page.
 function selectTransactionType(type) {
     typeInput.value = type;
 
@@ -171,14 +174,17 @@ function selectTransactionType(type) {
     updateCategories();
 }
 
+// Run this code when the user interacts with the page.
 expenseButton.addEventListener("click", function () {
     selectTransactionType("Expense");
 });
 
+// Run this code when the user interacts with the page.
 incomeButton.addEventListener("click", function () {
     selectTransactionType("Income");
 });
 
+// Run this code when the user interacts with the page.
 typeInput.addEventListener("change", function () {
     selectTransactionType(typeInput.value);
 });
@@ -191,6 +197,7 @@ descriptionInput.addEventListener("input", function () {
 });
 
 [dayInput, monthInput, yearInput].forEach(function (input) {
+    // Run this code when the user interacts with the page.
     input.addEventListener("input", function () {
         validateDate();
         message.textContent = "";
@@ -202,6 +209,7 @@ amountInput.addEventListener("input", function () {
     message.textContent = "";
 });
 
+// Run this code when the user interacts with the page.
 categoryInput.addEventListener("change", function () {
     message.textContent = "";
 });
@@ -209,12 +217,16 @@ categoryInput.addEventListener("change", function () {
 // Close the shared dialog without adding a record.
 const dialog = document.getElementById("transactionDialog");
 const saveButton = document.getElementById("saveButton");
+
 let saving = false;
+
 document.getElementById("cancelButton").addEventListener("click", function () {
     if (!saving) dialog.close();
 });
+// Run this code when the user interacts with the page.
 dialog.addEventListener("cancel", function (event) {
     if (saving) event.preventDefault();
+
 });
 
 // Validate first, then call the backend-ready save function.
@@ -224,6 +236,7 @@ form.addEventListener("submit", async function (event) {
     validateDescription();
     validateDate();
     if (!form.reportValidity()) return;
+
     const transaction = {
         type: typeInput.value,
         amount: Number(amountInput.value).toFixed(2),
@@ -235,14 +248,17 @@ form.addEventListener("submit", async function (event) {
     };
     saving = true;
     saveButton.disabled = true;
+
     document.getElementById("cancelButton").disabled = true;
     message.classList.remove("error");
     message.textContent = "Saving transaction...";
+
     // Freeze inputs while waiting so the visible data matches the request.
     const inputs = form.querySelectorAll("input, select");
     inputs.forEach(input => input.disabled = true);
     try {
         const saved = await window.FinSyncTransactions.save(transaction);
+
         // Adapter must return the saved record, including its five fields.
         if (!saved || saved.type !== transaction.type || !saved.date ||
             !saved.category || !saved.description || !Number.isFinite(Number(saved.amount)) || Number(saved.amount) <= 0) {
@@ -253,6 +269,7 @@ form.addEventListener("submit", async function (event) {
     } catch (error) {
         message.classList.add("error");
         message.textContent = "Could not save the transaction. Please try again.";
+
         // Keep entered values so the user can retry.
     } finally {
         saving = false;

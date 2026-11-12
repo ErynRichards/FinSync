@@ -39,9 +39,11 @@
 .spending-track { display: block; max-width: 88px; height: 12px; margin-top: 4px; background: #d5d5d5; border-radius: 20px; }
 .spending-fill { display: block; height: 100%; border-radius: inherit; }
 
+/* Adjust the layout for this screen size. */
 @media (max-width: 1150px) {
   .reports-shell { margin-inline: 24px; grid-template-columns: 230px minmax(0, 1fr); gap: 24px; }
 }
+/* Adjust the layout for this screen size. */
 @media (max-width: 820px) {
   .reports-shell { grid-template-columns: 1fr; margin-top: 24px; }
   .reports-sidebar { min-height: auto; padding: 12px 20px; }
@@ -59,6 +61,7 @@
     box-sizing: border-box;
 }
 
+/* Adjust the layout for this screen size. */
 @media (max-width: 550px) {
   .spending-category { grid-template-columns: minmax(0, 355px); gap: 12px; }
   .spending-breakdown { margin-top: 0; }

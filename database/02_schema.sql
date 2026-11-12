@@ -4,6 +4,7 @@
 USE finsync;
 
 -- Users table (columns from the 4.5 database design)
+-- Create the users table and define its fields and constraints.
 CREATE TABLE IF NOT EXISTS users (
     user_id        INT UNSIGNED  NOT NULL AUTO_INCREMENT,
     first_name     VARCHAR(50)   NOT NULL,
@@ -18,6 +19,7 @@ CREATE TABLE IF NOT EXISTS users (
 ) ENGINE=InnoDB;
 
 -- One row for every "Forgot Password" request
+-- Create the password_reset_tokens table and define its fields and constraints.
 CREATE TABLE IF NOT EXISTS password_reset_tokens (
     token_id    INT UNSIGNED  NOT NULL AUTO_INCREMENT,
     user_id     INT UNSIGNED  NOT NULL,
@@ -32,6 +34,7 @@ CREATE TABLE IF NOT EXISTS password_reset_tokens (
 ) ENGINE=InnoDB;
 
 -- Financial accounts belonging to each user (e.g. Cheque, Savings, Credit Card, Cash)
+-- Create the accounts table and define its fields and constraints.
 CREATE TABLE IF NOT EXISTS accounts (
     account_id       INT UNSIGNED   NOT NULL AUTO_INCREMENT,
     user_id          INT UNSIGNED   UNIQUE,
@@ -46,6 +49,7 @@ CREATE TABLE IF NOT EXISTS accounts (
 ) ENGINE=InnoDB;
 
 -- How transactions are classified (shared by all users)
+-- Create the categories table and define its fields and constraints.
 CREATE TABLE IF NOT EXISTS categories (
     category_id    INT UNSIGNED  NOT NULL AUTO_INCREMENT,
     category_name  VARCHAR(50)   NOT NULL,
@@ -55,6 +59,7 @@ CREATE TABLE IF NOT EXISTS categories (
 ) ENGINE=InnoDB;
 
 -- The user's income and expenses
+-- Create the transactions table and define its fields and constraints.
 CREATE TABLE IF NOT EXISTS transactions (
     transaction_id    INT UNSIGNED   NOT NULL AUTO_INCREMENT,
     account_id        INT UNSIGNED   NOT NULL,
@@ -73,6 +78,7 @@ CREATE TABLE IF NOT EXISTS transactions (
 ) ENGINE=InnoDB;
 
 -- Monthly budget for a category
+-- Create the budgets table and define its fields and constraints.
 CREATE TABLE IF NOT EXISTS budgets (
     budget_id      INT UNSIGNED   NOT NULL AUTO_INCREMENT,
     user_id        INT UNSIGNED   NOT NULL,
@@ -90,6 +96,7 @@ CREATE TABLE IF NOT EXISTS budgets (
 ) ENGINE=InnoDB;
 
 -- Record budget-exceeded notifications to prevent duplicates
+-- Create the budget_notification_history table and define its fields and constraints.
 CREATE TABLE IF NOT EXISTS budget_notification_history (
     notification_id  INT UNSIGNED  NOT NULL AUTO_INCREMENT,
     user_id          INT UNSIGNED  UNIQUE,
@@ -105,6 +112,7 @@ CREATE TABLE IF NOT EXISTS budget_notification_history (
 ) ENGINE=InnoDB;
 
 -- Savings goals, e.g. "Holiday" or "New laptop"
+-- Create the savings_goals table and define its fields and constraints.
 CREATE TABLE IF NOT EXISTS savings_goals (
     goal_id         INT UNSIGNED   NOT NULL AUTO_INCREMENT,
     user_id         INT UNSIGNED   NOT NULL,
@@ -122,6 +130,7 @@ CREATE TABLE IF NOT EXISTS savings_goals (
 ) ENGINE=InnoDB;
 
 -- Each user's settings (one row per user)
+-- Create the user_settings table and define its fields and constraints.
 CREATE TABLE IF NOT EXISTS user_settings (
     user_id                INT UNSIGNED  NOT NULL,
     theme                  VARCHAR(10)   NOT NULL DEFAULT 'light',  -- light or dark

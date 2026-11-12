@@ -6,19 +6,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-wdith, initial-scale=1.0">
 <title>About | FinSync</title>
+<!-- Load styling or another page resource. -->
 <link rel="stylesheet"  href="{{ url_for('static', filename='css/landingStyle.css') }}">
+<!-- Load JavaScript used by this page. -->
 <script src="{{ url_for('static', filename='js/landingScript.js') }}" defer></script>
 </head>
 
 <body>
+<!-- Show the page heading and navigation. -->
 <header class="header">
+<!-- Links to other pages. -->
 <nav class="navbar">
 <a href="{{ url_for('index') }}" class="logo">FinSync</a>
 
+<!-- Run an action when this button is clicked. -->
 <button class="menu-toggle"
 aria-label="Toggle navigation"
 aria-expanded="false"
-aria-ccontrols="navLinks">
+aria-controls="navLinks">
 &#9776;
 </button>
 
@@ -33,14 +38,16 @@ aria-ccontrols="navLinks">
 </nav>
 </header>
 
+<!-- Show the main content of this page. -->
 <main>
+<!-- Group related content on the page. -->
 <section class="about-section">
 <h2>About FinSync</h2>
 
 <p>
 FinSync is a personal finance management
 application designed to make managing
-money simpler, smarter and more accessible. 
+money simpler, smarter and more accessible.
 </p>
 
 <h2>Why Was FinSync Developed?</h2>
@@ -54,8 +61,8 @@ or understand their spending habits.
 
 
 <p>
-FinSync was developed to address these 
-challenges by providing an organised 
+FinSync was developed to address these
+challenges by providing an organised
 platform for personal financial management.
 </p>
 
@@ -84,6 +91,7 @@ financial future.
 
 </main>
 
+<!-- Footer containing secondary page information. -->
 <footer class="footer">
 
 <p>&copy; <span id="year"></span> FinSync.

@@ -3,11 +3,14 @@
 // mistakes straight away. Michalyn can replace this file with her own.
 // The server checks everything again in app.py, because browser checks can be skipped.
 
+// Handle this part of the page.
 function isValidEmail(email) {
   return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
 }
 
+// Handle this part of the page.
 function checkPasswordRules(password, confirmPassword) {
+
   var errors = [];
   if (password.length < 8) errors.push("Password must be at least 8 characters.");
   if (!/[A-Z]/.test(password)) errors.push("Password must contain an uppercase letter.");
@@ -18,8 +21,11 @@ function checkPasswordRules(password, confirmPassword) {
   return errors;
 }
 
+
+
 // Returns a list of mistakes for the given form
 function checkForm(form) {
+
   var type = form.dataset.validate;
   var errors = [];
 
@@ -28,6 +34,7 @@ function checkForm(form) {
       errors.push("Please enter a valid email address.");
     }
   }
+
   if (type === "login" && form.password.value === "") {
     errors.push("Password is required.");
   }
@@ -39,6 +46,8 @@ function checkForm(form) {
   }
   return errors;
 }
+
+
 
 // Show the mistakes in the red box above the form
 function showErrors(form, errors) {

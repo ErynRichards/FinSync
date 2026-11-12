@@ -149,16 +149,19 @@ input:focus {
 /* Mobile screen adjustments */
 @media (max-width: 480px) {
 
+/* Set the appearance of .auth-container. */
     .auth-container {
         width: auto;
         margin: 20px auto;
         padding: 20px;
     }
 
+/* Set the appearance of h1. */
     h1 {
         font-size: 28px;
     }
 
+/* Set the appearance of .brand-name. */
     .brand-name {
         font-size: 25px;
     }

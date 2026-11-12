@@ -1,5 +1,6 @@
 /* Form styles are scoped to avoid changing the Transactions page. */
 
+/* Set the appearance of #transactionDialog. */
 #transactionDialog {
     --navy: #050a32;
     --blue: #2854e8;
@@ -7,9 +8,11 @@
     --text: #111322;
     --border: #e3e3e3;
 }
+/* Set the appearance of #transactionDialog *. */
 #transactionDialog * {
     box-sizing: border-box;
 }
+/* Set the appearance of #transactionDialog. */
 #transactionDialog {
     width: 580px;
     max-width: calc(100% - 30px);
@@ -22,16 +25,19 @@
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
     overflow-y: auto;
 }
+/* Set the appearance of #transactionDialog .transaction-card. */
 #transactionDialog .transaction-card {
     padding: 10px 15px 20px;
     border-radius: 20px;
     background: white;
 }
+/* Set the appearance of #transactionDialog h2. */
 #transactionDialog h2 {
     margin: 6px 0 20px;
     font-size: 24px;
 }
 #transactionDialog label,
+/* Set the appearance of #transactionDialog legend. */
 #transactionDialog legend {
     display: block;
     margin-bottom: 8px;
@@ -40,11 +46,13 @@
 }
 #transactionDialog input,
 #transactionDialog select,
+/* Set the appearance of #transactionDialog button. */
 #transactionDialog button {
     font-family: inherit;
     font-size: 17px;
 }
 #transactionDialog input,
+/* Set the appearance of #transactionDialog select. */
 #transactionDialog select {
     min-width: 0;
     height: 46px;
@@ -55,6 +63,7 @@
     color: var(--text);
     box-shadow: 0 0 2px #ddd;
 }
+/* Set the appearance of #transactionDialog .type-field. */
 #transactionDialog .type-field {
     margin-bottom: 35px;
 }
@@ -66,6 +75,7 @@
     margin-bottom: 25px;
 }
 
+/* Set the appearance of #transactionDialog .type-btn. */
 #transactionDialog .type-btn {
     flex: 1;
     padding: 13px;
@@ -78,11 +88,13 @@
     cursor: pointer;
 }
 
+/* Set the appearance of #transactionDialog .type-btn.selected. */
 #transactionDialog .type-btn.selected {
     background: #2854e8;
     color: white;
 }
 
+/* Set the appearance of #transactionDialog .type-btn. */
 #transactionDialog .type-btn:hover {
     filter: brightness(0.95);
 }
@@ -99,9 +111,11 @@
     white-space: nowrap;
 }
 
+/* Set the appearance of #transactionDialog .field. */
 #transactionDialog .field {
     margin-bottom: 14px;
 }
+/* Set the appearance of #transactionDialog .amount-control. */
 #transactionDialog .amount-control {
     display: flex;
     align-items: center;
@@ -112,9 +126,11 @@
     border-radius: 10px;
     box-shadow: 0 0 2px #ddd;
 }
+/* Set the appearance of #transactionDialog .amount-control span. */
 #transactionDialog .amount-control span {
     font-size: 17px;
 }
+/* Set the appearance of #transactionDialog .amount-control input. */
 #transactionDialog .amount-control input {
     width: 100%;
     height: 42px;
@@ -122,33 +138,41 @@
     border: none;
     box-shadow: none;
 }
+/* Set the appearance of #transactionDialog #description. */
 #transactionDialog #description {
     width: 100%;
 }
+/* Set the appearance of #transactionDialog #category. */
 #transactionDialog #category {
     width: 100%;
 }
+/* Set the appearance of #transactionDialog .date-field. */
 #transactionDialog .date-field {
     margin: 0;
     padding: 0;
     border: none;
 }
+/* Set the appearance of #transactionDialog .date-inputs. */
 #transactionDialog .date-inputs {
     display: flex;
     gap: 9px;
 }
+/* Set the appearance of #transactionDialog .date-inputs input. */
 #transactionDialog .date-inputs input {
     width: 30%;
     text-align: center;
 }
+/* Set the appearance of #transactionDialog .date-inputs #year. */
 #transactionDialog .date-inputs #year {
     flex: 1;
 }
+/* Set the appearance of #transactionDialog .action-buttons. */
 #transactionDialog .action-buttons {
     display: flex;
     gap: 22px;
     margin-top: 40px;
 }
+/* Set the appearance of #transactionDialog button. */
 #transactionDialog button {
     flex: 1;
     padding: 9px 12px;
@@ -156,29 +180,35 @@
     border-radius: 22px;
     cursor: pointer;
 }
+/* Set the appearance of #transactionDialog #cancelButton. */
 #transactionDialog #cancelButton {
     background: var(--light-blue);
     color: var(--text);
 }
+/* Set the appearance of #transactionDialog #saveButton. */
 #transactionDialog #saveButton {
     background: var(--blue);
     color: white;
 }
+/* Set the appearance of #transactionDialog button. */
 #transactionDialog button:hover {
     filter: brightness(0.95);
 }
 #transactionDialog input:focus-visible,
 #transactionDialog select:focus-visible,
+/* Set the appearance of #transactionDialog button. */
 #transactionDialog button:focus-visible {
     outline: 3px solid #91b9ff;
     outline-offset: 3px;
 }
+/* Set the appearance of #transactionDialog #message. */
 #transactionDialog #message {
     margin: 16px 0 0;
     font-size: 14px;
     line-height: 1.5;
     color: #245340;
 }
+/* Set the appearance of #transactionDialog .screen-reader-only. */
 #transactionDialog .screen-reader-only {
     position: absolute;
     width: 1px;
@@ -191,16 +221,21 @@
 }
 
 
+/* Adjust the layout for this screen size. */
 @media (max-width: 500px) {
+/* Set the appearance of #transactionDialog. */
 #transactionDialog {
         padding: 18px;
     }
+/* Set the appearance of #transactionDialog .transaction-card. */
 #transactionDialog .transaction-card {
         padding: 28px 20px 20px;
     }
+/* Set the appearance of #transactionDialog .action-buttons. */
 #transactionDialog .action-buttons {
         gap: 14px;
     }
+/* Set the appearance of #transactionDialog .date-inputs input. */
 #transactionDialog .date-inputs input {
         padding: 10px 5px;
         font-size: 16px;

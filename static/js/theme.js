@@ -10,6 +10,7 @@
 (function () {
     const THEME_STORAGE_KEY = "finsync-theme";
 
+    // Handle this part of the page.
     function applySavedTheme() {
         let theme = "light";
 

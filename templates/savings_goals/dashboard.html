@@ -9,6 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Savings Goals | FinSync</title>
 
+<!-- Load styling or another page resource. -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/savings_goals/savings_goals.css') }}">
 
   <!-- REECE: Shared light and dark mode styling -->
@@ -31,6 +32,7 @@
         <h2>FinSync</h2>
     </div>
 
+<!-- Links to other pages. -->
     <nav aria-label="FinSync navigation">
         <a class="nav-btn" href="/dashboard">Dashboard</a>
         <a class="nav-btn" href="/transactions">Transactions</a>
@@ -46,6 +48,7 @@
 </aside>
 
 
+<!-- Show the main content of this page. -->
     <main class="savings-main">
       <!-- Decorative placeholders for the shared dashboard's account controls. -->
       <div class="account-icons" aria-hidden="true">
@@ -54,6 +57,7 @@
         </svg>
         <span class="avatar">J</span>
       </div>
+<!-- Show the page heading and navigation. -->
       <header class="savings-header">
         <div>
           <h1>Savings goals</h1>
@@ -78,6 +82,7 @@
         </select>
       </div>
       <p id="goals-message" role="status" hidden></p>
+<!-- Group related content on the page. -->
       <section id="goal-list" class="goal-grid" aria-label="Savings goals"></section>
 
       <!-- This template stays hidden until JavaScript clones it for each goal. -->
@@ -106,14 +111,18 @@
 
       <!-- ERYN: Add Savings popup -->
       <dialog id="contribution-dialog" class="contribution-dialog" aria-labelledby="contribution-title">
+<!-- Collect information entered by the user. -->
         <form id="contribution-form">
           <h2 id="contribution-title">Add Savings</h2>
           <p id="contribution-goal-name"></p>
           <label for="contribution-amount">Amount (R)</label>
+<!-- Let the user enter or choose a value. -->
           <input id="contribution-amount" type="number" min="0.01" step="0.01" required placeholder="0.00">
           <p id="contribution-error" role="alert"></p>
           <div class="contribution-actions">
+<!-- Run an action when this button is clicked. -->
             <button type="button" id="cancel-contribution">Cancel</button>
+<!-- Run an action when this button is clicked. -->
             <button type="submit" id="save-contribution" class="primary-button">Add Savings</button>
           </div>
         </form>

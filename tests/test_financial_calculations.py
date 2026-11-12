@@ -5,8 +5,10 @@ Tests the financial calculations using
 sample income and expense transactions.
 """
 
+# Use functions and classes from another file.
 from decimal import Decimal
 
+# Use functions and classes from another file.
 from financial_calculations import (
     get_financial_summary
 )
@@ -53,7 +55,6 @@ summary = get_financial_summary(transactions)
 
 # Display calculated results
 print("FIN SYNC FINANCIAL SUMMARY")
-print("--------------------------")
 
 print("Total Income: R", summary["total_income"])
 print("Total Expenses: R", summary["total_expenses"])
@@ -61,6 +62,7 @@ print("Balance: R", summary["balance"])
 
 print("\nSpending by Category:")
 
+# Go through each item one at a time.
 for category, amount in summary["spending_by_category"].items():
     print(category, ": R", amount)
 

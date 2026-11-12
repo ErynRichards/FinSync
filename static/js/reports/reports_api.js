@@ -11,6 +11,7 @@
   document.querySelector(".reports-tabs").before(status);
   let requestId = 0;
 
+  // Handle this part of the page.
   function setMonths(months) {
     const previous = month.value;
     month.replaceChildren();
@@ -26,6 +27,7 @@
     else if (months.length) month.value = months[months.length-1];
   }
 
+  // Handle this part of the page.
   async function loadReports() {
     const current = ++requestId;
     status.textContent = "Loading reports...";
@@ -46,6 +48,7 @@
     }
   }
 
+  // Handle this part of the page.
   async function loadSpending() {
     const current = requestId;
     try {
@@ -61,7 +64,9 @@
       status.textContent = `Category spending could not load: ${error.message}`;
     }
   }
+  // Run this code when the user interacts with the page.
   period.addEventListener("change", loadReports);
+  // Run this code when the user interacts with the page.
   spendingSection.addEventListener("spending-filter-change", loadSpending);
   loadReports();
 })();

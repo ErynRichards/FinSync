@@ -19,12 +19,15 @@
         defer makes the script run after the HTML has been parsed.
         This allows JavaScript to find the form controls by their IDs.
     -->
+<!-- Load JavaScript used by this page. -->
     <script src="{{ url_for('static', filename='js/budgets/budget_recommendations.js') }}" defer></script>
 
 </head>
 
 <body>
+<!-- Show the main content of this page. -->
     <main class="budget-frame">
+<!-- Group related content on the page. -->
         <section class="budget-card" aria-labelledby="formTitle">
             <h1 id="formTitle">Create Budget</h1>
 
@@ -32,6 +35,7 @@
                 This form is a separate preview of the recommendation feature.
                 Actual budget saving will be connected during integration.
             -->
+<!-- Collect information entered by the user. -->
             <form id="budgetForm">
 
                 <label for="category">Category</label>
@@ -72,6 +76,7 @@
                 <div class="amount-box">
                     <span aria-hidden="true">R</span>
 
+<!-- Let the user enter or choose a value. -->
                     <input
                         id="amount"
                         name="amount"
@@ -89,6 +94,7 @@
                     Native date inputs provide a calendar and basic validation.
                 -->
                 <label for="startDate">Start Date</label>
+<!-- Let the user enter or choose a value. -->
                 <input
                     id="startDate"
                     name="start_date"
@@ -97,6 +103,7 @@
                 >
 
                 <label for="endDate">End Date</label>
+<!-- Let the user enter or choose a value. -->
                 <input
                     id="endDate"
                     name="end_date"
